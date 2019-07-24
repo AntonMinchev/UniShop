@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using UniShop.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UniShop.Data;
@@ -61,6 +60,7 @@ namespace UniShop.Web
             {
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<UniShopDbContext>())
                 {
+
                     if (!context.Roles.Any())
                     {
                         SeedRoles(context);

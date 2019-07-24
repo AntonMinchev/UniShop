@@ -6,6 +6,11 @@ namespace UniShop.Data.Models
 {
     public class Address
     {
+        public Address()
+        {
+            this.Orders = new List<Order>();
+        }
+
         public int Id { get; set; }
 
         public int CityId { get; set; }

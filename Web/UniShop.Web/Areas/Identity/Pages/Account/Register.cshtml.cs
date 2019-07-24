@@ -21,20 +21,21 @@ namespace UniShop.Web.Areas.Identity.Pages.Account
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<UniShopUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+       // private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<UniShopUser> userManager,
             RoleManager<IdentityRole> roleManager,
             SignInManager<UniShopUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            ILogger<RegisterModel> logger
+          //  IEmailSender emailSender
+          )
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+           // _emailSender = emailSender;
         }
 
         [BindProperty]
