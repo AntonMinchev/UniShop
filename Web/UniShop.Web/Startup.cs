@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UniShop.Data;
 using UniShop.Data.Models;
+using CloudinaryDotNet;
+using UniShop.Services;
 
 namespace UniShop.Web
 {
@@ -37,6 +39,17 @@ namespace UniShop.Web
                 .AddEntityFrameworkStores<UniShopDbContext>()
                 .AddDefaultTokenProviders();
 
+
+            Account cloudinaryCredentials = new Account(
+              this.Configuration["Cloudinary:CloudName"],
+              this.Configuration["Cloudinary:ApiKey"],
+              this.Configuration["Cloudinary:ApiSecret"]);
+
+            Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
+
+            services.AddSingleton(cloudinaryUtility);
+
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -49,6 +62,8 @@ namespace UniShop.Web
 
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

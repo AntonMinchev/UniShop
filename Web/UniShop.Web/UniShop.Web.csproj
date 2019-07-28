@@ -8,6 +8,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
@@ -16,6 +17,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\UniShop.Data\UniShop.Data.csproj" />
+    <ProjectReference Include="..\..\Services\UniShop.Services\UniShop.Services.csproj" />
+    <ProjectReference Include="..\UniShop.Web.InputModels\UniShop.Web.InputModels.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
   </ItemGroup>
 
 </Project>
