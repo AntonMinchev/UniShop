@@ -16,9 +16,13 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\UniShop.Data.Models\UniShop.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\UniShop.Data\UniShop.Data.csproj" />
+    <ProjectReference Include="..\..\Services\UniShop.Services.Mapping\UniShop.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\UniShop.Services.Models\UniShop.Services.Models.csproj" />
     <ProjectReference Include="..\..\Services\UniShop.Services\UniShop.Services.csproj" />
     <ProjectReference Include="..\UniShop.Web.InputModels\UniShop.Web.InputModels.csproj" />
+    <ProjectReference Include="..\UniShop.Web.ViewModels\UniShop.Web.ViewModels.csproj" />
   </ItemGroup>
 
 

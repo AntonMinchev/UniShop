@@ -1,39 +1,43 @@
-﻿@model UniShop.Web.InputModels.ChildCategoriesCreateInputModel
+﻿@using UniShop.Web.ViewModels
+@model UniShop.Web.InputModels.ChildCategoryCreateInputModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+    <div class="col-md-offset-4 col-md-4">
+        <section>
+            <div class="text-center ">
+                <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Създаване на подкатегория продукти</h2>
+            </div>
+        </section>
+    </div>
 
-<h4>ChildCategoriesCreateInputModel</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-offset-4 col-md-4">
+        <hr />
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Име</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select class="select-width" name="ParentId">
+                <label asp-for="ParentCategoryId" class="control-label">Основна категория</label>
+                <select class="select-width center-block" name="parentCategoryId">
                     <option value="" disabled selected>-- Основна категория --</option>
-                    <option value="parentCategory">parentCategory.Name</option>
-                    <option value="parentCategory.Id">parentCategory.Name</option>
-                    @*@if (Model.ParentCategories != null)
-        {
-            @foreach (var parentCategory in Model.ParentCategories)
-            {
-                <option value="@parentCategory.Id">@parentCategory.Name</option>
-            }
-        }*@
+                    @foreach (var parentCategory in (IEnumerable<ChildCategoryCreateParentCategoryViewModel>)this.ViewData["types"])
+                    {
+                        <option value="@parentCategory.Id">@parentCategory.Name</option>
+                    }
                 </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" style="background-color:#F8694A" class="btn btn-default center-block" />
             </div>
         </form>
     </div>

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace UniShop.Data.Models
 {
     public class ChildCategory
     {
-
+     
         public int Id { get; set; }
 
         public string Name { get; set; }

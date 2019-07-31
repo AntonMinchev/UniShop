@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using UniShop.Data.Models
+
+@inject SignInManager<UniShopUser> SignInManager
+@inject UserManager<UniShopUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -78,7 +83,7 @@
                                     <div class="header-btns-icon">
                                         <i class="fa fa-user-o"></i>
                                     </div>
-                                    <strong class="text-uppercase">Здравейте,@this.User<i class="fa fa-caret-down"></i></strong>
+                                    <strong class="text-uppercase">Здравейте,@this.UserManager.GetUserName(User)<i class="fa fa-caret-down"></i></strong>
                                 </div>
                                 <a href="/Identity/Account/Logout" class="text-uppercase">Изход</a>
                                 <ul class="custom-menu">
@@ -493,30 +498,19 @@
                         </div>
                         <!-- /footer logo -->
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                        <p>В нашият магазин може да намерите всичко от което имате нужда!</p>
 
-                        <!-- footer social -->
-                        <ul class="footer-social">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        </ul>
-                        <!-- /footer social -->
                     </div>
                 </div>
                 <!-- /footer widget -->
                 <!-- footer widget -->
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-header">My Account</h3>
+                        <h3 class="footer-header">Моят Акаунт</h3>
                         <ul class="list-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Compare</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="#">Моят Акаунт</a></li>
+                            <li><a href="#">Любими</a></li>
+                            <li><a href="#">Вход</a></li>
                         </ul>
                     </div>
                 </div>
@@ -527,30 +521,25 @@
                 <!-- footer widget -->
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-header">Customer Service</h3>
+                        <h3 class="footer-header">Доставка</h3>
                         <ul class="list-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Shiping & Return</a></li>
-                            <li><a href="#">Shiping Guide</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Доставка на поръчките</a></li>
+                            <li><a href="#">Доставка и връщане</a></li>
+                            <li><a href="#">Гаранция и Сервиз</a></li>
                         </ul>
                     </div>
                 </div>
                 <!-- /footer widget -->
-                <!-- footer subscribe -->
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-header">Stay Connected</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                        <form>
-                            <div class="form-group">
-                                <input class="input" placeholder="Enter Email Address">
-                            </div>
-                            <button class="primary-btn">Join Newslatter</button>
-                        </form>
+                        <h3 class="footer-header">Връзка с нас</h3>
+                        <ul class="list-links">
+                            <li><a href="#">За Нас</a></li>
+                            <li><a href="#">Контакти</a></li>
+                            <li><a href="#">Форма за запитвания</a></li>
+                        </ul>
                     </div>
                 </div>
-                <!-- /footer subscribe -->
             </div>
             <!-- /row -->
             <hr>
@@ -561,7 +550,7 @@
                     <div class="footer-copyright">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved !</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                     <!-- /footer copyright -->
@@ -588,15 +577,14 @@
 
 <script src="~/js/jquery.zoom.min.js"></script>
 <script src="~/js/main.js"></script>
-
 @*<script src="~/js/nouislider.min.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/jquery-3.4.1.min.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/popper.min.js"></script>
+        <script src="~/js/jquery-3.4.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
 
-    <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.min.js"></script>
 
-    <script src="js/slick.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/main.js"></script>*@
+        <script src="js/slick.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
+        <script src="js/main.js"></script>*@
 

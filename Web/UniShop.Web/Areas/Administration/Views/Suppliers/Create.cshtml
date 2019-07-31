@@ -1,35 +1,41 @@
 ﻿@model UniShop.Web.InputModels.SupplierCreateInputModel
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<div class="col-md-offset-4 col-md-4">
+    <section>
+        <div class="text-center ">
+            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Добавяне на доставчик</h2>
+        </div>
+    </section>
+</div>
 
-<h4>SupplierCreateInputModel</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-offset-4 col-md-4">
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Име</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PriceToOffice" class="control-label"></label>
+                <label asp-for="PriceToOffice" class="control-label">Цена до офис на доставчика</label>
                 <input asp-for="PriceToOffice" class="form-control" />
                 <span asp-validation-for="PriceToOffice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PriceToAddress" class="control-label"></label>
+                <label asp-for="PriceToAddress" class="control-label">Цена до адрес на клиента</label>
                 <input asp-for="PriceToAddress" class="form-control" />
                 <span asp-validation-for="PriceToAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" style="background-color:#F8694A" class="btn btn-default center-block" />
             </div>
         </form>
     </div>

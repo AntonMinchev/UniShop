@@ -16,6 +16,11 @@ using UniShop.Data;
 using UniShop.Data.Models;
 using CloudinaryDotNet;
 using UniShop.Services;
+using UniShop.Services.Mapping;
+using UniShop.Web.InputModels;
+using UniShop.Services.Models;
+using System.Reflection;
+using UniShop.Web.ViewModels;
 
 namespace UniShop.Web
 {
@@ -64,6 +69,11 @@ namespace UniShop.Web
             });
 
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IParentCategoriesService, ParentCategoriesService>();
+            services.AddTransient<IChildCategoriesService, ChildCategoriesService>();
+            services.AddTransient<ISuppliersService, SuppliersService>();
+            services.AddTransient<IProductsService, ProductsService>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -71,6 +81,13 @@ namespace UniShop.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            AutoMapperConfig.RegisterMappings(
+              typeof(ProductCreateInputModel).GetTypeInfo().Assembly,
+              typeof(ProductHomeViewModel).GetTypeInfo().Assembly,
+              typeof(ProductServiceModel).GetTypeInfo().Assembly);
+
+
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<UniShopDbContext>())

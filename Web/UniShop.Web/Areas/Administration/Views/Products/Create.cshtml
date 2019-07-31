@@ -1,0 +1,82 @@
+﻿@model UniShop.Web.InputModels.ProductCreateInputModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using UniShop.Web.ViewModels
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-offset-4 col-md-4">
+    <section>
+        <div class="text-center ">
+            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Добавяне на нов продукт</h2>
+        </div>
+    </section>
+</div>
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+        <hr />
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mx-auto w-45">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-auto w-45">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-auto w-45">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-auto w-45">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-auto w-45">
+                <label asp-for="Specification" class="control-label"></label>
+                <input asp-for="Specification" class="form-control" />
+                <span asp-validation-for="Specification" class="text-danger"></span>
+            </div>
+            <div class="form-group mx-auto w-45">
+                <div class="d-flex justify-content-center">
+                    <label asp-for="Image" class="text-primary h5">Picture</label>
+                </div>
+                <input type="file"
+                       class="form-control text-primary text-center"
+                       id="picture"
+                       placeholder="Picture..."
+                       asp-for="Image">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChildCategoryName" class="control-label">Основна категория</label>
+                <select class="select-width center-block" name="ChildCategoryName">
+                    <option value="" disabled selected>-- Основна категория --</option>
+                    @foreach (var childCategory in (IEnumerable<ProductCreateChildCategoryViewModel>)this.ViewData["types"])
+                    {
+                        <option value="@childCategory.Name">@childCategory.Name (@childCategory.ParentCategoryName)</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" style="background-color:#F8694A" class="btn btn-default center-block" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
