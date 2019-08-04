@@ -73,6 +73,7 @@ namespace UniShop.Web
             services.AddTransient<IChildCategoriesService, ChildCategoriesService>();
             services.AddTransient<ISuppliersService, SuppliersService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IShoppingCartsService, ShoppingCartsService>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

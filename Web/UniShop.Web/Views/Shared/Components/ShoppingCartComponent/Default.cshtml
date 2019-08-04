@@ -1,0 +1,163 @@
+﻿@model List<UniShop.Web.ViewModels.ShoppingCartProductViewModel>
+
+
+@if (Model.Count() == 0)
+{
+    <li class="header-cart dropdown default-dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <div class="header-btns-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="qty">0</span>
+            </div>
+            <strong class="text-uppercase">Моята количка</strong>
+            <br>
+
+        </a>
+        <div class="custom-menu">
+            <div id="shopping-cart">
+                <div class="shopping-cart-list">
+                    <div class="product product-widget">
+                        <p>Вашата количка е празна!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+}
+else
+{
+    <li class="header-cart dropdown default-dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <div class="header-btns-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="qty">@Model.Select(p => p.Quantity).Sum()</span>
+            </div>
+            <strong class="text-uppercase">Моята количка:</strong>
+            <br>
+            <span>@Model.Select(x => x.Product.Price * x.Quantity).Sum() лв</span>
+        </a>
+        <div class="custom-menu">
+            <div id="shopping-cart">
+                <div class="shopping-cart-list">
+                    @foreach (var product in Model)
+                    {
+
+                        <div class="product product-widget">
+                            <div class="product-thumb">
+                                <img src="@product.Product.Image" alt="">
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-price">@product.Product.Price.ToString("F2") лв <span class="qty">x @product.Quantity</span></h3>
+                                <h2 class="product-name"><a href="#">@product.Product.Name</a></h2>
+                            </div>
+                            <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                        </div>
+
+
+
+                    }
+
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="shopping-cart-btns">
+                            <button class="col-sm-1 main-btn">Виж количката</button>
+                            <div class="col-sm-2">
+                                <p>Обща сума:</p>
+                                <p>@Model.Select(x => x.Product.Price * x.Quantity).Sum() лв</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+   </li>
+    }
+
+
+
+
+@*<li class="header-cart dropdown default-dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        <div class="header-btns-icon">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="qty">6</span>
+        </div>
+        <strong class="text-uppercase">Моята количка:</strong>
+        <br>
+        <span>35.20$</span>
+    </a>
+    <div class="custom-menu">
+        <div id="shopping-cart">
+            <div class="shopping-cart-list">
+                <div class="product product-widget">
+                    <div class="product-thumb">
+                        <img src="./img/thumb-product01.jpg" alt="">
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
+                        <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                    </div>
+                    <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                </div>
+                <div class="product product-widget">
+                    <div class="product-thumb">
+                        <img src="./img/thumb-product01.jpg" alt="">
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
+                        <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                    </div>
+                    <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="shopping-cart-btns">
+                        <button class="col-sm-1 main-btn">Виж количката</button>
+                        <div class="col-sm-2">
+                            <p>Обща сума:</p>
+                            <p>38.55 lw</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</li>
+        }*@
+
+@*@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

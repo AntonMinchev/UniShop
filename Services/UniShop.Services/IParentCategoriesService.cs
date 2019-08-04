@@ -12,7 +12,7 @@ namespace UniShop.Services
     {
         bool Create(ParentCategoryServiceModel parentCategoryServiceModel );
 
-        IEnumerable<ParentCategory> GetAllParentCategories();
+        IQueryable<ParentCategoryServiceModel> GetAllParentCategories();
 
        
     }

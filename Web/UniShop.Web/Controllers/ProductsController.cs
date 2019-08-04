@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using UniShop.Services;
+using UniShop.Services.Mapping;
 using UniShop.Web.ViewModels;
 
 namespace UniShop.Web.Controllers
 {
     public class ProductsController : Controller
     {
+        private readonly IProductsService productsService;
+
+        public ProductsController(IProductsService productsService)
+        {
+            this.productsService = productsService;
+        }
+
         [HttpGet("/Products/Details/{id}")]
         public IActionResult Details(int id)
         {
-            
+            ProductDetailsViewModel productDetailsViewModel = this.productsService.GetById(id).To<ProductDetailsViewModel>();
 
-            return this.View(new ProductDetailsViewModel());
+            return this.View(productDetailsViewModel);
         }
     }
 }

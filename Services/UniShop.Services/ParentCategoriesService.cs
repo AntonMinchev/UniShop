@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UniShop.Data;
 using UniShop.Data.Models;
+using UniShop.Services.Mapping;
 using UniShop.Services.Models;
 
 namespace UniShop.Services
@@ -29,10 +30,10 @@ namespace UniShop.Services
             return result > 0;
         }
 
-       
-        IEnumerable<ParentCategory> IParentCategoriesService.GetAllParentCategories()
+
+        IQueryable<ParentCategoryServiceModel> IParentCategoriesService.GetAllParentCategories()
         {
-            var parentCategories = this.context.ParentCategories;
+            var parentCategories = this.context.ParentCategories.To<ParentCategoryServiceModel>();
 
             return parentCategories;
         }

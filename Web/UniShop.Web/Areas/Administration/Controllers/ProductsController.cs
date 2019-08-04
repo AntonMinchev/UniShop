@@ -31,7 +31,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             this.ViewData["types"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
             {
-                ParentCategoryName = childCategory.ParentCategoryName,
+                ParentCategoryName = childCategory.ParentCategory.Name,
                 Name = childCategory.Name
             })
                 .ToList(); ;

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UniShop.Data.Models;
 using UniShop.Services.Mapping;
+using UniShop.Services.Models;
 
-namespace UniShop.Services.Models
+namespace UniShop.Web.ViewModels
 {
-    public class ParentCategoryServiceModel : IMapFrom<ParentCategory>,IMapTo<ParentCategory>
+    public class CategoryViewModel : IMapFrom<ParentCategoryServiceModel>
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public virtual ICollection<ChildCategoryServiceModel> ChildCategories { get; set; }

@@ -27,8 +27,8 @@ namespace UniShop.Web.Controllers
                         Id = product.Id,
                         Name = product.Name,
                         Price = product.Price,
-                        Image = product.Image,
-                        Raiting = product.Raiting    
+                        Image = product.Image
+                        //Raiting = product.Raiting    
                     })
                     .ToList();
 
@@ -37,6 +37,26 @@ namespace UniShop.Web.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult PackageDelivery()
+        {
+            return View();
+        }
+
+        public IActionResult Warranty()
+        {
+            return View();
+        }
+
+        public IActionResult ReturnShipment()
+        {
+            return View();
+        }
+
+        public IActionResult Contacts()
         {
             return View();
         }

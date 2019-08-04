@@ -10,9 +10,8 @@ using UniShop.Web.InputModels;
 namespace UniShop.Services.Models
 {
     public class ProductServiceModel : IMapFrom<Product>, IMapTo<Product>
-        ,IMapFrom<ProductCreateInputModel> ,IMapTo<ProductCreateInputModel>,IHaveCustomMappings
+        ,IMapFrom<ProductCreateInputModel> ,IMapTo<ProductCreateInputModel>
     {
-        
 
         public string Id { get; set; }
 
@@ -26,6 +25,8 @@ namespace UniShop.Services.Models
 
         public int Quantity { get; set; }
 
+        public bool IsInStock => this.Quantity > 0;
+
         public int ChildCategoryId { get; set; }
 
         public ChildCategoryServiceModel ChildCategory { get; set; }
@@ -34,18 +35,13 @@ namespace UniShop.Services.Models
 
         public string Image { get; set; }
 
-        public int Raiting { get; set; }
+        public virtual ICollection<ShoppingCartProductServiceModel> ShoppingCartProducts { get; set; }
 
-        public int CountReviews { get; set; }
+        public virtual ICollection<UniShopUserFavoriteProductServiceModel> FavoriteProducts { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-                .CreateMap<Product, ProductServiceModel>()
-                .ForMember(destination => destination.Raiting,
-                            opts => opts.MapFrom(origin => origin.Reviews.Select(x=>x.Raiting).Sum()))
-                .ForMember(destination => destination.CountReviews,
-                            opts => opts.MapFrom(origin => origin.Reviews.Count()));
-        }
+        public virtual ICollection<ReviewServiceModel> Reviews { get; set; }
+
+
+       
     }
 }

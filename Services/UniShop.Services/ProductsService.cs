@@ -40,5 +40,12 @@ namespace UniShop.Services
         {
             return this.context.Products.To<ProductServiceModel>();
         }
+
+        public ProductServiceModel GetById(int id)
+        {
+            var product = this.context.Products.FirstOrDefault(p => p.Id==id);
+
+            return product.To<ProductServiceModel>();
+        }
     }
 }

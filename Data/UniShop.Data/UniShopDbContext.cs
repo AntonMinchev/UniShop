@@ -21,7 +21,7 @@ namespace UniShop.Data
 
         public DbSet<OrderProduct> OrderProducts { get; set; }
 
-        public DbSet<CategoryProduct> CategoryProducts { get; set; }
+      //  public DbSet<CategoryProduct> CategoryProducts { get; set; }
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
@@ -41,7 +41,7 @@ namespace UniShop.Data
 
             builder.Entity<ShoppingCartProduct>().HasKey(x => new { x.ProductId, x.ShoppingCartId });
 
-            builder.Entity<CategoryProduct>().HasKey(x => new { x.ChildCategoryId, x.ProductId });
+       //     builder.Entity<CategoryProduct>().HasKey(x => new { x.ChildCategoryId, x.ProductId });
 
             builder.Entity<UniShopUserFavoriteProduct>().HasKey(x => new { x.ProductId, x.UniShopUserId });
 

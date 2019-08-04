@@ -8,21 +8,19 @@ using UniShop.Web.InputModels;
 
 namespace UniShop.Services.Models
 {
-    public class ChildCategoryServiceModel : IMapFrom<ChildCategoryCreateInputModel>,IMapFrom<ChildCategory>,IHaveCustomMappings
+    public class ChildCategoryServiceModel :  IMapFrom<ChildCategoryCreateInputModel>,IMapFrom<ChildCategory>
     {
-       
-        public string Name { get; set; }
 
-        public string ParentCategoryName { get; set; }
+        public int Id { get; set; }
+
+        public string Name { get; set; }
 
         public int ParentCategoryId { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-                .CreateMap<ChildCategory, ChildCategoryServiceModel>()
-                .ForMember(destination => destination.ParentCategoryName,
-                            opts => opts.MapFrom(origin => origin.ParentCategory.Name));
-        }
+        public ParentCategoryServiceModel ParentCategory { get; set; }
+
+        public ICollection<ProductServiceModel> Products { get; set; }
+
+        
     }
 }
