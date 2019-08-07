@@ -46,5 +46,13 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             return Redirect("/");
         }
+
+        [HttpGet("/Administration/ChildCategories/All")]
+        public IActionResult All()
+        {
+            var childCategoryViewModels = this.childCategoriesService.GetAllChildCategories().To<ChildCategoryViewModel>().ToList();
+
+            return this.View(childCategoryViewModels);
+        }
     }
 }

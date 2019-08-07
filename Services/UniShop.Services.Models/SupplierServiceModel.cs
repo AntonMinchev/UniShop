@@ -16,6 +16,6 @@ namespace UniShop.Services.Models
 
         public decimal PriceToOffice { get; set; }
 
-        public decimal PriceToAddress { get; set; }
+        public decimal PriceToHome { get; set; }
     }
 }

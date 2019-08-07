@@ -34,7 +34,7 @@ namespace UniShop.Web.Components
                 return this.View(new List<ShoppingCartProductViewModel>());
             }
 
-            return this.View();
+            return this.View(categoriesViewModel);
             }
 
         }

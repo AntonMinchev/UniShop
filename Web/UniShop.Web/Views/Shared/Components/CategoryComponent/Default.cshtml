@@ -1,3 +1,167 @@
 ﻿@model List<UniShop.Web.ViewModels.CategoryViewModel>
+@using Microsoft.AspNetCore.Identity
+@using UniShop.Data.Models
+
+@inject SignInManager<UniShopUser> SignInManager
+@inject UserManager<UniShopUser> UserManager
+
+<div id="navigation">
+    <!-- container -->
+    <div class="container">
+        <div id="responsive-nav">
+            <!-- category nav -->
+            <div class="category-nav show-on-click">
+                <span class="category-header">Категории <i class="fa fa-list"></i></span>
+                <ul class="category-list">
+                    @foreach (var parentCategory in Model)
+                    {
+                        <li class="dropdown side-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">@parentCategory.Name <i class="fa fa-angle-right"></i></a>
+                            <div class="custom-menu" style="width:initial">
+                                <div class="row">
+                                    <div class="col-lg-offset-1">
+                                        <ul class="list-links">
+                                            <li>
+                                                <h3 class="list-links-title">Категории</h3>
+                                            </li>
+                                            @foreach (var childCategory in parentCategory.ChildCategories)
+                                            {
+                                                <li><a href="#">@childCategory.Name</a></li>
+                                            }
+                                        </ul>
+                                        <hr class="hidden-md hidden-lg">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- /category nav -->
+            <!-- menu nav -->
+            <div class="menu-nav">
+                <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
+                <ul class="menu-list">
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                    {
+                        <li class="dropdown default-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Поръчки<i class="fa fa-caret-down"></i></a>
+                            <ul class="custom-menu">
+                                <li><a href="index.html">Необработени поръчки</a></li>
+                                <li><a href="products.html">Обработени поръчки</a></li>
+                                <li><a href="product-page.html">Доставени поръчки</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown default-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Доставчици <i class="fa fa-caret-down"></i></a>
+                            <ul class="custom-menu">
+                                <li><a href="/Administration/Suppliers/All">Всички доставчици</a></li>
+                                <li><a href="/Administration/Suppliers/Create">Добави доставчик</a></li>
+ 
+                            </ul>
+                        </li>
+                        <li class="dropdown default-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Категории <i class="fa fa-caret-down"></i></a>
+                            <ul class="custom-menu">
+                                <li><a href="index.html">Основни Категории</a></li>
+                                <hr />
+                                <li><a href="/Administration/ParentCategories/Create">Създай осн. категория</a></li>
+                                <li><a href="/Administration/ParentCategories/All">Всички осн. категории</a></li>
+                                <hr />
+                                <li><a href="checkout.html">Подкатегории</a></li>
+                                <hr />
+                                <li><a href="/Administration/ChildCategories/Create">Създай подкатегория</a></li>
+                                <li><a href="/Administration/ChildCategories/All">Всички подкатегории</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown default-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Продукти <i class="fa fa-caret-down"></i></a>
+                            <ul class="custom-menu">
+                                <li><a href="/Administration/Products/All">Всички продукти</a></li>
+                                <li><a href="/Administration/Products/Create">Добави Продукт</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="#">За Нас</a></li>
+                        <li><a href="#">Контакти</a></li>
+                        <li><a href="#">Доставка</a></li>
+
+
+                    }
+
+                </ul>
+            </div>
+            <!-- menu nav -->
+        </div>
+    </div>
+    <!-- /container -->
+</div>
+
+@*<div id="navigation">
+    <!-- container -->
+    <div class="container">
+        <div id="responsive-nav">
+            <div class="category-nav show-on-click">
+                <span class="category-header">Категории<i class="fa fa-list"></i></span>
+                <ul class="category-list">
+                    @foreach (var parentCategory in Model)
+                    {
+
+                        <li class="dropdown side-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">@parentCategory.Name <i class="fa fa-angle-right"></i></a>
+                            <div class="custom-menu" style="width:initial">
+                                <div class="row">
+                                    <div class="col-lg-offset-1">
+                                        <ul class="list-links">
+                                            <li>
+                                                <h3 class="list-links-title">Категории</h3>
+                                            </li>
+                                            @foreach (var childCategory in parentCategory.ChildCategories)
+                                            {
+
+                                                <li><a href="#">@childCategory.Name</a></li>
+                                                <hr />
+                                            }
+
+                                            </ul>
+                                        <hr class="hidden-md hidden-lg">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    }
+                    </ul>
+            </div>
+
+
+
+            </div>
+            <!-- /category nav -->
+            <!-- menu nav -->
+        <div class="menu-nav">
+            <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
+            <ul class="menu-list">
+                <li class="dropdown default-dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pages <i class="fa fa-caret-down"></i></a>
+                    <ul class="custom-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <hr />
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="product-page.html">Product Details</a></li>
+                        <li><a href="checkout.html">Checkout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+                </ul>
+            </div>
+            <!-- menu nav -->
+
+        </div>*@
 
 

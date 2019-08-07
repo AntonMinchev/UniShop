@@ -6,7 +6,8 @@ namespace UniShop.Services.Mapping
     {
         public static T To<T>(this object origin)
         {
-            if(origin == null)
+
+            if (origin == null)
             {
                 throw new ArgumentNullException(nameof(origin));
             }

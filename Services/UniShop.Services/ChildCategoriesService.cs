@@ -35,7 +35,7 @@ namespace UniShop.Services
             return result > 0;
         }
 
-        public IQueryable<ChildCategoryServiceModel> GetAllChildCategoriesCategories()
+        public IQueryable<ChildCategoryServiceModel> GetAllChildCategories()
         {
             var childCategories = this.context.ChildCategories.To<ChildCategoryServiceModel>();
 

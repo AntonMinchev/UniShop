@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UniShop.Data;
 using UniShop.Data.Models;
+using UniShop.Services.Mapping;
 using UniShop.Services.Models;
 
 namespace UniShop.Services
@@ -22,7 +24,7 @@ namespace UniShop.Services
             Supplier supplier = new Supplier
             {
                 Name = supplierServiceModel.Name,
-                PriceToHome = supplierServiceModel.PriceToAddress,
+                PriceToHome = supplierServiceModel.PriceToOffice,
                 PriceToOffice = supplierServiceModel.PriceToOffice
             };
 
@@ -31,6 +33,13 @@ namespace UniShop.Services
             int result = this.context.SaveChanges();
 
             return result > 0;
+        }
+
+        public IQueryable<SupplierServiceModel> GetAllSuppliers()
+        {
+            var suppliers = this.context.Suppliers.To<SupplierServiceModel>();
+
+            return suppliers;
         }
     }
 }

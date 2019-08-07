@@ -7,6 +7,7 @@ using UniShop.Services;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
 using UniShop.Web.InputModels;
+using UniShop.Web.ViewModels;
 
 namespace UniShop.Web.Areas.Administration.Controllers
 {
@@ -34,6 +35,14 @@ namespace UniShop.Web.Areas.Administration.Controllers
             this.suppliersService.Create(supplierServiceModel);
 
             return Redirect("/");
+        }
+
+        [HttpGet("/Administration/Suppliers/All")]
+        public IActionResult All()
+        {
+            var suppliersViewModels = this.suppliersService.GetAllSuppliers().To<SupplierViewModel>().ToList();
+
+            return this.View(suppliersViewModels);
         }
 
     }

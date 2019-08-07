@@ -10,6 +10,6 @@ namespace UniShop.Services
     {
         bool Create(ChildCategoryServiceModel childCategoryServiceModel);
 
-        IQueryable<ChildCategoryServiceModel> GetAllChildCategoriesCategories();
+        IQueryable<ChildCategoryServiceModel> GetAllChildCategories();
     }
 }

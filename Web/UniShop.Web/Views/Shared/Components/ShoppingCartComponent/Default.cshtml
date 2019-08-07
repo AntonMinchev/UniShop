@@ -9,7 +9,7 @@
                 <i class="fa fa-shopping-cart"></i>
                 <span class="qty">0</span>
             </div>
-            <strong class="text-uppercase">Моята количка</strong>
+            <strong >Моята количка</strong>
             <br>
 
         </a>
@@ -32,7 +32,7 @@ else
                 <i class="fa fa-shopping-cart"></i>
                 <span class="qty">@Model.Select(p => p.Quantity).Sum()</span>
             </div>
-            <strong class="text-uppercase">Моята количка:</strong>
+            <strong>Моята количка:</strong>
             <br>
             <span>@Model.Select(x => x.Product.Price * x.Quantity).Sum() лв</span>
         </a>

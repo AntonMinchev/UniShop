@@ -27,7 +27,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
         [HttpGet("/Administration/Products/Create")]
         public IActionResult Create()
         {
-            var childCategories = this.childCategoriesService.GetAllChildCategoriesCategories();
+            var childCategories = this.childCategoriesService.GetAllChildCategories();
 
             this.ViewData["types"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
             {
@@ -54,6 +54,15 @@ namespace UniShop.Web.Areas.Administration.Controllers
             this.productsService.Create(productServiceModel);
 
             return this.Redirect("/");            
+
+        }
+
+        [HttpGet("/Administration/Products/All")]
+        public IActionResult All(ProductCreateInputModel productCreateInputModel)
+        {
+            var productsViewModels = this.productsService.GetAllProducts().To<ProductViewModel>().ToList();
+
+            return this.View(productsViewModels);
 
         }
     }
