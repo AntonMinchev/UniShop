@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +18,8 @@ using UniShop.Services.Mapping;
 using UniShop.Web.InputModels;
 using UniShop.Services.Models;
 using System.Reflection;
-using UniShop.Web.ViewModels;
+using UniShop.Services.Contracts;
+using UniShop.Web.ViewModels.Home;
 
 namespace UniShop.Web
 {
@@ -74,6 +73,7 @@ namespace UniShop.Web
             services.AddTransient<ISuppliersService, SuppliersService>();
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IShoppingCartsService, ShoppingCartsService>();
+            services.AddTransient<IUsersService, UsersService>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

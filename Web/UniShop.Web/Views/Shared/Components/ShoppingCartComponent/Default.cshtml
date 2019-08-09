@@ -1,4 +1,4 @@
-﻿@model List<UniShop.Web.ViewModels.ShoppingCartProductViewModel>
+﻿@model List<UniShop.Web.ViewModels.ShoppingCarts.ShoppingCartProductViewModel>
 
 
 @if (Model.Count() == 0)
@@ -50,8 +50,8 @@ else
                                 <h3 class="product-price">@product.Product.Price.ToString("F2") лв <span class="qty">x @product.Quantity</span></h3>
                                 <h2 class="product-name"><a href="#">@product.Product.Name</a></h2>
                             </div>
-                            <button class="cancel-btn"><i class="fa fa-trash"></i></button>
-                        </div>
+                            <a href="ShoppingCarts/Remove/@product.Id"><button class="cancel-btn"><i class="fa fa-trash"></i></button></a>
+</div>
 
 
 
@@ -61,12 +61,16 @@ else
                 <div class="container">
                     <div class="row">
                         <div class="shopping-cart-btns">
-                            <button class="col-sm-1 main-btn">Виж количката</button>
-                            <div class="col-sm-2">
-                                <p>Обща сума:</p>
-                                <p>@Model.Select(x => x.Product.Price * x.Quantity).Sum() лв</p>
-                            </div>
-                        </div>
+                            <a href="/ShoppingCarts/Index">
+                                <button class="col-sm-1 main-btn">
+                                    Виж количката
+                                </button>
+                            </a>
+                                <div class="col-sm-2">
+                                    <p>Обща сума:</p>
+                                    <p>@Model.Select(x => x.Product.Price * x.Quantity).Sum() лв</p>
+                                </div>
+</div>
                     </div>
                 </div>
             </div>

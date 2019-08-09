@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UniShop.Services;
+using UniShop.Services.Contracts;
 using UniShop.Web.ViewModels;
+using UniShop.Web.ViewModels.ShoppingCarts;
 
 namespace UniShop.Web.Components
 {
@@ -29,7 +31,7 @@ namespace UniShop.Web.Components
                 ChildCategories = category.ChildCategories
             }).ToList();
 
-            if (categoriesViewModel.Count == 0)
+            if (categoriesViewModel.Count() == 0)
             {
                 return this.View(new List<ShoppingCartProductViewModel>());
             }

@@ -5,8 +5,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using UniShop.Services;
+using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Web.ViewModels;
+using UniShop.Web.ViewModels.ShoppingCarts;
 
 namespace UniShop.Web.Components
 {

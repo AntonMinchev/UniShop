@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UniShop.Data;
 using UniShop.Data.Models;
+using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
 

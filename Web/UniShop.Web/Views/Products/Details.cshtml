@@ -1,4 +1,4 @@
-﻿@model UniShop.Web.ViewModels.ProductDetailsViewModel
+﻿@model UniShop.Web.ViewModels.Products.ProductDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -46,12 +46,8 @@
         <p>@Model.Description </p>
 
         <div class="product-btns row ">
-            <div class="qty-input col-lg-3 ">
-                <span class="text-uppercase">Количество: </span>
-                <input class="input " type="number">
-            </div>
-            <div class="col-md-8 col-offset-8"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></div>
-        </div>
+            <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.Id"><div class="col-md-8 col-offset-8"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></div></a>
+</div>
     </div>
 </div>
 <div class="col-md-12">

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<UniShop.Web.ViewModels.Products.ProductViewModel>
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="col-md-offset-4 col-md-4">
+        <div class="text-center ">
+            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Продукти</h2>
+        </div>
+    </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChildCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                <img src="@item.Image" width="50" height="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChildCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)лв.
+            </td>
+            <td class="col-md-3 d-flex justify-content-around">
+                <button class="btn btn-success"><a href="">Детайли</a></button>
+                <button class="btn" style="background-color:coral"><a href="">Промени</a></button>
+                <button class="btn btn-danger"><a href="">Изтрий</a></button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services;
+using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels;
+using UniShop.Web.ViewModels.Products;
 
 namespace UniShop.Web.Areas.Administration.Controllers
 {
@@ -58,7 +60,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
         }
 
         [HttpGet("/Administration/Products/All")]
-        public IActionResult All(ProductCreateInputModel productCreateInputModel)
+        public IActionResult All()
         {
             var productsViewModels = this.productsService.GetAllProducts().To<ProductViewModel>().ToList();
 

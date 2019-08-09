@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services;
+using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Web.ViewModels;
+using UniShop.Web.ViewModels.Products;
 
 namespace UniShop.Web.Controllers
 {

@@ -1,4 +1,4 @@
-﻿@model List<UniShop.Web.ViewModels.ProductHomeViewModel>
+﻿@model List<UniShop.Web.ViewModels.Home.ProductHomeViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -92,8 +92,8 @@
                                                     </div>
                                                     <h2 class="product-name"><a href="/Products/Details/@Model[j].Id">@Model[j].Name</a></h2>
                                                     <div class="product-btns">
-
-                                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                                        <a href="ShoppingCarts/Add/@Model[j].Id"><button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Добави в количката</button></a>
+                                                        @*<a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model[j].Id" class="primary-btn "> <i class="fas fa-shopping-cart"></i>  Добави</a>*@
                                                     </div>
                                                 </div>
                                             </div>
