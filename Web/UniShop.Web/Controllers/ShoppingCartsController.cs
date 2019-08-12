@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
+using UniShop.Services.Models;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels.ShoppingCarts;
 
 namespace UniShop.Web.Controllers
 {
+    [Authorize]
     public class ShoppingCartsController : BaseController
     {
         private readonly IShoppingCartsService shoppingCartsService;
@@ -41,22 +44,21 @@ namespace UniShop.Web.Controllers
 
 
         //[HttpPost("/ShoppingCarts/Add")]
-        public IActionResult Add(ShoppingCartAddInputModel shoppingCartAddInputModel)
+        public IActionResult Add(int id)
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-
-            this.shoppingCartsService.AddShoppingCartProduct(shoppingCartAddInputModel.Id, username);
+            this.shoppingCartsService.AddShoppingCartProduct(id, username);
 
             return this.Redirect("/ShoppingCarts/Index");
         }
 
-        public IActionResult Remove(ShoppingCartAddInputModel shoppingCartAddInputModel)
+        public IActionResult Remove(int id)
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
 
-            this.shoppingCartsService.RemoveShoppingCartProduct(shoppingCartAddInputModel.Id, username);
+            this.shoppingCartsService.RemoveShoppingCartProduct(id, username);
 
             return this.Redirect("/ShoppingCarts/Index");
         }
@@ -65,7 +67,7 @@ namespace UniShop.Web.Controllers
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-            bool result = this.shoppingCartsService.IncreaseQuantity(id,username);
+            this.shoppingCartsService.IncreaseQuantity(id, username);
 
 
             return this.Redirect("/ShoppingCarts/Index");
@@ -76,7 +78,7 @@ namespace UniShop.Web.Controllers
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-            bool result = this.shoppingCartsService.ReduceQuantity(id, username);
+            this.shoppingCartsService.ReduceQuantity(id, username);
 
 
             return this.Redirect("/ShoppingCarts/Index");

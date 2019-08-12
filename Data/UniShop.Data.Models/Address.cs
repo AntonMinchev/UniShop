@@ -13,8 +13,8 @@ namespace UniShop.Data.Models
 
         public int Id { get; set; }
 
-        public int CityId { get; set; }
-        public City City  { get; set; }
+        public string City { get; set; }
+        //public City City  { get; set; }
 
         public string UniShopUserId { get; set; }
         public UniShopUser UniShopUser { get; set; }

@@ -6,7 +6,7 @@ using UniShop.Services.Mapping;
 
 namespace UniShop.Services.Models
 {
-    public class CityServiceModel : IMapFrom<City>
+    public class CityServiceModel 
     {
         public int Id { get; set; }
 

@@ -48,5 +48,17 @@ namespace UniShop.Services
 
             return product.To<ProductServiceModel>();
         }
+
+        public bool ReduceProductQuantity(int productId, int quantity)
+        {
+            var product = this.context.Products.FirstOrDefault(p => p.Id == productId);
+
+            product.Quantity = product.Quantity - quantity;
+            this.context.Update(product);
+            int result = this.context.SaveChanges();
+
+
+            return result > 0;
+        }
     }
 }

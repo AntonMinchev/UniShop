@@ -42,5 +42,12 @@ namespace UniShop.Services
 
             return suppliers;
         }
+
+        public SupplierServiceModel GetSupplierById(int id)
+        {
+            var supplier = this.context.Suppliers.FirstOrDefault(s => s.Id == id).To<SupplierServiceModel>();
+
+            return supplier;
+        }
     }
 }

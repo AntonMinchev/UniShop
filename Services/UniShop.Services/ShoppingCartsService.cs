@@ -13,10 +13,10 @@ namespace UniShop.Services
     public class ShoppingCartsService : IShoppingCartsService
     {
         private readonly UniShopDbContext context;
-        private readonly IUsersService usersService;
+        private readonly IUniShopUsersService usersService;
         private readonly IProductsService productsService;
 
-        public ShoppingCartsService(UniShopDbContext context,IUsersService usersService,IProductsService productsService)
+        public ShoppingCartsService(UniShopDbContext context,IUniShopUsersService usersService,IProductsService productsService)
         {
             this.context = context;
             this.usersService = usersService;
@@ -34,7 +34,7 @@ namespace UniShop.Services
             var shoppingCartProduct = this.context.ShoppingCartProducts.FirstOrDefault(x => x.ProductId == productId && x.ShoppingCartId == user.ShoppingCartId);
            
 
-            if (shoppingCartProduct == null && product.Quantity > 1)
+            if (shoppingCartProduct == null && product.Quantity >= 1)
             {
                 var shoppingcartProduct = new ShoppingCartProduct
                 {

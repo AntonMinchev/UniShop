@@ -6,13 +6,18 @@ namespace UniShop.Data.Models
 {
     public class UniShopUser : IdentityUser<string>
     {
-       
-                
+
+        public UniShopUser()
+        {
+            this.Addresses = new HashSet<Address>();
+            this.Orders = new HashSet<Order>();
+            this.FavoriteProducts = new HashSet<UniShopUserFavoriteProduct>();
+        }
         public string FullName { get; set; }
 
-        public ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
 
         public int ShoppingCartId { get; set; }
@@ -20,5 +25,6 @@ namespace UniShop.Data.Models
 
         public virtual ICollection<UniShopUserFavoriteProduct> FavoriteProducts { get; set; }
 
+        
     }
 }

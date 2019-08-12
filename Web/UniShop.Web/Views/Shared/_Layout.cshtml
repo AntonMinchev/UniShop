@@ -80,7 +80,7 @@
 
 
                             <!-- Account -->
-                            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                            @if (this.User.Identity.IsAuthenticated)
                             {
                             <li class="header-account dropdown default-dropdown">
                                 <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
@@ -93,7 +93,7 @@
                                 <ul class="custom-menu">
                                     <li><a href="#"><i class="fa fa-user-o"></i> Моите поръчки</a></li>
                                     <li><a href="#"><i class="fa fa-heart-o"></i> Любими</a></li>
-                                    <li><a href="#"><i class="fa fa-exchange"></i> Админ. модул</a></li>
+                                    <li><a href="#"><i class="fa fa-exchange"></i>Моят профил</a></li>
                                 </ul>
                             </li>
                             @await Component.InvokeAsync(typeof(ShoppingCartComponent))
@@ -186,7 +186,7 @@
                     <div class="footer">
                         <h3 class="footer-header">Моят Акаунт</h3>
                         <ul class="list-links">
-                            <li><a href="#">Моят Акаунт</a></li>
+                            <li><a href="/Identity/Account/Manage/Index">Моят Акаунт</a></li>
                             <li><a href="#">Любими</a></li>
                             <li><a href="#">Вход</a></li>
                         </ul>

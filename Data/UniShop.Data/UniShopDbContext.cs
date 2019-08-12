@@ -7,7 +7,7 @@ namespace UniShop.Data
 {
     public class UniShopDbContext : IdentityDbContext<UniShopUser,IdentityRole,string>
     {
-        public DbSet<City> Cities { get; set; }
+       // public DbSet<City> Cities { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 

@@ -1,0 +1,155 @@
+﻿@using System.Linq
+@using UniShop.Web.ViewModels.Addresses
+@using UniShop.Web.ViewModels.Suppliers
+@using UniShop.Web.ViewModels.ShoppingCarts
+@model UniShop.Web.InputModels.OrderCreateInputModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var addresses = (IEnumerable<AddressViewModel>)this.ViewData["addresses"];
+    var suppliers = (IEnumerable<SupplierViewModel>)this.ViewData["suppliers"];
+    var products = (IEnumerable<ShoppingCartProductViewModel>)this.ViewData["products"];
+    bool isChekedSupplier = false;
+}
+
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-2">
+        <div class="h3 font-weight-bold text-center">Данни на получателя:</div>
+        <div>
+            <h4>Имена на получателя</h4>
+            <div>
+                @this.ViewData["fullname"]
+            </div>
+        </div>
+        <div>
+            <h4>Телефон на получателя</h4>
+            <div>
+                @this.ViewData["phoneNumber"]
+            </div>
+        </div>
+        @if (addresses.Count() == 0)
+        {
+            <p>Все още нямате добавени адреси във вашия профил.</p>
+        }
+    <form method="post" asp-controller="Orders" asp-action="Create">
+        <div class="h3 font-weight-bold mt-3 text-center">Адрес за доставка:</div>
+        <div class="form-group border-primary mb-0">
+            <ul class="list-group">
+                @foreach (var address in addresses)
+                {
+                    <li class="list-group-item">
+                        <label>
+                            <input asp-for="AddressId" type="radio" value="@address.Id" checked />
+                            @address.Street , @address.City,  @address.BuildingNumber
+                        </label>
+                    </li>
+                }
+            </ul>
+            <span asp-validation-for="AddressId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <a href="/Addresses/Add"><input value="Добави адрес" style="background-color:#F8694A" class="btn btn-default center-block" /></a>
+        </div>
+
+        <div class="h3 font-weight-bold text-center">Изберете доставчик и вида на доставката:</div>
+
+        @foreach (var supplier in suppliers)
+        {
+            <div class="form-group mb-0">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>
+                            @if (!isChekedSupplier)
+                            {
+                                <input asp-for="SupplierId" type="radio" value="@supplier.Id" checked />
+                            }
+                            else
+                            {
+                                <input asp-for="SupplierId" type="radio" value="@supplier.Id" />
+                            }
+                            <span class="font-weight-bold">@supplier.Name</span>
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        Aдрес: @supplier.PriceToHome лв. / Oфис: @supplier.PriceToOffice лв.
+                    </div>
+                </div>
+            </div>
+        }
+        <hr />
+        <span asp-validation-for="SupplierId" class="text-danger"></span>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="DeliveryType" type="radio" id="Home" value="Home" checked>
+                    <label for="Home">Доставка до адрес</label>
+                </div>
+                <div class="col-md-6">
+                    <input asp-for="DeliveryType" type="radio" id="Office" value="Office">
+                    <label for="Office">Доставка до офис</label>
+                </div>
+            </div>
+        </div>
+        <span asp-validation-for="DeliveryType" class="text-danger"></span>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        Име на продукта
+                    </th>
+                    <th>
+                        Количество
+                    </th>
+                    <th>
+                        Цена за 1 бройка
+                    </th>
+                    <th>
+                        Обща цена
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in products)
+                {
+                    <tr>
+                        <td class="col-1 d-flex justify-content-center">
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">  <img src="@item.Product.Image" width="50" height="50" /></a>
+                        </td>
+                        <td class="col-1 d-flex justify-content-center">
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">  @Html.DisplayFor(modelItem => item.Product.Name)</a>
+                        </td>
+                        <td class="col-1 d-flex justify-content-center">
+                            <a href="/ShoppingCarts/Reduce/@item.Product.Id" class="text-danger"><i class="fa fa-minus-circle col-lg-1"></i></a>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                            <a href="/ShoppingCarts/Increase/@item.Product.Id" class="text-success "><i class="fa fa-plus-circle "></i></a>
+                        </td>
+                        <td class="col-1 d-flex ">
+                            @Html.DisplayFor(modelItem => item.Product.Price) лв.
+                        </td>
+                        <td class="col-1 d-flex ">
+                            @Html.DisplayFor(modelItem => item.TotalPrice) лв.
+                        </td>
+                        <td>
+                            <a href="/ShoppingCarts/Remove/@item.Product.Id"><button class="cancel-btn"><i class="fa fa-trash"></i></button></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row"><p class="col-lg-offset-9"><b>Обща сума:</b>@products.Select(x => x.TotalPrice).Sum() лв.</p></div>
+        <div class="form-group">
+            <input type="submit" value="Create" style="background-color:#F8694A" class="btn btn-default center-block" />
+        </div>
+    </form>
+
+        
+
+
+   

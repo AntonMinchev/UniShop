@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniShop.Data;
 
 namespace UniShop.Data.Migrations
 {
     [DbContext(typeof(UniShopDbContext))]
-    partial class UniShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190810134923_ChangeCityIdToCity")]
+    partial class ChangeCityIdToCity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,6 +188,10 @@ namespace UniShop.Data.Migrations
                     b.Property<DateTime>("OrderDate");
 
                     b.Property<int>("OrderStatus");
+
+                    b.Property<string>("Recipient");
+
+                    b.Property<string>("RecipientPhoneNumber");
 
                     b.Property<decimal>("TotalPrice");
 

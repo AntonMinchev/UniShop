@@ -11,5 +11,7 @@ namespace UniShop.Services.Contracts
         bool Create(SupplierServiceModel supplierServiceModel);
 
         IQueryable<SupplierServiceModel> GetAllSuppliers();
+
+        SupplierServiceModel GetSupplierById(int id);
     }
 }

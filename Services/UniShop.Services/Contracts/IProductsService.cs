@@ -11,5 +11,7 @@ namespace UniShop.Services.Contracts
         IQueryable<ProductServiceModel> GetAllProducts();
 
         ProductServiceModel GetById(int id);
+
+        bool ReduceProductQuantity(int productId,int quantity);
     }
 }
