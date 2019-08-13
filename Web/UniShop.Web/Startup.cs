@@ -63,9 +63,8 @@ namespace UniShop.Web
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 0;
-
                 options.User.RequireUniqueEmail = true;
-            });
+            }); 
 
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IParentCategoriesService, ParentCategoriesService>();
@@ -76,6 +75,7 @@ namespace UniShop.Web
             services.AddTransient<IUniShopUsersService, UniShopUsersService>();
             services.AddTransient<IAddressesService, AddressesService>();
             services.AddTransient<IOrderService, OrdersService>();
+            services.AddTransient<IFavoriteProductsService, FavoriteProductsService>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

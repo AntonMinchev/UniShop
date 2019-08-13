@@ -64,15 +64,6 @@ namespace UniShop.Web.Controllers
             this.ViewData["suppliers"] = suppliers;
             this.ViewData["products"] = shoppingCartProductsViewModel;
 
-            //this.ViewBag = new OrderCreateViewModel
-            //{
-            //     Addresses = addreses,
-            //     FullName = user.FullName,
-            //     PhoneNumber = user.PhoneNumber,
-            //     Suppliers = suppliers,
-            //     Products = shoppingCartProductsViewModel
-            //};
-
 
             return View();
         }
@@ -86,6 +77,15 @@ namespace UniShop.Web.Controllers
             this.orderService.CreateOrder(username, orderCreateInputModel.SupplierId, orderCreateInputModel.DeliveryType, orderCreateInputModel.AddressId);
 
             return this.Redirect("/");
+        }
+
+        public IActionResult All()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var orders = this.orderService.GetAllOrdersByUserId(userId).To<AllOrdersViewModel>().ToList();
+
+            return this.View(orders);
         }
     }
 }

@@ -46,8 +46,16 @@
         <p>@Model.Description </p>
 
         <div class="product-btns row ">
-            <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.Id"><div class="col-md-8 col-offset-8"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></div></a>
-</div>
+            <div class="product-btns">
+                <div class="col-md-4 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.Id"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></a></div>
+                <div class="col-md-3"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.Id"><button class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</button></a></div>
+                @*<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>*@
+
+
+            </div>
+           
+           
+        </div>
     </div>
 </div>
 <div class="col-md-12">

@@ -7,7 +7,7 @@ using UniShop.Services.Mapping;
 
 namespace UniShop.Services.Models
 {
-    public class OrderServiceModel : IMapFrom<Order>
+    public class OrderServiceModel : IMapFrom<Order>,IMapTo<Order>
     {
         public int Id { get; set; }
 
@@ -25,9 +25,9 @@ namespace UniShop.Services.Models
 
         public decimal DeliveryPrice { get; set; }
 
-        public string Recipient { get; set; }
+        //public string Recipient { get; set; }
 
-        public string RecipientPhoneNumber { get; set; }
+        //public string RecipientPhoneNumber { get; set; }
 
         public string UniShopUserId { get; set; }
         public UniShopUserServiceModel UniShopUser { get; set; }

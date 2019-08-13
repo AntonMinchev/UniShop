@@ -91,9 +91,9 @@
                                 </div>
                                 <a href="/Identity/Account/Logout" class="text-uppercase">Изход</a>
                                 <ul class="custom-menu">
-                                    <li><a href="#"><i class="fa fa-user-o"></i> Моите поръчки</a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> Любими</a></li>
-                                    <li><a href="#"><i class="fa fa-exchange"></i>Моят профил</a></li>
+                                    <li><a href="#"><i class="fa fa-user-o"></i> Моят профил</a></li>
+                                    <li><a href="/FavoriteProducts/All"><i class="fa fa-heart-o"></i> Любими</a></li>
+                                    <li><a href="/Orders/All"><i class="fa fa-list"></i>Моите поръчки</a></li>
                                 </ul>
                             </li>
                             @await Component.InvokeAsync(typeof(ShoppingCartComponent))

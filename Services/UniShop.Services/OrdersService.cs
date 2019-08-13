@@ -59,7 +59,12 @@ namespace UniShop.Services
                     Quantity = shoppingCartProduct.Quantity
                 };
 
-                this.productsService.ReduceProductQuantity(shoppingCartProduct.ProductId, shoppingCartProduct.Quantity);
+               bool isInStock = this.productsService.ReduceProductQuantity(shoppingCartProduct.ProductId, shoppingCartProduct.Quantity);
+
+                if (!isInStock)
+                {
+                    return false;
+                }
 
                 orderProducts.Add(orderProduct);
             }
@@ -88,7 +93,66 @@ namespace UniShop.Services
             return result > 0;
         }
 
-       
+        public bool DeliverOrder(int id)
+        {
+            var order = this.context.Orders.FirstOrDefault(o => o.Id == id);
+
+            order.OrderStatus = OrderStatus.Delivered;
+            order.DeliveryDate = DateTime.UtcNow;
+
+            this.context.Update(order);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
+        public IQueryable<OrderServiceModel> GetAllDeliveredOrders()
+        {
+            var deliveredOrders = this.context.Orders.Where(o => o.OrderStatus == OrderStatus.Delivered).To<OrderServiceModel>();
+
+            return deliveredOrders;
+        }
+
+        public IQueryable<OrderServiceModel> GetAllOrdersByUserId(string userId)
+        {
+            var orders = this.context.Orders.Where(o => o.UniShopUserId == userId).To<OrderServiceModel>();
+
+            return orders;
+        }
+
+        public IQueryable<OrderServiceModel> GetAllProcessedOrders()
+        {
+            var processedOrders = this.context.Orders.Where(o => o.OrderStatus == OrderStatus.Processed).To<OrderServiceModel>();
+
+            return processedOrders;
+        }
+
+        public IQueryable<OrderServiceModel> GetAllUnprocessedOrders()
+        {
+            var unprocessedOrders = this.context.Orders.Where(o => o.OrderStatus == OrderStatus.Unprocessed).To<OrderServiceModel>();
+
+            return unprocessedOrders;
+        }
+
+        public OrderServiceModel GetOrderById(int id)
+        {
+            var order = this.context.Orders.FirstOrDefault(o => o.Id == id).To<OrderServiceModel>();
+
+            return order;
+        }
+
+        public bool ProcessingOrder(int id)
+        {
+            var order = this.context.Orders.FirstOrDefault(o => o.Id == id);
+
+            order.OrderStatus = OrderStatus.Processed;
+            order.DispatchDate = DateTime.UtcNow;
+
+            this.context.Update(order);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
 
         private bool RemoveShoppingCartProducts(List<ShoppingCartProductServiceModel> shoppingCartProducts)
         {
