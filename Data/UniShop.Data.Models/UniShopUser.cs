@@ -25,6 +25,8 @@ namespace UniShop.Data.Models
 
         public virtual ICollection<UniShopUserFavoriteProduct> FavoriteProducts { get; set; }
 
-        
+        public virtual ICollection<Review> Reviews { get; set; }
+
+
     }
 }

@@ -26,7 +26,8 @@
                                             </li>
                                             @foreach (var childCategory in parentCategory.ChildCategories)
                                             {
-                                                <li><a href="#">@childCategory.Name</a></li>
+                                               
+                                                <li><a asp-controller="Home" asp-action="Index" asp-route-childCategoryId="@childCategory.Id" class="nav-link active">@childCategory.Name</a></li>
                                             }
                                         </ul>
                                         <hr class="hidden-md hidden-lg">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UniShop.Data;
 using UniShop.Data.Models;
+using UniShop.Data.Models.Enums;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
@@ -42,6 +43,22 @@ namespace UniShop.Services
             return this.context.Products.To<ProductServiceModel>();
         }
 
+        public IQueryable<ProductServiceModel> GetAllProducts(int? childCategoryId, string searchString)
+        {
+
+            if (searchString != null)
+            {
+               return this.GetProductsBySearchString(searchString);
+
+            }
+            else if (childCategoryId != null)
+            {
+                return this.GetProductByChildCategoryId(childCategoryId);
+            }
+
+            return this.GetAllProducts();        
+        }
+
         public ProductServiceModel GetById(int id)
         {
             var product = this.context.Products.FirstOrDefault(p => p.Id==id);
@@ -59,6 +76,28 @@ namespace UniShop.Services
 
 
             return result > 0;
+        }
+
+        public IQueryable<ProductServiceModel> SortProducts(IQueryable<ProductServiceModel> products, ProductsSort sort)
+        {
+            if (sort == ProductsSort.PriceDescending)
+            {
+                return products.OrderByDescending(p => p.Price);
+            }
+
+            return products.OrderBy(p => p.Price);
+        }
+
+        private IQueryable<ProductServiceModel> GetProductByChildCategoryId(int? categoryId)
+        {
+
+            return this.context.Products.Where(p => p.ChildCategoryId == categoryId).To<ProductServiceModel>();       
+          
+        }
+
+        private IQueryable<ProductServiceModel> GetProductsBySearchString(string searchString)
+        {
+            return this.context.Products.Where(p => p.Name.ToLower().Contains(searchString.ToLower())).To<ProductServiceModel>();
         }
     }
 }

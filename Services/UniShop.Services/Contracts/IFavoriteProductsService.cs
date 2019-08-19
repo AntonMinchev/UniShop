@@ -10,6 +10,8 @@ namespace UniShop.Services.Contracts
     {
         bool AddFavoriteProduct(int productId, string username);
 
+        bool RemoveFavoriteProduct(int productId, string username);
+
         IQueryable<UniShopUserFavoriteProductServiceModel> GetAllFavoriteProductsByUserId(string userId);
     }
 }

@@ -8,6 +8,9 @@ namespace UniShop.Data.Models
     {
         public int Id { get; set; }
 
+        public string UniShopUserId { get; set; }
+        public UniShopUser UniShopUser { get; set; }
+
         public int Raiting { get; set; }
 
         public string Comment { get; set; }

@@ -44,5 +44,16 @@ namespace UniShop.Web.Controllers
 
             return this.View(favoriteProductsViewModels);
         }
+
+
+        public IActionResult Remove(int id)
+        {
+            string username = this.User.FindFirst(ClaimTypes.Name).Value;
+
+            this.favoriteProductsService.RemoveFavoriteProduct(id, username);
+
+            return this.Redirect("/");
+        }
+
     }
 }

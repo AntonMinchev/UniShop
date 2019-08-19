@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using UniShop.Data.Models;
+using UniShop.Services.Mapping;
+using UniShop.Services.Models;
 
 namespace UniShop.Web.ViewModels.Home
 {
-    public class ProductHomeViewModel
+    public class ProductHomeViewModel : IMapFrom<ProductServiceModel>,IMapFrom<Product>
     {
+     
         public string Id { get; set; }
 
         public string Name { get; set; }

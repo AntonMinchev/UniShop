@@ -29,6 +29,9 @@ namespace UniShop.Data
 
         public DbSet<UniShopUserFavoriteProduct> UniShopFavoriteProducts { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+
+
         public DbSet<Supplier> Suppliers { get; set; }
         public UniShopDbContext(DbContextOptions<UniShopDbContext> options) 
             : base(options)

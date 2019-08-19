@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Services\UniShop.Services.Mapping\UniShop.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\UniShop.Services.Models\UniShop.Services.Models.csproj" />
   </ItemGroup>

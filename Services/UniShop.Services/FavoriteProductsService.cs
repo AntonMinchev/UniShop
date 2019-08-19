@@ -53,5 +53,21 @@ namespace UniShop.Services
 
             return favoriteProducts;
         }
+
+        public bool RemoveFavoriteProduct(int productId, string username)
+        {
+            var user = this.uniShopUsersService.GetUserByUsername(username);
+            var favoriteProduct = this.context.UniShopFavoriteProducts.FirstOrDefault(p => p.ProductId == productId && p.UniShopUserId == user.Id);
+
+            if (favoriteProduct == null)
+            {
+                return false;
+            }
+
+            this.context.UniShopFavoriteProducts.Remove(favoriteProduct);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
     }
 }
