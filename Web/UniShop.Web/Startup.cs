@@ -76,8 +76,9 @@ namespace UniShop.Web
             services.AddTransient<IAddressesService, AddressesService>();
             services.AddTransient<IOrderService, OrdersService>();
             services.AddTransient<IFavoriteProductsService, FavoriteProductsService>();
+            services.AddTransient<IReviewsService, ReviewsService>();
 
-         
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

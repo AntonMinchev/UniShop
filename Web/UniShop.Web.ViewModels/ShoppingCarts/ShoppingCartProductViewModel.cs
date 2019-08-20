@@ -1,4 +1,5 @@
 ﻿using UniShop.Services.Models;
+using UniShop.Web.ViewModels.Products;
 
 namespace UniShop.Web.ViewModels.ShoppingCarts
 {
@@ -6,7 +7,7 @@ namespace UniShop.Web.ViewModels.ShoppingCarts
     {
         public int Id { get; set; }
 
-        public ProductServiceModel Product { get; set; }
+        public ProductViewModel Product { get; set; }
 
         public int Quantity { get; set; }
 

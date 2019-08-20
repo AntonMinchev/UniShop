@@ -35,15 +35,12 @@
                 <span asp-validation-for="PriceToAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" style="background-color:#F8694A" class="btn btn-default center-block" />
+                <input type="submit" value="Добави" style="background-color:#F8694A" class="btn btn-default center-block" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

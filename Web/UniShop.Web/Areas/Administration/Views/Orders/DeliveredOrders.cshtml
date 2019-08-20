@@ -1,15 +1,18 @@
 ﻿@model IEnumerable<UniShop.Web.ViewModels.Orders.DeliveredOrderViewModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    ViewData["Title"] = "DeliveredOrders";
+    ViewData["Title"] = "Доставени поръчки";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DeliveredOrders</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Доставени поръчки</h2>
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -35,32 +38,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstimatedDeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DispatchDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstimatedDeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DispatchDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    <a asp-area="Administration" asp-controller="Orders" asp-action="Deliver" asp-route-id="@item.Id" class="btn btn-success">Детайли</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

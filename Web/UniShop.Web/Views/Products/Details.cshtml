@@ -1,4 +1,7 @@
 ﻿@model UniShop.Web.ViewModels.Products.ProductDetailsViewModel
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
 
 @{
     ViewData["Title"] = "Details";
@@ -10,7 +13,7 @@
     <div class="col-md-6">
         <div id="product-main-view">
             <div class="product-view">
-                <img src="@Model.Image" alt="">
+                <img src="@Model.ProductViewModel.Image" alt="">
             </div>
 
         </div>
@@ -19,21 +22,36 @@
 </div>
 <div class="col-md-6">
     <div class="product-body">
-        <h2 class="product-name">@Model.Name</h2>
-        <h3 class="product-price">@Model.Price.ToString("F2") </h3>
+        <h2 class="product-name">@Model.ProductViewModel.Name</h2>
+        <h3 class="product-price">@Model.ProductViewModel.Price.ToString("F2") </h3>
         <div>
             <div class="product-rating">
-                <i class="fa fa-star" style="color:darkorange"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o empty"></i>
+
+                @if (Model.ProductReviews.Sum(r => r.Raiting) != 0 && @Model.ProductReviews.Count() != 0)
+                {
+                    @for (int i = 0; i < Model.ProductReviews.Average(r => r.Raiting); i++)
+                    {
+                        <i class="fa fa-star" style="color:darkorange"></i>
+                    }
+                    @for (int i = 0; i < 5 - Model.ProductReviews.Average(r => r.Raiting); i++)
+                    {
+                        <i class="fa fa-star-o empty"></i>
+                    }
+                }
+                else
+                {
+                    <i class="fa fa-star-o empty"></i>
+                    <i class="fa fa-star-o empty"></i>
+                    <i class="fa fa-star-o empty"></i>
+                    <i class="fa fa-star-o empty"></i>
+                    <i class="fa fa-star-o empty"></i>
+                }
             </div>
-            <a >3 Review(s)</a>
+            <div>@Model.ReviewCount Review(s)</div>
         </div>
         <p>
             <strong>Availability:</strong>
-            @if (Model.IsInStock == true)
+            @if (Model.ProductViewModel.IsInStock == true)
             {
                 <a>In Stock</a>
             }
@@ -42,113 +60,80 @@
                 <a>Out Of Stock</a>
             }
         </p>
-            <h3>Описание:</h3>
-        <p>@Model.Description </p>
+        <h3>Описание:</h3>
+        <p>@Model.ProductViewModel.Description </p>
 
         <div class="product-btns row ">
             <div class="product-btns">
-                <div class="col-md-4 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.Id"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></a></div>
-                <div class="col-md-3"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.Id"><button class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</button></a></div>
+                <div class="col-md-4 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></a></div>
+                <div class="col-md-3"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id"><button class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</button></a></div>
                 @*<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>*@
 
 
             </div>
-           
-           
+
+
         </div>
     </div>
 </div>
 <div class="col-md-12">
     <div class="product-tab">
         <ul class="tab-nav">
-            <li class="active"><a data-toggle="tab" href="#tab1">Описание</a></li>
+            <li class="active"><a data-toggle="tab" href="#tab3">Ревюта (@Model.ReviewCount)</a></li>
+            <li><a data-toggle="tab" href="#tab1">Описание</a></li>
             <li><a data-toggle="tab" href="#tab2">Характеристика</a></li>
-            <li><a data-toggle="tab" href="#tab3">Ревюта (3)</a></li>
         </ul>
         <div class="tab-content">
-            <div id="tab1" class="tab-pane fade in active">
-                <p>@Model.Description</p>
-            </div>
-            <div id="tab2" class="tab-pane fade in active">
-                <p>@Model.Specification</p>
-            </div>
-            <div id="tab3" class="tab-pane fade in">
+            <div id="tab3" class="tab-pane fade in active">
 
                 <div class="row">
                     <div class="col-md-6">
                         <div class="product-reviews">
-                            <div class="single-review">
-                                <div class="review-heading">
-                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                    <div class="review-rating pull-right">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                    </div>
-                                </div>
-                                <div class="review-body">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    </p>
-                                </div>
-                            </div>
+                            @foreach (var review in Model.ProductReviews)
+                            {
+                                <div class="single-review">
+                                    <div class="review-heading">
+                                        <div><a href="#"><i class="fa fa-user-o"></i>@review.Username </a></div>
+                                        <div class="review-rating pull-right">
+                                            @for (int i = 0; i < review.Raiting; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @for (int i = 0; i < 5 - review.Raiting; i++)
+                                            {
+                                                <i class="fa fa-star-o empty"></i>
+                                            }
 
-                            <div class="single-review">
-                                <div class="review-heading">
-                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                    <div class="review-rating pull-right">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
+                                        </div>
+                                    </div>
+                                    <div class="review-body">
+                                        <p>
+                                            @review.Comment
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="review-body">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    </p>
-                                </div>
-                            </div>
+                            }
 
-                            <div class="single-review">
-                                <div class="review-heading">
-                                    <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                    <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                    <div class="review-rating pull-right">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                    </div>
-                                </div>
-                                <div class="review-body">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    </p>
-                                </div>
-                            </div>
+
+
 
                             <ul class="reviews-pages">
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                                @Html.PagedListPager((IPagedList)Model.ProductReviews, page => Url.Action("Details", new
+                                {
+                                                pageNumber = page,
+
+                                }))
+                                @*<li class="active">1</li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>*@
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h4 class="text-uppercase">Write Your Review</h4>
                         <form class="review-form" method="post" asp-controller="Reviews" asp-action="Add">
-                            <input type="hidden" name="productId" value="@Model.Id">
+                            <input type="hidden" name="productId" value="@Model.ProductViewModel.Id">
                             <div class="form-group">
                                 <textarea class="input" name="comment" placeholder="Your review"></textarea>
                             </div>
@@ -172,8 +157,15 @@
 
 
             </div>
+            <div id="tab1" class="tab-pane ">
+                <p>@Model.ProductViewModel.Description</p>
+            </div>
+            <div id="tab2" class="tab-pane ">
+                <p>@Model.ProductViewModel.Specification</p>
+            </div>
+
         </div>
     </div>
 </div>
 
-				
+

@@ -62,7 +62,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
         [HttpGet("/Administration/Products/All")]
         public IActionResult All()
         {
-            var productsViewModels = this.productsService.GetAllProducts().To<ProductViewModel>().ToList();
+            var productsViewModels = this.productsService.GetAllProducts().To<ProductAllViewModel>().ToList();
 
             return this.View(productsViewModels);
 

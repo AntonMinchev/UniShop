@@ -19,7 +19,7 @@
                     <div class="pull-left">
                         <div class="header-search">
                             <form method="post" asp-controller="Home" asp-action="Index">
-                                <input class="input search-input" type="text" name="SearchString" id="SearchString" placeholder="Enter your keyword">
+                                <input class="input search-input" type="text" name="SearchString" id="SearchString" placeholder="Какво търсиш днес">
                                 <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -30,14 +30,14 @@
                             <input type="hidden" name="PageNumber" value="@Model.PageNumber">
                             <input type="hidden" name="ChildCategoryId" value="@Model.ChildCategoryId">
                             <div class="sort-filter">
-                                <span class="text-uppercase">Sort By:</span>
+                                <span class="text-uppercase">Сортирай по:</span>
                                 <select name="Sort" id="Sort" onchange="this.form.submit();">
                                     <option value="1" selected="@(Model.Sort.ToString() == "PriceAscending" ? true : false)">Цена(възх.)</option>
                                     <option value="2" selected="@(Model.Sort.ToString() == "PriceDescending" ? true : false)">Цена(низх.)</option>
                                 </select>
                             </div>
                             <div class="page-filter">
-                                <span class="text-uppercase">Show:</span>
+                                <span class="text-uppercase">Продукти на страница:</span>
                                 <select name="PageSize" id="PageSize" onchange="this.form.submit();">
                                     <option value="9" selected="@(@Model.PageSize == 9 ? true : false)">9</option>
                                     <option value="18" selected="@(Model.PageSize == 18 ? true : false)">18</option>
@@ -66,13 +66,13 @@
                                     <div class="product-body">
                                         <h3 class="product-price">@product.Price.ToString("F2")</h3>
                                         <div class="product-rating">
-                                            @*@if (product.Raiting != 0 && product.CountReviews != 0)
+                                            @if (product.Raiting != 0 && product.CountReviews != 0)
                                     {
-                                        @for (int k = 0; k < product.Raiting / product.CountReviews; k++)
+                                        @for (int i = 0; i < product.Raiting / product.CountReviews; i++)
                                         {
                                             <i class="fa fa-star"></i>
                                         }
-                                        @for (int k = 0; k < 5 - product.Raiting / product.CountReviews; k++)
+                                        @for (int i = 0; i < 5 - product.Raiting / product.CountReviews; i++)
                                         {
                                             <i class="fa fa-star-o empty"></i>
                                         }
@@ -84,7 +84,7 @@
                                         <i class="fa fa-star-o empty"></i>
                                         <i class="fa fa-star-o empty"></i>
                                         <i class="fa fa-star-o empty"></i>
-                                    }*@
+                                    }
                                         </div>
                                         <h2 class="product-name"><a href="/Products/Details/@product.Id">@product.Name</a></h2>
                                         <div class="product-btns">

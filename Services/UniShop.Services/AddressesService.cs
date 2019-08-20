@@ -37,7 +37,7 @@ namespace UniShop.Services
             this.context.Addresses.Add(address);
             int result = this.context.SaveChanges();
 
-            AddAddressToUser(address, userId);
+            
 
             return result > 0;
         }
@@ -49,16 +49,6 @@ namespace UniShop.Services
             return addresses;
         }
 
-        private bool AddAddressToUser(Address address, string userId)
-        {
-            var user = this.uniShopUsersService.GetUserById(userId).To<UniShopUser>();
-           
-            user.Addresses.Add(address);
-
-            this.context.Update(user);
-            int result = this.context.SaveChanges();
-
-            return result > 0;
-        }
+      
     }
 }

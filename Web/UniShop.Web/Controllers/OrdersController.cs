@@ -10,6 +10,7 @@ using UniShop.Services.Mapping;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels.Addresses;
 using UniShop.Web.ViewModels.Orders;
+using UniShop.Web.ViewModels.Products;
 using UniShop.Web.ViewModels.ShoppingCarts;
 using UniShop.Web.ViewModels.Suppliers;
 
@@ -46,7 +47,7 @@ namespace UniShop.Web.Controllers
             var shoppingCartProductsViewModel = shoppingCartProducts.Select(product => new ShoppingCartProductViewModel
             {
                 Id = product.ProductId,
-                Product = product.Product,
+                Product = product.Product.To<ProductViewModel>(),
                 Quantity = product.Quantity,
                 TotalPrice = product.Quantity * product.Product.Price
 

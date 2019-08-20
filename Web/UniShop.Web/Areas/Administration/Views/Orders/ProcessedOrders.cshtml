@@ -2,15 +2,18 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    ViewData["Title"] = "ProcessedOrders";
+    ViewData["Title"] = "Обработени поръчки";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ProcessedOrders</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Обработени поръчки</h2>
+    </div>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -52,7 +55,7 @@
                     @Html.DisplayFor(modelItem => item.TotalPrice)
                 </td>
                 <td>
-                    <a asp-area="Administration" asp-controller="Orders" asp-action="Deliver" asp-route-id="@item.Id"><button class="btn btn-success">Доставена</button></a>
+                    <a asp-area="Administration" asp-controller="Orders" asp-action="Deliver" asp-route-id="@item.Id" class="btn btn-success">Доставена</a>
                 </td>
             </tr>
         }

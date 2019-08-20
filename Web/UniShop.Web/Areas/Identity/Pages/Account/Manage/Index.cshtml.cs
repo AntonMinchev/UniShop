@@ -48,7 +48,7 @@ namespace UniShop.Web.Areas.Identity.Pages.Account.Manage
             public string Email { get; set; }
 
             [Required]
-            [EmailAddress]
+            [Phone]
             public string PhoneNumber { get; set; }
         }
 
