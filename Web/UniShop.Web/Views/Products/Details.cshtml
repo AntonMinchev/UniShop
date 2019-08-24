@@ -1,7 +1,8 @@
 ﻿@model UniShop.Web.ViewModels.Products.ProductDetailsViewModel
-@using X.PagedList.Mvc.Core;
-@using X.PagedList;
 
+
+@inject SignInManager<UniShopUser> SignInManager
+@inject UserManager<UniShopUser> UserManager
 
 @{
     ViewData["Title"] = "Details";
@@ -47,17 +48,17 @@
                     <i class="fa fa-star-o empty"></i>
                 }
             </div>
-            <div>@Model.ReviewCount Review(s)</div>
+            <div>@Model.ReviewCount Ревю(та)</div>
         </div>
         <p>
-            <strong>Availability:</strong>
+            <strong>Наличност:</strong>
             @if (Model.ProductViewModel.IsInStock == true)
             {
-                <a>In Stock</a>
+                <i>Наличен</i>
             }
             else
             {
-                <a>Out Of Stock</a>
+                <i>Изчерпан</i>
             }
         </p>
         <h3>Описание:</h3>
@@ -65,11 +66,12 @@
 
         <div class="product-btns row ">
             <div class="product-btns">
-                <div class="col-md-4 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id"><button class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</button></a></div>
-                <div class="col-md-3"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id"><button class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</button></a></div>
-                @*<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>*@
-
-
+                <div class="col-md-5 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</a></div>
+                <div class="col-md-5"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</a></div>
+                @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                {
+                    <div class="col-md-2"><a asp-area="Administration" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn">Промени</a></div>
+                }
             </div>
 
 
@@ -113,33 +115,26 @@
                                     </div>
                                 </div>
                             }
-
-
-
-
                             <ul class="reviews-pages">
                                 @Html.PagedListPager((IPagedList)Model.ProductReviews, page => Url.Action("Details", new
                                 {
                                                 pageNumber = page,
 
                                 }))
-                                @*<li class="active">1</li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>*@
+
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="text-uppercase">Write Your Review</h4>
+                        <h4 class="text-uppercase">Напиши твоето ревю</h4>
                         <form class="review-form" method="post" asp-controller="Reviews" asp-action="Add">
                             <input type="hidden" name="productId" value="@Model.ProductViewModel.Id">
                             <div class="form-group">
-                                <textarea class="input" name="comment" placeholder="Your review"></textarea>
+                                <textarea class="input" name="comment" placeholder="Напиши твоето ревю"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="input-rating">
-                                    <strong class="text-uppercase">Your Rating: </strong>
+                                    <strong class="text-uppercase">Рейтинг: </strong>
                                     <div class="stars">
                                         <input type="radio" id="star5" name="raiting" value="5" /><label for="star5"></label>
                                         <input type="radio" id="star4" name="raiting" value="4" /><label for="star4"></label>
@@ -149,13 +144,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="primary-btn">Submit</button>
+                            <button class="primary-btn">Добави ревю</button>
                         </form>
                     </div>
                 </div>
-
-
-
             </div>
             <div id="tab1" class="tab-pane ">
                 <p>@Model.ProductViewModel.Description</p>
@@ -169,3 +161,6 @@
 </div>
 
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

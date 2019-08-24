@@ -12,6 +12,7 @@ namespace UniShop.Web.InputModels
     {
         [Display(Name = "Име")]
         [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
         public string Name { get; set; }
 
         [Display(Name = "Цена")]
@@ -26,10 +27,12 @@ namespace UniShop.Web.InputModels
 
         [Display(Name = "Описание")]
         [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
+        [StringLength(255, MinimumLength = 10, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
         public string Description { get; set; }
 
         [Display(Name = "Характеристики")]
         [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
+        [StringLength(255, MinimumLength = 10, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
         public string Specification { get; set; } 
        
         [Display(Name = "Снимка")]

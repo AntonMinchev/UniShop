@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Web.ViewModels.FavoriteProducts;
+using X.PagedList;
 
 namespace UniShop.Web.Controllers
 {
@@ -25,10 +26,10 @@ namespace UniShop.Web.Controllers
 
             this.favoriteProductsService.AddFavoriteProduct(id, username);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("All");
         }
 
-        public IActionResult All()
+        public IActionResult All(int? pages)
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -42,7 +43,11 @@ namespace UniShop.Web.Controllers
                 ProductPrice = p.Product.Price
             });
 
-            return this.View(favoriteProductsViewModels);
+            int pageNumber = pages ?? 1;
+
+            var pageFavoriteProducts = favoriteProductsViewModels.ToPagedList(pageNumber, 3);
+
+            return this.View(pageFavoriteProducts);
         }
 
 
@@ -52,7 +57,7 @@ namespace UniShop.Web.Controllers
 
             this.favoriteProductsService.RemoveFavoriteProduct(id, username);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("All");
         }
 
     }

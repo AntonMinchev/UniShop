@@ -25,9 +25,9 @@ namespace UniShop.Services.Models
 
         public decimal DeliveryPrice { get; set; }
 
-        //public string Recipient { get; set; }
+        public string Recipient { get; set; }
 
-        //public string RecipientPhoneNumber { get; set; }
+        public string RecipientPhoneNumber { get; set; }
 
         public string UniShopUserId { get; set; }
         public UniShopUserServiceModel UniShopUser { get; set; }

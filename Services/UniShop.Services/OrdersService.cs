@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using UniShop.Data;
@@ -39,7 +41,9 @@ namespace UniShop.Services
                 OrderDate = DateTime.UtcNow,
                 DeliveryAddressId = addressId,
                 EstimatedDeliveryDate = DateTime.UtcNow.AddDays(5),
-                UniShopUserId = user.Id
+                UniShopUserId = user.Id,
+                Recipient = user.FullName,
+                RecipientPhoneNumber = user.PhoneNumber
             };
 
             this.context.Orders.Add(order);
@@ -82,8 +86,9 @@ namespace UniShop.Services
                 order.DeliveryPrice = supplier.PriceToOffice;
             }
 
-            order.TotalPrice = orderProducts.Sum(op => op.Price * op.Quantity) + order.DeliveryPrice;
 
+            order.TotalPrice = orderProducts.Sum(op => op.Price * op.Quantity) + order.DeliveryPrice;
+            order.OrderProducts = orderProducts;
             int result = this.context.SaveChanges();
 
             this.RemoveShoppingCartProducts(shoppingCartProducts);
@@ -136,8 +141,12 @@ namespace UniShop.Services
 
         public OrderServiceModel GetOrderById(int id)
         {
-            var order = this.context.Orders.FirstOrDefault(o => o.Id == id).To<OrderServiceModel>();
-
+            var order = this.context.Orders.Include(p => p.OrderProducts).ThenInclude(x=>x.Product).Include(o=>o.DeliveryAddress).FirstOrDefault(o => o.Id == id).To<OrderServiceModel>();
+            //.Include(x => x.DeliveryAddress)
+            //                  .ThenInclude(x => x.City)
+            //                  .Include(x => x.XeonUser)
+            //                  .ThenInclude(x => x.Company)
+            //                  .FirstOrDefault(x => x.Id == orderId && x.XeonUser.UserName == username);
             return order;
         }
 

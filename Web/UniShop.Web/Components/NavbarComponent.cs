@@ -10,11 +10,11 @@ using UniShop.Web.ViewModels.ShoppingCarts;
 
 namespace UniShop.Web.Components
 {
-    public class CategoryComponent : ViewComponent
+    public class NavbarComponent : ViewComponent
     {
         private readonly IParentCategoriesService parentCategoriesService;
 
-        public CategoryComponent(IParentCategoriesService parentCategoriesService)
+        public NavbarComponent(IParentCategoriesService parentCategoriesService)
         {
             this.parentCategoriesService = parentCategoriesService;
         }

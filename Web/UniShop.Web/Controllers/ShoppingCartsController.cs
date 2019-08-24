@@ -51,7 +51,7 @@ namespace UniShop.Web.Controllers
 
             this.shoppingCartsService.AddShoppingCartProduct(id, username);
 
-            return this.Redirect("/ShoppingCarts/Index");
+            return this.RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
@@ -61,7 +61,7 @@ namespace UniShop.Web.Controllers
 
             this.shoppingCartsService.RemoveShoppingCartProduct(id, username);
 
-            return this.Redirect("/ShoppingCarts/Index");
+            return this.RedirectToAction("Index");
         }
 
         public IActionResult Increase(int id)
@@ -71,7 +71,7 @@ namespace UniShop.Web.Controllers
             this.shoppingCartsService.IncreaseQuantity(id, username);
 
 
-            return this.Redirect("/ShoppingCarts/Index");
+            return this.RedirectToAction("Index");
         }
         
 
@@ -82,7 +82,7 @@ namespace UniShop.Web.Controllers
             this.shoppingCartsService.ReduceQuantity(id, username);
 
 
-            return this.Redirect("/ShoppingCarts/Index");
+            return this.RedirectToAction("Index");
         }
     }
 }

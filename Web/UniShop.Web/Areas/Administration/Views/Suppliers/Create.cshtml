@@ -1,5 +1,5 @@
 ﻿@model UniShop.Web.InputModels.SupplierCreateInputModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,18 +21,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Име</label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" placeholder="Име"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PriceToOffice" class="control-label">Цена до офис на доставчика</label>
-                <input asp-for="PriceToOffice" class="form-control" />
+                <input asp-for="PriceToOffice" class="form-control" placeholder="Цена до офис на доставчика"/>
                 <span asp-validation-for="PriceToOffice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PriceToAddress" class="control-label">Цена до адрес на клиента</label>
-                <input asp-for="PriceToAddress" class="form-control" />
-                <span asp-validation-for="PriceToAddress" class="text-danger"></span>
+                <label asp-for="PriceToHome" class="control-label">Цена до адрес на клиента</label>
+                <input asp-for="PriceToHome" class="form-control" placeholder="Цена до адрес на клиента"/>
+                <span asp-validation-for="PriceToHome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Добави" style="background-color:#F8694A" class="btn btn-default center-block" />

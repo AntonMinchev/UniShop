@@ -7,6 +7,7 @@ using UniShop.Data.Models;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.InputModels;
 
 namespace UniShop.Services
 {
@@ -34,6 +35,41 @@ namespace UniShop.Services
             int result = this.context.SaveChanges();
 
             return result > 0;
+        }
+
+        public bool Delete(int id)
+        {
+            var supplier = this.context.Suppliers.FirstOrDefault(s => s.Id == id);
+
+            if (supplier == null)
+            {
+                return false;
+            }
+
+            this.context.Remove(supplier);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
+        public bool Edit(SupplierServiceModel supplierEditInputModel)
+        {
+            var supplier = this.context.Suppliers.FirstOrDefault(s => s.Id == supplierEditInputModel.Id);
+
+            if (supplier == null)
+            {
+                return false;
+            }
+
+            supplier.Name = supplierEditInputModel.Name;
+            supplier.PriceToHome = supplierEditInputModel.PriceToHome;
+            supplier.PriceToOffice = supplierEditInputModel.PriceToOffice;
+
+            this.context.Update(supplier);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+
         }
 
         public IQueryable<SupplierServiceModel> GetAllSuppliers()

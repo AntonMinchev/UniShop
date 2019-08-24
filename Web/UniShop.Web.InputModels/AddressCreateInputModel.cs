@@ -18,7 +18,7 @@ namespace UniShop.Web.InputModels
         [StringLength(150, MinimumLength = 2, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         public string Street { get; set; }
 
-        [Display(Name = "Ноемр на сградата")]
+        [Display(Name = "Номер на сградата")]
         [Required(ErrorMessage = "Полето \"{0}\" е задължително.")]
         [StringLength(10, MinimumLength = 1, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
         public string BuildingNumber { get; set; }

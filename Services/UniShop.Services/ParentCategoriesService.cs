@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,12 +32,56 @@ namespace UniShop.Services
             return result > 0;
         }
 
+        public bool Delete(int id)
+        {
+            var parentCategory = this.context.ParentCategories.Include(c => c.ChildCategories).FirstOrDefault(p => p.Id == id);
 
-        IQueryable<ParentCategoryServiceModel> IParentCategoriesService.GetAllParentCategories()
+            var isHaveChildCategories = parentCategory.ChildCategories.Any();
+
+            if (isHaveChildCategories)
+            {
+                return false;
+            }
+
+            this.context.Remove(parentCategory);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
+        public bool Edit(ParentCategoryServiceModel parentCategoryServiceModel)
+        {
+            var parentCategory = this.context.ParentCategories.FirstOrDefault(p => p.Id == parentCategoryServiceModel.Id);
+
+            if (parentCategory == null)
+            {
+                return false;
+            }
+
+            parentCategory.Name = parentCategoryServiceModel.Name;
+            this.context.Update(parentCategory);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
+        public IQueryable<ParentCategoryServiceModel> GetAllParentCategories()
         {
             var parentCategories = this.context.ParentCategories.To<ParentCategoryServiceModel>();
 
             return parentCategories;
+        }
+
+        public ParentCategoryServiceModel GetParentCategoryById(int id)
+        {
+            var parentCategory = this.context.ParentCategories.FirstOrDefault(p => p.Id == id).To<ParentCategoryServiceModel>();
+
+            return parentCategory;
+        }
+
+        public bool IsHaveParentCategory(int id)
+        {
+            return this.context.ParentCategories.Any(p => p.Id == id);
         }
     }
 }

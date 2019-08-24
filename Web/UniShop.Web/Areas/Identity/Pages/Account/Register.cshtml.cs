@@ -45,30 +45,32 @@ namespace UniShop.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [Display(Name = "Username")]
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+            [Display(Name = "Потребителско име")]
             public string UserName { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [Display(Name = "FullName")]
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+            [Display(Name = "Имена")]
             public string FullName { get; set; }
 
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            
+            [EmailAddress(ErrorMessage ="Невалиден имейл.")]
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [Display(Name = "Емайл")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
             //[DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
-           // [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            // [DataType(DataType.Password)]
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [Display(Name = "Потвърди паролата")]
+            [Compare("Password", ErrorMessage = "Паролата не съвпада")]
             public string ConfirmPassword { get; set; }
         }
 

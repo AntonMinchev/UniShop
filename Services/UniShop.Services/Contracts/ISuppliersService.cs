@@ -13,5 +13,9 @@ namespace UniShop.Services.Contracts
         IQueryable<SupplierServiceModel> GetAllSuppliers();
 
         SupplierServiceModel GetSupplierById(int id);
+
+        bool Edit(SupplierServiceModel supplierEditInputModel);
+
+        bool Delete(int id);
     }
 }

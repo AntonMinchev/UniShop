@@ -6,7 +6,10 @@ namespace UniShop.Data.Models
 {
     public class ShoppingCart
     {
-
+        public ShoppingCart()
+        {
+            this.ShoppingCartProducts = new HashSet<ShoppingCartProduct>();
+        }
         public int Id { get; set; }
 
         public UniShopUser User { get; set; }

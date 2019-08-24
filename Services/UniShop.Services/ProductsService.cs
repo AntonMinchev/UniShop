@@ -38,6 +38,41 @@ namespace UniShop.Services
             return result > 0;
         }
 
+        public bool Edit(ProductServiceModel productServiceModel)
+        {
+            var product = this.context.Products.FirstOrDefault(p => p.Id == productServiceModel.Id);
+
+            if (product == null)
+            {
+                return false;
+            }
+
+            var categoty = this.context.ChildCategories.FirstOrDefault(c => c.Name == productServiceModel.ChildCategoryName);
+
+            if (categoty == null)
+            {
+                return false;
+            }
+
+            product.Name = productServiceModel.Name;
+            product.Price = productServiceModel.Price;
+            product.Description = productServiceModel.Description;
+            product.Specification = productServiceModel.Specification;
+            product.Quantity = productServiceModel.Quantity;
+            product.ChildCategory = categoty;
+            if (!string.IsNullOrEmpty(productServiceModel.Image))
+            {
+                product.Image = productServiceModel.Image;
+            }
+
+
+            this.context.Products.Update(product);
+            int result = context.SaveChanges();
+
+            return result > 0;
+
+        }
+
         public IQueryable<ProductServiceModel> GetAllProducts()
         {
             return this.context.Products.To<ProductServiceModel>();

@@ -187,6 +187,10 @@ namespace UniShop.Data.Migrations
 
                     b.Property<int>("OrderStatus");
 
+                    b.Property<string>("Recipient");
+
+                    b.Property<string>("RecipientPhoneNumber");
+
                     b.Property<decimal>("TotalPrice");
 
                     b.Property<string>("UniShopUserId");

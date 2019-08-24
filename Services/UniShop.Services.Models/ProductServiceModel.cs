@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ using UniShop.Web.InputModels;
 namespace UniShop.Services.Models
 {
     public class ProductServiceModel : IMapFrom<Product>, IMapTo<Product>
-        ,IMapFrom<ProductCreateInputModel> ,IMapTo<ProductCreateInputModel>
+        ,IMapFrom<ProductCreateInputModel> ,IMapTo<ProductCreateInputModel>,IMapFrom<ProductEditInputModel>,IMapTo<ProductEditInputModel>, IHaveCustomMappings
     {
-
-        public string Id { get; set; }
+        
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -41,7 +42,13 @@ namespace UniShop.Services.Models
 
         public virtual ICollection<ReviewServiceModel> Reviews { get; set; }
 
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration
+                .CreateMap<ProductServiceModel, ProductEditInputModel>()
+                .ForMember(destination => destination.Image,
+                            opts => opts.Ignore());
+        }
 
-       
     }
 }

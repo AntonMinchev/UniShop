@@ -48,17 +48,6 @@ namespace UniShop.Web.Controllers
                 SearchString = indexInputModel.SearchString
             };
 
-                //this.productsService.GetAllProducts()
-                //   .Select(product => new ProductHomeViewModel
-                //   {
-                //       Id = product.Id,
-                //       Name = product.Name,
-                //       Price = product.Price,
-                //       Image = product.Image
-                //        //Raiting = product.Raiting    
-                //    }).ToPagedList(pageNumber, 6); ;
-            //ViewBag.OnePageOfProducts = products;
-
             return this.View(viewModel);
 
         }

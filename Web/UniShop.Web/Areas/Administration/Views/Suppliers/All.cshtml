@@ -5,17 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="col-md-offset-4 col-md-4">
-        <div class="text-center ">
-            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Доставчици</h2>
-        </div>
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Доставчици</h2>
     </div>
+</div>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-               #
+                #
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -30,25 +30,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceToOffice)лв.
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceToHome)лв.
-            </td>
-            <td class="col-md-3 d-flex justify-content-around">
-                <button class="btn" style="background-color:coral"><a href="">Промени</a></button>
-                <button class="btn btn-danger"><a href="">Изтрий</a></button>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceToOffice)лв.
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceToHome)лв.
+                </td>
+                <td class="col-md-2 d-flex justify-content-around">
+                    <a asp-controller="Suppliers" asp-action="Edit" asp-route-id="@item.Id" class="btn" style="background-color:coral">Промени</a>
+                    <a asp-controller="Suppliers" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Изтрий</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

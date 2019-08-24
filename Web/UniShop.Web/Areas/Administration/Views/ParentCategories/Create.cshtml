@@ -1,5 +1,4 @@
 ﻿@model UniShop.Web.InputModels.ParentCategoryCreateInputModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     ViewData["Title"] = "Create";
@@ -21,7 +20,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Име</label>
-                <input type="text" asp-for="Name" id="Name" class="form-control" />
+                <input type="text" asp-for="Name" id="Name" class="form-control" placeholder="Име"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">

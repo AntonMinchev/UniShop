@@ -1,54 +1,53 @@
-﻿@model IEnumerable<UniShop.Web.ViewModels.FavoriteProducts.UniShopUserFavoriteProductViewModel>
+﻿@model IPagedList<UniShop.Web.ViewModels.FavoriteProducts.UniShopUserFavoriteProductViewModel>
 
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="col-md-offset-4 col-md-4">
-        <div class="text-center ">
-            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Любоми продукти</h2>
-        </div>
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Любоми продукти</h2>
     </div>
+</div>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductId)
+                 Име
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductName)
+                Снимка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
+                Цена
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductPrice)
-            </td>
-            <td>
-                <a asp-controller="FavoriteProducts" asp-action="Remove" asp-route-id="@item.ProductId"><button class="btn btn-success">Прмахни</button></a>
-                <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@item.ProductId"><button class="btn btn-success">Добави в количката</button></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    <img src="@item.ProductImage" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductPrice)
+                </td>
+                <td class="col-md-2 d-flex justify-content-around">
+                    <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@item.ProductId" class="btn" style="background-color:coral">Добави в количката</a>
+                    <a asp-controller="FavoriteProducts" asp-action="Remove" asp-route-id="@item.ProductId" class="btn btn-danger">Премахни</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new
+       {
+                                             pages = page
+                                         }))

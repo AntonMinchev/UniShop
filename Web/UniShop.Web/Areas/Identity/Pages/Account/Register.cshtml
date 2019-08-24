@@ -16,13 +16,10 @@
     <div class="col-md-offset-4 col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group mx-auto">
-                <div class="d-flex justify-content-center">
-                    <label asp-for="Input.UserName" class="text-primary h5">Username</label>
-                </div>
-                
-                <input asp-for="Input.UserName" class="form-control  text-primary" id="username" placeholder="Потребителско име" />
-                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            <div class="form-group">               
+                    <label asp-for="Input.UserName" ></label>
+                    <input asp-for="Input.UserName" class="form-control  text-primary" id="username" placeholder="Потребителско име" />
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>                        
             </div>
             <div class="form-group">
                 <label asp-for="Input.FullName"></label>
@@ -44,7 +41,7 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control"  placeholder="Потвърди парола"/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" style="background-color:#F8694A" class="btn btn-primary center-block">Register</button>
+            <button type="submit" style="background-color:#F8694A" class="btn btn-primary center-block">Регистрация</button>
         </form>
     </div>
 </div>

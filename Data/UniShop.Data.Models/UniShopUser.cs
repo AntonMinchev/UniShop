@@ -12,6 +12,7 @@ namespace UniShop.Data.Models
             this.Addresses = new HashSet<Address>();
             this.Orders = new HashSet<Order>();
             this.FavoriteProducts = new HashSet<UniShopUserFavoriteProduct>();
+            this.Reviews = new HashSet<Review>();
         }
         public string FullName { get; set; }
 

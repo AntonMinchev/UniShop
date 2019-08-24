@@ -6,6 +6,12 @@ namespace UniShop.Data.Models
 {
     public class Product
     {
+        public Product()
+        {
+            this.ShoppingCartProducts = new HashSet<ShoppingCartProduct>();
+            this.FavoriteProducts = new HashSet<UniShopUserFavoriteProduct>();
+            this.Reviews = new HashSet<Review>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }

@@ -7,8 +7,6 @@ namespace UniShop.Data
 {
     public class UniShopDbContext : IdentityDbContext<UniShopUser,IdentityRole,string>
     {
-       // public DbSet<City> Cities { get; set; }
-
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<ParentCategory> ParentCategories { get; set; }
@@ -20,8 +18,6 @@ namespace UniShop.Data
         public DbSet<Product> Products { get; set; }
 
         public DbSet<OrderProduct> OrderProducts { get; set; }
-
-      //  public DbSet<CategoryProduct> CategoryProducts { get; set; }
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
@@ -36,6 +32,7 @@ namespace UniShop.Data
         public UniShopDbContext(DbContextOptions<UniShopDbContext> options) 
             : base(options)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -43,8 +40,6 @@ namespace UniShop.Data
             builder.Entity<OrderProduct>().HasKey(x => new { x.OrderId, x.ProductId });
 
             builder.Entity<ShoppingCartProduct>().HasKey(x => new { x.ProductId, x.ShoppingCartId });
-
-       //     builder.Entity<CategoryProduct>().HasKey(x => new { x.ChildCategoryId, x.ProductId });
 
             builder.Entity<UniShopUserFavoriteProduct>().HasKey(x => new { x.ProductId, x.UniShopUserId });
 

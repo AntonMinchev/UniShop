@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Web.ViewModels.Orders;
+using X.PagedList;
 
 namespace UniShop.Web.Areas.Administration.Controllers
 {
@@ -19,27 +20,39 @@ namespace UniShop.Web.Areas.Administration.Controllers
         }
 
         [HttpGet("/Administration/Orders/UnprocessedOrders")]
-        public IActionResult UnprocessedOrders()
+        public IActionResult UnprocessedOrders(int? pages)
         {
             var unprocessedOrders = this.orderService.GetAllUnprocessedOrders().To<UnprocessedOrderViewModel>().ToList();
 
-            return this.View(unprocessedOrders);
+            int pageNumber = pages ?? 1;
+
+            var pageUnprocrssedOrders = unprocessedOrders.ToPagedList(pageNumber, 2);
+
+            return this.View(pageUnprocrssedOrders);
         }
 
         [HttpGet("/Administration/Orders/ProcessedOrders")]
-        public IActionResult ProcessedOrders()
+        public IActionResult ProcessedOrders(int? pages)
         {
             var processedOrders = this.orderService.GetAllProcessedOrders().To<ProcessedOrderViewModel>().ToList();
 
-            return this.View(processedOrders);
+            int pageNumber = pages ?? 1;
+
+            var pageProcrssedOrders = processedOrders.ToPagedList(pageNumber, 2);
+
+            return this.View(pageProcrssedOrders);
         }
 
         [HttpGet("/Administration/Orders/DeliveredOrders")]
-        public IActionResult DeliveredOrders()
+        public IActionResult DeliveredOrders(int? pages)
         {
             var deliveredOrders = this.orderService.GetAllDeliveredOrders().To<DeliveredOrderViewModel>().ToList();
 
-            return this.View(deliveredOrders);
+            int pageNumber = pages ?? 1;
+
+            var pageDeliveredOrders = deliveredOrders.ToPagedList(pageNumber, 2);
+
+            return this.View(pageDeliveredOrders);
         }
 
 

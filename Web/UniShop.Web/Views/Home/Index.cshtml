@@ -1,5 +1,11 @@
-﻿@using X.PagedList.Mvc.Core; 
+﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList;
+@using Microsoft.AspNetCore.Identity
+@using UniShop.Data.Models
+
+
+@inject SignInManager<UniShopUser> SignInManager
+@inject UserManager<UniShopUser> UserManager
 @model UniShop.Web.ViewModels.Home.IndexViewModel
 @{
     ViewData["Title"] = "Home Page";
@@ -15,7 +21,7 @@
             <!-- MAIN -->
             <div id="main" class="col-md-12">
                 <!-- store top filter -->
-                <div class="store-filter clearfix">                  
+                <div class="store-filter clearfix">
                     <div class="pull-left">
                         <div class="header-search">
                             <form method="post" asp-controller="Home" asp-action="Index">
@@ -23,7 +29,7 @@
                                 <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-                    </div>                  
+                    </div>
                     <div class="pull-right">
                         <form method="post" asp-controller="Home" asp-action="Index">
                             <input type="hidden" name="SearchString" value="@Model.SearchString">
@@ -46,9 +52,9 @@
                             </div>
                         </form>
                     </div>
-                  
+
                 </div>
-                
+
                 <!-- /store top filter -->
                 <!-- STORE -->
                 <div id="store">
@@ -67,48 +73,52 @@
                                         <h3 class="product-price">@product.Price.ToString("F2")</h3>
                                         <div class="product-rating">
                                             @if (product.Raiting != 0 && product.CountReviews != 0)
-                                    {
-                                        @for (int i = 0; i < product.Raiting / product.CountReviews; i++)
-                                        {
-                                            <i class="fa fa-star"></i>
-                                        }
-                                        @for (int i = 0; i < 5 - product.Raiting / product.CountReviews; i++)
-                                        {
-                                            <i class="fa fa-star-o empty"></i>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star-o empty"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                        <i class="fa fa-star-o empty"></i>
-                                    }
+                                            {
+                                                @for (int i = 0; i < product.Raiting / product.CountReviews; i++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                @for (int i = 0; i < 5 - product.Raiting / product.CountReviews; i++)
+                                                {
+                                                    <i class="fa fa-star-o empty"></i>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star-o empty"></i>
+                                                <i class="fa fa-star-o empty"></i>
+                                                <i class="fa fa-star-o empty"></i>
+                                                <i class="fa fa-star-o empty"></i>
+                                                <i class="fa fa-star-o empty"></i>
+                                            }
                                         </div>
                                         <h2 class="product-name"><a href="/Products/Details/@product.Id">@product.Name</a></h2>
                                         <div class="product-btns">
-                                            <a href="/ShoppingCarts/Add/@product.Id"><button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Добави в количката</button></a>
+                                            @if (this.User.Identity.IsAuthenticated)
+                                            {
+                                                <a href="/ShoppingCarts/Add/@product.Id" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Добави в количката</a>
 
-                                            @*<a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model[j].Id" class="primary-btn "> <i class="fas fa-shopping-cart"></i>  Добави</a>*@
+                                            }
+                                            else
+                                            {
+                                                <a href="/Identity/Account/Login" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Добави в количката</a>
+
+                                            }
+
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         }
 
-
-
-
-
-
-
                         <!-- /container -->
                         <!-- /store bottom filter -->
                     </div>
                     <!-- /MAIN -->
                 </div>
-                @Html.PagedListPager((IPagedList)Model.Products, page => Url.Action("Index", new {
+                @Html.PagedListPager((IPagedList)Model.Products, page => Url.Action("Index", new
+                {
                                                 pageNumber = page,
                                                 PageSize = Model.PageSize,
                                                 ChildCategoryId = Model.ChildCategoryId,
@@ -117,20 +127,8 @@
                                             }))
                 <!-- /row -->
             </div>
-           
+
         </div>
-    <!-- /section -->
-    @*<script>
-        $('#products-search-bar').on("change paste keyup", function () {
-            $('.product').show();
-
-            let searchValue = $('#products-search-bar').val();
-
-            for (let elem of $('.product')) {
-                let productName = $($(elem).children()[1]).text();
-
-                if (!productName.toLowerCase().includes(searchValue.toLowerCase())) {
-                    $(elem).hide();
-                }
-            }
-        });</script>*@
+        <!-- /section -->
+    </div>
+</div>

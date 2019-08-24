@@ -1,8 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using UniShop.Data.Models
-@using UniShop.Web.Components
-
-@inject SignInManager<UniShopUser> SignInManager
+﻿@inject SignInManager<UniShopUser> SignInManager
 @inject UserManager<UniShopUser> UserManager
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="~/logo.png" />
+
+
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>UniShop</title>
@@ -91,7 +88,7 @@
                                 </div>
                                 <a href="/Identity/Account/Logout" class="text-uppercase">Изход</a>
                                 <ul class="custom-menu">
-                                    <li><a href="#"><i class="fa fa-user-o"></i> Моят профил</a></li>
+                                    <li><a href="/Identity/Account/Manage/Index"><i class="fa fa-user-o"></i> Моят профил</a></li>
                                     <li><a href="/FavoriteProducts/All"><i class="fa fa-heart-o"></i> Любими</a></li>
                                     <li><a href="/Orders/All"><i class="fa fa-list"></i>Моите поръчки</a></li>
                                 </ul>
@@ -113,12 +110,7 @@
                                     <strong>Моят акаунт <i class="fa fa-caret-down"></i></strong>
                                 </div>
                                 <a href="/Identity/Account/Login" >Вход</a> / <a href="/Identity/Account/Register">Регистрация</a>
-                                <ul class="custom-menu">
-                                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                                    <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                                    
-
-                                </ul>
+                             
                             </li>
                             @await Component.InvokeAsync(typeof(ShoppingCartComponent))
 
@@ -141,7 +133,7 @@
     <!-- /HEADER -->
     <!-- NAVIGATION -->
     <!-- category nav -->
-    @await Component.InvokeAsync(typeof(CategoryComponent))
+    @await Component.InvokeAsync(typeof(NavbarComponent))
 
     <!-- /NAVIGATION -->
     <!-- section -->
@@ -187,16 +179,21 @@
                         <h3 class="footer-header">Моят Акаунт</h3>
                         <ul class="list-links">
                             <li><a href="/Identity/Account/Manage/Index">Моят Акаунт</a></li>
-                            <li><a href="#">Любими</a></li>
-                            <li><a href="#">Вход</a></li>
+                            <li><a href="/FavoriteProducts/All">Любими</a></li>
+                            @if (!this.User.Identity.IsAuthenticated)
+                            {
+                                <li><a href="/Identity/Account/Login">Вход</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Orders/All">Моите поръчки</a></li>
+
+                            }
+
                         </ul>
                     </div>
                 </div>
-                <!-- /footer widget -->
-
-                <div class="clearfix visible-sm visible-xs"></div>
-
-                <!-- footer widget -->
+                
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-header">Доставка</h3>
@@ -210,11 +207,11 @@
                 <!-- /footer widget -->
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-header">Връзка с нас</h3>
+                        <h3 class="footer-header">Контакти</h3>
                         <ul class="list-links">
-                            <li><a href="#">За Нас</a></li>
-                            <li><a href="/Home/Contacts">Контакти</a></li>
-                            <li><a href="#">Форма за запитвания</a></li>
+                            <li><i class="fa fa-phone-square fa-2x" aria-hidden="true"></i><font size="4"> 089 654 2345</font></li>
+                            <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i><font size="4"> unishop.abg@abv.bg</font></li>
+                            <li><i class="fa fa-skype fa-2x" aria-hidden="true"></i> <font size="4">UniShopBg</font></li>
                         </ul>
                     </div>
                 </div>

@@ -1,0 +1,83 @@
+﻿@model UniShop.Web.InputModels.ProductEditInputModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Промяна на продукт</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+        <hr />
+        <form method="post" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" ></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Specification" class="control-label"></label>
+                <textarea asp-for="Specification" class="form-control" ></textarea>
+                <span asp-validation-for="Specification" class="text-danger"></span>
+            </div>
+            <div class="form-group">  
+                    <label asp-for="Image" class="control-label"></label>
+                <input type="file"
+                       class="form-control"
+                       id="image"
+                       placeholder="Снимка"
+                       asp-for="Image">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChildCategoryName" class="control-label"></label>
+                <select class="select-width center-block" name="ChildCategoryName">
+                    @foreach (var childCategory in (IEnumerable<ProductCreateChildCategoryViewModel>)this.ViewData["categories"])
+                    {
+                        if (childCategory.Name == Model.ChildCategoryName)
+                        {
+                            <option value="@childCategory.Name" selected>@childCategory.Name (@childCategory.ParentCategoryName)</option>
+                        }
+                        else
+                        {
+                            <option value="@childCategory.Name">@childCategory.Name (@childCategory.ParentCategoryName)</option>
+                        }
+
+                    }
+                </select>
+                <span asp-validation-for="ChildCategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Запази промените" style="background-color:#F8694A" class="btn btn-default center-block" />
+            </div>
+        </form>
+       
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

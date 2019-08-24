@@ -5,17 +5,20 @@ using System.Text;
 
 namespace UniShop.Web.InputModels
 {
-    public class ChildCategoriesCreateInputModel
+    public class ChildCategoryEditInputModel
     {
+
+        public int Id { get; set; }
+
+
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
         [Display(Name = "Име")]
         public string Name { get; set; }
-       
-        [Required(ErrorMessage = "Моля, изберете {0}.")]
-        [Display(Name = "Основна категория")]
-        public int? ParentId { get; set; }
 
-        public string ParentCategories { get; set; }
+        public string ParentCategoryName { get; set; }
+
+        [Required]
+        public int ParentCategoryId { get; set; }
     }
 }

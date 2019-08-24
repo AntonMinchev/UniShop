@@ -1,9 +1,5 @@
-﻿@using System.Linq
-@using UniShop.Web.ViewModels.Addresses
-@using UniShop.Web.ViewModels.Suppliers
-@using UniShop.Web.ViewModels.ShoppingCarts
-@model UniShop.Web.InputModels.OrderCreateInputModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model UniShop.Web.InputModels.OrderCreateInputModel
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -145,10 +141,11 @@
         </table>
         <div class="row"><p class="col-lg-offset-9"><b>Обща сума:</b>@products.Select(x => x.TotalPrice).Sum() лв.</p></div>
         <div class="form-group">
-            <input type="submit" value="Create" style="background-color:#F8694A" class="btn btn-default center-block" />
+            <input type="submit" value="Завърши поръчката" style="background-color:#F8694A" class="btn btn-default center-block" />
         </div>
     </form>
-
+    </div>
+</div>
         
 
 

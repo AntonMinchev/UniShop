@@ -37,12 +37,15 @@ namespace UniShop.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Username")]
+            
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+            [Display(Name = "Потребителско име")]
             public string Username { get; set; }
 
-            [Required]
-            [Display(Name = "Password")]
+            [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
+            [StringLength(100, MinimumLength = 6, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1}.")]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
         }
 
@@ -90,7 +93,7 @@ namespace UniShop.Web.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Невалидно потребителско име или парола.");
                     return Page();
                 }
             }

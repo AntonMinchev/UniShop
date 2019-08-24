@@ -1,16 +1,26 @@
 ﻿@model IEnumerable<UniShop.Web.ViewModels.ParentCategories.ParentCategoryViewModel>
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="col-md-offset-4 col-md-4">
-            <div class="text-center ">
-                <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Основни категории</h2>
+    <div class="row">
+        @if (this.TempData.ContainsKey("error"))
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <p class="close" data-dismiss="alert" aria-label="close">&times;</p>
+                <strong>Грешка!</strong> @this.TempData["error"]
             </div>
+        }
     </div>
+
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Основни категории</h2>
+    </div>
+</div>
+
 
 <table class="table">
     <thead>
@@ -40,9 +50,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ChildCategoriesCount)
                 </td>
-                <td class="col-md-3 d-flex justify-content-around">
-                    <button class="btn" style="background-color:coral"><a href="">Промени</a></button>
-                    <button class="btn btn-danger"><a href="">Изтрий</a></button>
+                <td class="col-md-2 d-flex justify-content-around">
+                    <a asp-controller="ParentCategories" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
+                    <a asp-controller="ParentCategories" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Изтрий</a>
+
                 </td>
             </tr>
         }

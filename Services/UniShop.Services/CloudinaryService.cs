@@ -20,28 +20,36 @@ namespace UniShop.Services
 
         public string UploadPicture(IFormFile pictureFile, string fileName)
         {
-            byte[] destinationData;
 
-            using (var ms = new MemoryStream())
+            if (pictureFile !=null)
             {
-                pictureFile.CopyTo(ms);
-                destinationData = ms.ToArray();
-            }
 
-            UploadResult uploadResult = null;
+                byte[] destinationData;
 
-            using (var ms = new MemoryStream(destinationData))
-            {
-                ImageUploadParams uploadParams = new ImageUploadParams
+                using (var ms = new MemoryStream())
                 {
-                    Folder = "product_images",
-                    File = new FileDescription(fileName, ms)
-                };
+                    pictureFile.CopyTo(ms);
+                    destinationData = ms.ToArray();
+                }
 
-                uploadResult = this.cloudinaryUtility.Upload(uploadParams);
+                UploadResult uploadResult = null;
+
+                using (var ms = new MemoryStream(destinationData))
+                {
+                    ImageUploadParams uploadParams = new ImageUploadParams
+                    {
+                        Folder = "product_images",
+                        File = new FileDescription(fileName, ms)
+                    };
+
+                    uploadResult = this.cloudinaryUtility.Upload(uploadParams);
+                }
+
+                return uploadResult?.SecureUri.AbsoluteUri;
             }
 
-            return uploadResult?.SecureUri.AbsoluteUri;
+            return string.Empty;
+
         }
     }
 }

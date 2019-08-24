@@ -1,17 +1,10 @@
 ﻿@model UniShop.Web.InputModels.ReviewCreateInputModel
 
-@{
-    ViewData["Title"] = "Add";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Add</h2>
-
-<h4>ReviewCreateInputModel</h4>
+<h4>_ReviewCreateInputModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Add" method="post">
+        <form asp-action="_ReviewCreatePartial">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Raiting" class="control-label"></label>
@@ -35,7 +28,5 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

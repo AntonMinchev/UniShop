@@ -10,6 +10,7 @@ using UniShop.Services.Models;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels;
 using UniShop.Web.ViewModels.Products;
+using X.PagedList;
 
 namespace UniShop.Web.Areas.Administration.Controllers
 {
@@ -31,7 +32,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             var childCategories = this.childCategoriesService.GetAllChildCategories();
 
-            this.ViewData["types"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
+            this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
             {
                 ParentCategoryName = childCategory.ParentCategory.Name,
                 Name = childCategory.Name
@@ -60,12 +61,73 @@ namespace UniShop.Web.Areas.Administration.Controllers
         }
 
         [HttpGet("/Administration/Products/All")]
-        public IActionResult All()
+        public IActionResult All(int? pages)
         {
             var productsViewModels = this.productsService.GetAllProducts().To<ProductAllViewModel>().ToList();
 
-            return this.View(productsViewModels);
+            int pageNumber = pages ?? 1;
+
+            var pageProductsViewModels = productsViewModels.ToPagedList(pageNumber, 10);
+
+            return this.View(pageProductsViewModels);
 
         }
+
+        [HttpGet("/Administration/Products/Edit")]
+        public IActionResult Edit(int id)
+        {
+            var productEditInputModel = this.productsService.GetById(id).To<ProductEditInputModel>();
+
+            if (productEditInputModel == null)
+            {
+                return Redirect("All");
+            }
+
+            var childCategories = this.childCategoriesService.GetAllChildCategories();
+
+
+            this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
+            {
+                ParentCategoryName = childCategory.ParentCategory.Name,
+                Name = childCategory.Name
+            })
+              .ToList(); ;
+
+            return this.View(productEditInputModel);
+
+        }
+
+        [HttpPost("/Administration/Products/Edit")]
+        public IActionResult Edit(ProductEditInputModel productEditInputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var productEditModel = this.productsService.GetById(productEditInputModel.Id).To<ProductEditInputModel>();
+
+                var childCategories = this.childCategoriesService.GetAllChildCategories();
+
+                this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
+                {
+                    ParentCategoryName = childCategory.ParentCategory.Name,
+                    Name = childCategory.Name
+                })
+                  .ToList(); ;
+
+                return this.View(productEditModel);
+            }
+
+            string pictureUrl = this.cloudinaryService.UploadPicture(
+                productEditInputModel.Image,
+                productEditInputModel.Name);
+
+            var productServiceModel = AutoMapper.Mapper.Map<ProductServiceModel>(productEditInputModel);
+
+            productServiceModel.Image = pictureUrl;
+
+            this.productsService.Edit(productServiceModel);
+
+            return this.Redirect("All");
+        }
+
     }
 }

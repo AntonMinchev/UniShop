@@ -1,15 +1,24 @@
 ﻿@model IEnumerable<UniShop.Web.ViewModels.ChildCategories.ChildCategoryViewModel>
 
+
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="col-md-offset-4 col-md-4">
-        <div class="text-center ">
-            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Подкатегории</h2>
-        </div>
+@if (this.TempData.ContainsKey("error"))
+{
+    <div class="alert alert-danger alert-dismissible">
+        <p class="close" data-dismiss="alert" aria-label="close">&times;</p>
+        <strong>Грешка!</strong> @this.TempData["error"]
     </div>
+}
+
+<div class="col-md-offset-4 col-md-4">
+    <div class="text-center ">
+        <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Подкатегории</h2>
+    </div>
+</div>
 
 <table class="table">
     <thead>
@@ -23,32 +32,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.ParentCategoryName)
             </th>
-            <th>
+            <th class="col-2 d-flex justify-content-center">
                 @Html.DisplayNameFor(model => model.CountOfProducts)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentCategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountOfProducts)
-            </td>
-            <td class="col-md-3 d-flex justify-content-around">
-                <button class="btn" style="background-color:coral"><a href="">Промени</a></button>
-                <button class="btn btn-danger"><a href="">Изтрий</a></button>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentCategoryName)
+                </td>
+                <td class="col">
+                    @Html.DisplayFor(modelItem => item.CountOfProducts)
+                </td>
+                <td class="col-md-2 d-flex justify-content-around">
+                    <a asp-controller="ChildCategories" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
+                    <a asp-controller="ChildCategories" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Изтрий</a>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,11 +37,65 @@ namespace UniShop.Services
             return result > 0;
         }
 
+        public bool Delete(int id)
+        {
+            var childCategory = this.context.ChildCategories.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
+
+            var isHaveProducts = childCategory.Products.Any();
+
+            if (isHaveProducts)
+            {
+                return false;
+            }
+
+            this.context.Remove(childCategory);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
+        public bool Edit(ChildCategoryServiceModel childCategoryServiceModel)
+        {
+            var childCategory = this.context.ChildCategories.FirstOrDefault(c => c.Id == childCategoryServiceModel.Id);
+
+            if (childCategory == null)
+            {
+                return false;
+            }
+
+            var parentCategory = this.context.ParentCategories.FirstOrDefault(p => p.Id == childCategoryServiceModel.ParentCategoryId);
+
+            if (parentCategory == null)
+            {
+                return false;
+            }
+
+            childCategory.Name = childCategoryServiceModel.Name;
+            childCategory.ParentCategoryId = childCategoryServiceModel.ParentCategoryId;
+
+            this.context.Update(childCategory);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
         public IQueryable<ChildCategoryServiceModel> GetAllChildCategories()
         {
             var childCategories = this.context.ChildCategories.To<ChildCategoryServiceModel>();
 
             return childCategories;
+        }
+
+        public ChildCategoryServiceModel GetChildCategoryById(int id)
+        {
+            var childCategory = this.context.ChildCategories.FirstOrDefault(c => c.Id == id).To<ChildCategoryServiceModel>();
+
+            return childCategory;
+        }
+
+        public bool IsHaveChildCategoryWhitId(int id)
+        {
+            return this.context.ChildCategories.Any(c => c.Id == id);
         }
     }
 }

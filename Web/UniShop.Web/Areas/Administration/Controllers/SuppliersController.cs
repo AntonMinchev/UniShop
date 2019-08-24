@@ -47,5 +47,45 @@ namespace UniShop.Web.Areas.Administration.Controllers
             return this.View(suppliersViewModels);
         }
 
+        [HttpGet("/Administration/Suppliers/Edit")]
+        public IActionResult Edit(int id)
+        {
+            var supplierEditInputModel = this.suppliersService.GetSupplierById(id).To<SupplierEditInputModel>();
+
+            if (supplierEditInputModel == null)
+            {
+                return Redirect("All");
+            }
+
+            return this.View(supplierEditInputModel);
+        }
+
+        [HttpPost("/Administration/Suppliers/Edit")]
+        public IActionResult Edit(SupplierEditInputModel supplierEditInputModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                var supplierEditModel = this.suppliersService.GetSupplierById(supplierEditInputModel.Id).To<SupplierEditInputModel>();
+
+                return this.View(supplierEditModel);
+            }
+
+
+            var supplierServiceModel = AutoMapper.Mapper.Map<SupplierServiceModel>(supplierEditInputModel);
+
+            this.suppliersService.Edit(supplierServiceModel);
+
+            return RedirectToAction("All");
+        }
+
+        [HttpGet("/Administration/Suppliers/Delete")]
+        public IActionResult Delete(int id)
+        {
+           
+            this.suppliersService.Delete(id);
+
+            return Redirect("All");
+        }
     }
 }

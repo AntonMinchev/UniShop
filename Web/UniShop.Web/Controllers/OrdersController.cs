@@ -13,6 +13,7 @@ using UniShop.Web.ViewModels.Orders;
 using UniShop.Web.ViewModels.Products;
 using UniShop.Web.ViewModels.ShoppingCarts;
 using UniShop.Web.ViewModels.Suppliers;
+using X.PagedList;
 
 namespace UniShop.Web.Controllers
 {
@@ -77,16 +78,33 @@ namespace UniShop.Web.Controllers
 
             this.orderService.CreateOrder(username, orderCreateInputModel.SupplierId, orderCreateInputModel.DeliveryType, orderCreateInputModel.AddressId);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("Successfully");
         }
 
-        public IActionResult All()
+        public IActionResult All(int? pages)
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var orders = this.orderService.GetAllOrdersByUserId(userId).To<AllOrdersViewModel>().ToList();
 
-            return this.View(orders);
+            int pageNumber = pages ?? 1;
+
+            var pageOrders = orders.ToPagedList(pageNumber, 5);
+
+            return this.View(pageOrders);
+        }
+
+        public IActionResult Details(int id)
+        {
+
+            var order = this.orderService.GetOrderById(id).To<OrderDetailsViewModel>();
+
+            return this.View(order);
+        }
+
+        public IActionResult Successfully()
+        {
+            return this.View();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace UniShop.Web.ViewModels.ChildCategories
         [Display(Name = "Основна категория")]
         public string ParentCategoryName { get; set; }
 
-        [Display(Name = "Брой продукти в подкатегорията")]
+        [Display(Name = "Брой продукти")]
         public int CountOfProducts { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

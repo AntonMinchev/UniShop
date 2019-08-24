@@ -1,0 +1,112 @@
+﻿@model UniShop.Web.ViewModels.Orders.OrderDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+   
+
+    <div class="row text-center"><h1>Данни за поръчката</h1></div>
+    <table class="table ">
+        <thead>
+            <tr>
+                <th style="border-color:black"></th>
+                <th style="border-color:black"></th>
+                <th style="border-color:black"></th>
+                <th style="border-color:black"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td class="col-1 d-flex "><strong>Номер на поръчката :</strong></td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Id</td>
+                <td class="col-1 d-flex "><strong>Статус :</strong></td>      
+                <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.OrderStatus)</td>
+            </tr>
+            <tr>
+                <td class="col-1 d-flex "><strong>Дата на поръчката :</strong></td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.OrderDate</td>
+                <td class="col-1 d-flex "><strong>Очаквана дата за доставка :</strong></td>
+                <td class="col-1 d-flex ">@Model.EstimatedDeliveryDate</td>
+            </tr>
+            <tr>
+                <td class="col-1 d-flex "><strong>Дата на изпрашане на поръчката :</strong></td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.DispatchDate</td>
+                <td class="col-1 d-flex "><strong>Дата на доставка :</strong></td>
+                <td class="col-1 d-flex ">@Model.DeliveryDate</td>
+            </tr>
+            <tr>
+                <td class="col-1 d-flex "><strong>Имена на клиента :</strong></td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Recipient</td>
+                <td class="col-1 d-flex "><strong>Телефон :</strong></td>
+                <td class="col-1 d-flex ">@Model.RecipientPhoneNumber</td>
+            </tr>
+            <tr>
+                <td class="col-1 d-flex "><strong>Адрес :</strong></td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Address</td>
+                <td class="col-1 d-flex "><strong>Цена на доставката :</strong></td>
+                <td class="col-1 d-flex ">@Model.DeliveryPrice лв.</td>
+            </tr>
+            <tr>
+                <td class="col-1 d-flex "><strong>Обща сума:</strong></td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.TotalPrice лв.</td>
+                <td class="col-1 d-flex "></td>
+                <td class="col-1 d-flex "></td>
+            </tr>
+
+        </tbody>
+    </table>
+                         
+<div class="row text-center"><h2>Закупени продукти</h2></div>
+
+<table class="table ">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                Име на продукта
+            </th>
+            <th>
+                Количество
+            </th>
+            <th>
+                Цена за 1 бройка
+            </th>
+            <th>
+                Обща цена
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.OrderProducts)
+
+        {
+            <tr>
+                <td class="col-1 d-flex justify-content-center">
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId">  <img src="@product.ProductImage" width="50" height="50" /></a>
+
+                </td>
+                <td class="col-1 d-flex justify-content-center">
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId">  @product.ProductName</a>
+                </td>
+                <td class="col-1 d-flex ">
+                    @product.Quantity
+                </td>
+                <td class="col-1 d-flex ">
+                    @product.ProductPrice лв.
+                </td>
+                <td class="col-1 d-flex ">
+                    @(@product.Price*product.Quantity) лв.
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row"><p class="col-lg-offset-9"><b>Обща сума:</b>@Model.OrderProducts.Select(x => x.Price * x.Quantity).Sum() лв.</p></div>
+

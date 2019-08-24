@@ -1,7 +1,4 @@
 ﻿@model UniShop.Web.InputModels.ProductCreateInputModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using UniShop.Web.ViewModels.Products
-
 
 @{
     ViewData["Title"] = "Create";
@@ -9,58 +6,54 @@
 }
 
 <div class="col-md-offset-4 col-md-4">
-    <section>
         <div class="text-center ">
             <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Добавяне на нов продукт</h2>
         </div>
-    </section>
 </div>
 <div class="row">
     <div class="col-md-offset-4 col-md-4">
         <hr />
         <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group mx-auto w-45">
+            <div class="form-group ">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" placeholder="Име"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group mx-auto w-45">
+            <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+                <input asp-for="Price" class="form-control" placeholder="Цена"/>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group mx-auto w-45">
+            <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control" placeholder="Количество"/>
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            <div class="form-group mx-auto w-45">
+            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea  asp-for="Description" class="form-control" placeholder="Описания"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group mx-auto w-45">
+            <div class="form-group">
                 <label asp-for="Specification" class="control-label"></label>
-                <input asp-for="Specification" class="form-control" />
+                <textarea asp-for="Specification" class="form-control" placeholder="Характеристика"></textarea>
                 <span asp-validation-for="Specification" class="text-danger"></span>
             </div>
-            <div class="form-group mx-auto w-45">
-                <div class="d-flex justify-content-center">
-                    <label asp-for="Image" class="text-primary h5"></label>
-                </div>
+            <div class="form-group">              
+                <label asp-for="Image" class="control-label"></label>  
                 <input type="file"
                        class="form-control text-primary text-center"
-                       id="picture"
-                       placeholder="Picture..."
+                       id="image"
+                       placeholder="Снимка"
                        asp-for="Image">
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ChildCategoryName" class="control-label">Основна категория</label>
+                <label asp-for="ChildCategoryName" class="control-label">Kатегория</label>
                 <select class="select-width center-block" name="ChildCategoryName">
                     <option value="" disabled selected>-- Основна категория --</option>
-                    @foreach (var childCategory in (IEnumerable<ProductCreateChildCategoryViewModel>)this.ViewData["types"])
+                    @foreach (var childCategory in (IEnumerable<ProductCreateChildCategoryViewModel>)this.ViewData["categories"])
                     {
                         <option value="@childCategory.Name">@childCategory.Name (@childCategory.ParentCategoryName)</option>
                     }

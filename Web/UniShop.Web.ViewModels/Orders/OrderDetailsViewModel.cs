@@ -22,13 +22,13 @@ namespace UniShop.Web.ViewModels.Orders
         public DateTime OrderDate { get; set; }
 
         [Display(Name = "Очаквана дата за доставка")]
-        public DateTime? EstimatedDeliveryDate { get; set; }
+        public string EstimatedDeliveryDate { get; set; }
 
         [Display(Name = "Дата на доставак")]
-        public DateTime? DeliveryDate { get; set; }
+        public string DeliveryDate { get; set; }
 
         [Display(Name = "Дата на изпращане на продуктите")]
-        public DateTime? DispatchDate { get; set; }
+        public string DispatchDate { get; set; }
 
         [Display(Name = "Сума")]
         public decimal TotalPrice { get; set; }
@@ -37,22 +37,41 @@ namespace UniShop.Web.ViewModels.Orders
         public decimal DeliveryPrice { get; set; }
 
         [Display(Name = "Име на клиента")]
-        public string RecipientFullName { get; set; }
+        public string Recipient { get; set; }
 
         [Display(Name = "Телефонен номер")]
         public string RecipientPhoneNumber { get; set; }
 
         [Display(Name = "Адрес на клиента")]
-        public AddressViewModel Address { get; set; }
+        public string Address { get; set; }
+
+        public ICollection<OrderProductViewModel> OrderProducts { get; set; }
+
+
+        //public void CreateMappings(IProfileExpression configuration)
+        //{
+        //    configuration
+        //        .CreateMap<OrderServiceModel, DeliveredOrderViewModel>()
+        //        .ForMember(destination => destination.EstimatedDeliveryDate,
+        //                    opts => opts.MapFrom(origin => origin.EstimatedDeliveryDate.HasValue ?
+        //                    origin.EstimatedDeliveryDate.Value.ToString("MM/dd/yyyy") : ""))
+        //         .ForMember(destination => destination.DeliveryDate,
+        //                    opts => opts.MapFrom(origin => origin.DeliveryDate.HasValue ?
+        //                    origin.EstimatedDeliveryDate.Value.ToString("MM/dd/yyyy") : ""));
+        //}
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration
                 .CreateMap<OrderServiceModel, OrderDetailsViewModel>()
-                .ForMember(destination => destination.RecipientFullName,
-                            opts => opts.MapFrom(origin => origin.UniShopUser.FullName))
-                 .ForMember(destination => destination.RecipientPhoneNumber,
-                            opts => opts.MapFrom(origin => origin.UniShopUser.PhoneNumber));
+                .ForMember(destination => destination.Address,
+                            opts => opts.MapFrom(origin => "гр." +origin.DeliveryAddress.City + " ул." +origin.DeliveryAddress.Street + " " +origin.DeliveryAddress.BuildingNumber))
+                .ForMember(destination => destination.EstimatedDeliveryDate,
+                           opts => opts.MapFrom(origin => origin.EstimatedDeliveryDate.HasValue ?
+                           origin.EstimatedDeliveryDate.Value.ToString("MM/dd/yyyy") : ""))
+                .ForMember(destination => destination.DeliveryDate,
+                           opts => opts.MapFrom(origin => origin.DeliveryDate.HasValue ?
+                           origin.DeliveryDate.Value.ToString("MM/dd/yyyy") : ""));
         }
     }
 }

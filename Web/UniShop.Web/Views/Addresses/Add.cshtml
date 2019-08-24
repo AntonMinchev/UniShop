@@ -1,17 +1,19 @@
 ﻿@model UniShop.Web.InputModels.AddressCreateInputModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @{
     ViewData["Title"] = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Add</h2>
-
-<h4>AddressCreateInputModel</h4>
-<hr />
+    <div class="col-md-offset-4 col-md-4">
+        <div class="text-center ">
+            <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Добавяне на адрес</h2>
+        </div>
+    </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-offset-4 col-md-4">
+        <hr />
         <form asp-action="Add" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -30,7 +32,7 @@
                 <span asp-validation-for="BuildingNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Добави" class="btn center-block" style="background-color:#F8694A"/>
             </div>
         </form>
     </div>

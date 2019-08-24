@@ -8,13 +8,12 @@ namespace UniShop.Data.Models
     {
         public Address()
         {
-            this.Orders = new List<Order>();
+            this.Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
 
         public string City { get; set; }
-        //public City City  { get; set; }
 
         public string UniShopUserId { get; set; }
         public UniShopUser UniShopUser { get; set; }

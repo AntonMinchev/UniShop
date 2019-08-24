@@ -7,6 +7,11 @@ namespace UniShop.Data.Models
 {
     public class Order
     {
+        public Order()
+        {
+            this.OrderProducts = new HashSet<OrderProduct>();
+        }
+
         public int Id { get; set; }
 
         public OrderStatus OrderStatus { get; set; }
@@ -23,20 +28,17 @@ namespace UniShop.Data.Models
 
         public decimal DeliveryPrice { get; set; }
 
-        //public string Recipient { get; set; }
+        public string Recipient { get; set; }
 
-        //public string RecipientPhoneNumber { get; set; }
+        public string RecipientPhoneNumber { get; set; }
 
         public string UniShopUserId { get; set; }
         public UniShopUser UniShopUser { get; set; }
 
-        public ICollection<OrderProduct> OrderProducts  { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts  { get; set; }
 
         public int? DeliveryAddressId { get; set; }
-        public Address DeliveryAddress { get; set; }
+        public virtual Address DeliveryAddress { get; set; }
 
-      
-            //PaymentType PaymentType
-       
     }
 }

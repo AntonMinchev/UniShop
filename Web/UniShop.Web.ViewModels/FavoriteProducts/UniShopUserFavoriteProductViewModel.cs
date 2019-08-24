@@ -10,11 +10,13 @@ namespace UniShop.Web.ViewModels.FavoriteProducts
     public class UniShopUserFavoriteProductViewModel : IMapFrom<UniShopUserFavoriteProductServiceModel>
     {
  
+        [Display(Name ="#")]
         public int ProductId { get; set; }
 
         [Display(Name = "Име")]
         public string ProductName { get; set; }
 
+        [Display(Name = "Снимка")]
         public string ProductImage { get; set; }
 
         [Display(Name = "Сума")]

@@ -11,5 +11,13 @@ namespace UniShop.Services.Contracts
         bool Create(ChildCategoryServiceModel childCategoryServiceModel);
 
         IQueryable<ChildCategoryServiceModel> GetAllChildCategories();
+
+        ChildCategoryServiceModel GetChildCategoryById(int id);
+
+        bool Edit(ChildCategoryServiceModel childCategoryServiceModel);
+
+        bool Delete(int id);
+
+        bool IsHaveChildCategoryWhitId(int id);
     }
 }

@@ -20,6 +20,6 @@ namespace UniShop.Web.InputModels
         [Display(Name = "Цена до адрес")]
         [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
         [Range(typeof(decimal),"0.01", "79228162514264337593543950335",ErrorMessage = "Полето \"{0}\" трябва да е число в диапазона от {1} до {2}")]
-        public decimal PriceToAddress { get; set; }
+        public decimal PriceToHome { get; set; }
     }
 }

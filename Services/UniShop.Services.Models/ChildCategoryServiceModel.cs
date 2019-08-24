@@ -8,7 +8,7 @@ using UniShop.Web.InputModels;
 
 namespace UniShop.Services.Models
 {
-    public class ChildCategoryServiceModel :  IMapFrom<ChildCategoryCreateInputModel>,IMapFrom<ChildCategory>
+    public class ChildCategoryServiceModel :  IMapFrom<ChildCategoryCreateInputModel>,IMapFrom<ChildCategory>,IMapFrom<ChildCategoryEditInputModel>,IMapTo<ChildCategoryEditInputModel>
     {
 
         public int Id { get; set; }

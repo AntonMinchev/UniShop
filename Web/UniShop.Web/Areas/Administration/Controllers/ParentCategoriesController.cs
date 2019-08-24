@@ -49,5 +49,60 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             return this.View(parentCategoryViewModels);
         }
+
+        [HttpGet("/Administration/ParentCategories/Edit")]
+        public IActionResult Edit(int id)
+        {
+            var parentCategoryEditInputModel = this.parentCategoriesService.GetParentCategoryById(id).To<ParentCategoryEditInputModel>();
+
+            if (parentCategoryEditInputModel == null)
+            {
+                return Redirect("All");
+            }
+
+            return this.View(parentCategoryEditInputModel);
+        }
+
+        [HttpPost("/Administration/ParentCategories/Edit")]
+        public IActionResult Edit(ParentCategoryEditInputModel categoryEditInputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var parentCategoryEditInputModel = this.parentCategoriesService.GetParentCategoryById(categoryEditInputModel.Id).To<ParentCategoryEditInputModel>();
+
+                return this.View(parentCategoryEditInputModel);
+            }
+
+
+            var parentCategoryServiceModel = AutoMapper.Mapper.Map<ParentCategoryServiceModel>(categoryEditInputModel);
+
+            this.parentCategoriesService.Edit(parentCategoryServiceModel);
+
+            return RedirectToAction("All");
+        }
+
+        [HttpGet("/Administration/ParentCategories/Delete")]
+        public IActionResult Delete(int id)
+        {
+            var isHaveParentCategory = this.parentCategoriesService.IsHaveParentCategory(id);
+
+            if (!isHaveParentCategory)
+            {
+                this.TempData["error"] = "Не може да изтриете несъществуваща категория!!!";
+                return this.Redirect("All");
+            }
+            else
+            {
+                var isDelete = this.parentCategoriesService.Delete(id);
+
+                if (!isDelete)
+                {
+                    this.TempData["error"] = "Категорията не може да бъде изтрита ,защото съдържа подкатегории!!!";
+                    return this.Redirect("All");
+                }
+            }
+
+            return this.Redirect("All");
+        }
     }
 }

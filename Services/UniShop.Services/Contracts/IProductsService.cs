@@ -18,5 +18,7 @@ namespace UniShop.Services.Contracts
         ProductServiceModel GetById(int id);
 
         bool ReduceProductQuantity(int productId,int quantity);
+
+        bool Edit(ProductServiceModel productServiceModel);
     }
 }

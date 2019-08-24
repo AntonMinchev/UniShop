@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using UniShop.Data.Models;
 using UniShop.Services.Mapping;
+using UniShop.Web.InputModels;
 
 namespace UniShop.Services.Models
 {
-    public class ParentCategoryServiceModel : IMapFrom<ParentCategory>,IMapTo<ParentCategory>
+    public class ParentCategoryServiceModel : IMapFrom<ParentCategory>,IMapTo<ParentCategory>,IMapTo<ParentCategoryEditInputModel>,IMapFrom<ParentCategoryEditInputModel>
     {
         public int Id { get; set; }
 

@@ -17,22 +17,6 @@ namespace UniShop.Web.ViewModels.ShoppingCarts
 
         public decimal TotalPrice { get; set; }
 
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration
-        //        .CreateMap<ShoppingCartProductServiceModel, ShoppingCartViewModel>()
-        //        .ForMember(destination => destination.TotalPrice,
-        //                    opts => opts.MapFrom(origin => origin.Product.Price * origin.Quantity))
-        //        .ForMember(destination => destination.Id,
-        //                    opts => opts.MapFrom(origin => origin.ProductId))
-        //        .ForMember(destination => destination.Name,
-        //                    opts => opts.MapFrom(origin => origin.Product.Name))
-        //        .ForMember(destination => destination.Image,
-        //                    opts => opts.MapFrom(origin => origin.Product.Image))
-        //        .ForMember(destination => destination.Price,
-        //                    opts => opts.MapFrom(origin => origin.Product.Price))
-        //        .ForMember(destination => destination.Quantity,
-        //                    opts => opts.MapFrom(origin => origin.Quantity));
-        //}
+        
     }
 }

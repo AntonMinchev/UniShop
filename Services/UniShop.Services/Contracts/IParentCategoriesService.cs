@@ -14,6 +14,12 @@ namespace UniShop.Services.Contracts
 
         IQueryable<ParentCategoryServiceModel> GetAllParentCategories();
 
-       
+        ParentCategoryServiceModel GetParentCategoryById(int id);
+
+        bool Edit(ParentCategoryServiceModel parentCategoryServiceModel);
+
+        bool Delete(int id);
+
+        bool IsHaveParentCategory(int id);
     }
 }

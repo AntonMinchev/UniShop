@@ -28,7 +28,7 @@ namespace UniShop.Web.Controllers
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             this.reviewsService.Create(review,userId);
 
-            return View();
+            return Redirect($"/Products/Details/{reviewCreateInputModel.ProductId}");
         }
     }
 }

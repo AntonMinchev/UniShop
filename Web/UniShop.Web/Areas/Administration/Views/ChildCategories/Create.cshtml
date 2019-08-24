@@ -1,6 +1,5 @@
-﻿@using UniShop.Web.ViewModels.ChildCategories
-@model UniShop.Web.InputModels.ChildCategoryCreateInputModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@model UniShop.Web.InputModels.ChildCategoryCreateInputModel
+
 
 @{
     ViewData["Title"] = "Create";
@@ -30,7 +29,7 @@
                 <label asp-for="ParentCategoryId" class="control-label">Основна категория</label>
                 <select class="select-width center-block" name="parentCategoryId">
                     <option value="" disabled selected>-- Основна категория --</option>
-                    @foreach (var parentCategory in (IEnumerable<ChildCategoryCreateParentCategoryViewModel>)this.ViewData["types"])
+                    @foreach (var parentCategory in (IEnumerable<ChildCategoryCreateParentCategoryViewModel>)this.ViewData["categories"])
                     {
                         <option value="@parentCategory.Id">@parentCategory.Name</option>
                     }

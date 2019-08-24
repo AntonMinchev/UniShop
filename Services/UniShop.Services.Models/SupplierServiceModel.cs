@@ -8,7 +8,7 @@ using UniShop.Data.Models;
 
 namespace UniShop.Services.Models
 {
-    public class SupplierServiceModel : IMapFrom<SupplierCreateInputModel> ,IMapFrom<Supplier>
+    public class SupplierServiceModel : IMapFrom<SupplierCreateInputModel> ,IMapFrom<Supplier>,IMapFrom<SupplierEditInputModel>,IMapTo<SupplierEditInputModel>
     {
         public int Id { get; set; }
 

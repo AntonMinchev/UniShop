@@ -29,7 +29,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             var parentCategories = this.parentCategoriesService.GetAllParentCategories();
 
-            this.ViewData["types"] = parentCategories.Select(parentCategory => new ChildCategoryCreateParentCategoryViewModel
+            this.ViewData["categories"] = parentCategories.Select(parentCategory => new ChildCategoryCreateParentCategoryViewModel
             {
                 Id = parentCategory.Id,
                 Name = parentCategory.Name
@@ -55,6 +55,82 @@ namespace UniShop.Web.Areas.Administration.Controllers
             var childCategoryViewModels = this.childCategoriesService.GetAllChildCategories().To<ChildCategoryViewModel>().ToList();
 
             return this.View(childCategoryViewModels);
+        }
+
+        [HttpGet("/Administration/ChildCategories/Edit")]
+        public IActionResult Edit(int id)
+        {
+            var childCategory = this.childCategoriesService.GetChildCategoryById(id).To<ChildCategoryEditInputModel>();
+
+            if (childCategory == null)
+            {
+                return Redirect("All");
+            }
+
+            var parentCategories = this.parentCategoriesService.GetAllParentCategories();
+
+            this.ViewData["categories"] = parentCategories.Select(parentCategory => new ChildCategoryCreateParentCategoryViewModel
+            {
+                Id = parentCategory.Id,
+                Name = parentCategory.Name
+            })
+            .ToList(); 
+
+
+            return this.View(childCategory);
+        }
+
+        [HttpPost("/Administration/ChildCategories/Edit")]
+        public IActionResult Edit(ChildCategoryEditInputModel childCategoryEditInput)
+        {
+            if (!ModelState.IsValid)
+            {
+                var childCategory = this.childCategoriesService.GetChildCategoryById(childCategoryEditInput.Id).To<ChildCategoryEditInputModel>();
+
+                var parentCategories = this.parentCategoriesService.GetAllParentCategories();
+
+                this.ViewData["categories"] = parentCategories.Select(parentCategory => new ChildCategoryCreateParentCategoryViewModel
+                {
+                    Id = parentCategory.Id,
+                    Name = parentCategory.Name
+                })
+                .ToList();
+
+
+                return this.View(childCategory);
+            }
+
+            var childCategoryServiceModel = AutoMapper.Mapper.Map<ChildCategoryServiceModel>(childCategoryEditInput);
+
+            this.childCategoriesService.Edit(childCategoryServiceModel);
+
+
+            return RedirectToAction("All");
+        }
+
+
+        [HttpGet("/Administration/ChildCategories/Delete")]
+        public IActionResult Delete(int id)
+        {
+            var isHaveChildCategory = this.childCategoriesService.IsHaveChildCategoryWhitId(id);
+
+            if (!isHaveChildCategory)
+            {
+                this.TempData["error"] = "Не може да изтриете несъществуваща подкатегория !!!";
+                return this.Redirect("All");
+            }
+            else
+            {
+                var isDelete = this.childCategoriesService.Delete(id);
+
+                if (!isDelete)
+                {
+                    this.TempData["error"] = "Не може да изтриете подкатегория ,която съдържа продукти !!!";
+                    return this.Redirect("All");
+                }
+            }
+
+            return this.Redirect("All");
         }
     }
 }
