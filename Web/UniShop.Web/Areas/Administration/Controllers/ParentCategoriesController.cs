@@ -32,6 +32,12 @@ namespace UniShop.Web.Areas.Administration.Controllers
         [HttpPost("/Administration/ParentCategories/Create")]
         public IActionResult Create(ParentCategoryCreateInputModel parentCategoryCreateInput )
         {
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             ParentCategoryServiceModel parentCategoryServiceModel = new ParentCategoryServiceModel
             {
                 Name = parentCategoryCreateInput.Name

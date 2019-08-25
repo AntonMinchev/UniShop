@@ -13,7 +13,7 @@ using X.PagedList;
 
 namespace UniShop.Web.Controllers
 {
-    [Authorize]
+  
     public class ProductsController : Controller
     {
         private readonly IProductsService productsService;

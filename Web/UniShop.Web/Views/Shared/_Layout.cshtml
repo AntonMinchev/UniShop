@@ -84,7 +84,7 @@
                                     <div class="header-btns-icon">
                                         <i class="fa fa-user-o"></i>
                                     </div>
-                                    <strong >Здравей,@this.UserManager.GetUserName(User)<i class="fa fa-caret-down"></i></strong>
+                                    <strong>Здравей,@this.UserManager.GetUserName(User)<i class="fa fa-caret-down"></i></strong>
                                 </div>
                                 <a href="/Identity/Account/Logout" class="text-uppercase">Изход</a>
                                 <ul class="custom-menu">
@@ -95,7 +95,7 @@
                             </li>
                             @await Component.InvokeAsync(typeof(ShoppingCartComponent))
 
-                          
+
                             <li class="nav-toggle">
                                 <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
                             </li>
@@ -109,8 +109,8 @@
                                     </div>
                                     <strong>Моят акаунт <i class="fa fa-caret-down"></i></strong>
                                 </div>
-                                <a href="/Identity/Account/Login" >Вход</a> / <a href="/Identity/Account/Register">Регистрация</a>
-                             
+                                <a href="/Identity/Account/Login">Вход</a> / <a href="/Identity/Account/Register">Регистрация</a>
+
                             </li>
                             @await Component.InvokeAsync(typeof(ShoppingCartComponent))
 
@@ -124,123 +124,127 @@
                             <!-- Mobile nav toggle-->
                             <!-- / Mobile nav toggle -->
                         </ul>
+                    </div>
                 </div>
+                <!-- header -->
             </div>
-            <!-- header -->
+            <!-- container -->
+        </header>
+        <!-- /HEADER -->
+        <!-- NAVIGATION -->
+        <!-- category nav -->
+        @await Component.InvokeAsync(typeof(NavbarComponent))
+        <partial name="~/Views/Shared/Partials/_ErrorMessagePartial.cshtml" />
+        <partial name="~/Views/Shared/Partials/_MessagePartial.cshtml" />
+        <!-- /NAVIGATION -->
+        <!-- section -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <main>
+                        @RenderBody()
+                    </main>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
         </div>
-        <!-- container -->
-    </header>
-    <!-- /HEADER -->
-    <!-- NAVIGATION -->
-    <!-- category nav -->
-    @await Component.InvokeAsync(typeof(NavbarComponent))
+        <!-- /section -->
+        <!-- FOOTER -->
+        <footer id="footer" class="section section-grey">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- footer widget -->
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="footer">
+                            <!-- footer logo -->
+                            <div class="footer-logo">
+                                <a class="logo" href="/">
+                                    <img src="~/logo.png" alt="">
+                                </a>
+                            </div>
+                            <!-- /footer logo -->
 
-    <!-- /NAVIGATION -->
-    <!-- section -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <main>
-                    @RenderBody()
-                </main>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /section -->
-    <!-- FOOTER -->
-    <footer id="footer" class="section section-grey">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- footer widget -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <!-- footer logo -->
-                        <div class="footer-logo">
-                            <a class="logo" href="/">
-                                <img src="~/logo.png" alt="">
-                            </a>
+                            <p>В нашият магазин може да намерите всичко от което имате нужда!</p>
+
                         </div>
-                        <!-- /footer logo -->
+                    </div>
+                    <!-- /footer widget -->
+                    <!-- footer widget -->
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-header">Моят Акаунт</h3>
+                            <ul class="list-links">
 
-                        <p>В нашият магазин може да намерите всичко от което имате нужда!</p>
+                                @if (!this.User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="/Identity/Account/Login">Моят Акаунт</a></li>
+                                    <li><a href="/Identity/Account/Login">Любими</a></li>
+                                    <li><a href="/Identity/Account/Login">Вход</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Identity/Account/Manage/Index">Моят Акаунт</a></li>
+                                    <li><a href="/FavoriteProducts/All">Любими</a></li>
+                                    <li><a href="/Orders/All">Моите поръчки</a></li>
 
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-header">Доставка</h3>
+                            <ul class="list-links">
+                                <li><a href="/Home/PackageDelivery">Доставка на поръчките</a></li>
+                                <li><a href="/Home/ReturnShipment">30 дни право на връщане</a></li>
+                                <li><a href="/Home/Warranty">Гаранция и Сервиз</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /footer widget -->
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-header">Контакти</h3>
+                            <ul class="list-links">
+                                <li><i class="fa fa-phone-square fa-2x" aria-hidden="true"></i><font size="4"> 089 654 2345</font></li>
+                                <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i><font size="4"> unishop.abg@abv.bg</font></li>
+                                <li><i class="fa fa-skype fa-2x" aria-hidden="true"></i> <font size="4">UniShopBg</font></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <!-- /footer widget -->
-                <!-- footer widget -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-header">Моят Акаунт</h3>
-                        <ul class="list-links">
-                            <li><a href="/Identity/Account/Manage/Index">Моят Акаунт</a></li>
-                            <li><a href="/FavoriteProducts/All">Любими</a></li>
-                            @if (!this.User.Identity.IsAuthenticated)
-                            {
-                                <li><a href="/Identity/Account/Login">Вход</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="/Orders/All">Моите поръчки</a></li>
-
-                            }
-
-                        </ul>
+                <!-- /row -->
+                <hr>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <!-- footer copyright -->
+                        <div class="footer-copyright">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved !</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div>
+                        <!-- /footer copyright -->
                     </div>
                 </div>
-                
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-header">Доставка</h3>
-                        <ul class="list-links">
-                            <li><a href="/Home/PackageDelivery">Доставка на поръчките</a></li>
-                            <li><a href="/Home/Warranty">30 дни право на връщане</a></li>
-                            <li><a href="/Home/ReturnShipment">Гаранция и Сервиз</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /footer widget -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="footer">
-                        <h3 class="footer-header">Контакти</h3>
-                        <ul class="list-links">
-                            <li><i class="fa fa-phone-square fa-2x" aria-hidden="true"></i><font size="4"> 089 654 2345</font></li>
-                            <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i><font size="4"> unishop.abg@abv.bg</font></li>
-                            <li><i class="fa fa-skype fa-2x" aria-hidden="true"></i> <font size="4">UniShopBg</font></li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- /row -->
             </div>
-            <!-- /row -->
-            <hr>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center">
-                    <!-- footer copyright -->
-                    <div class="footer-copyright">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved !</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                    <!-- /footer copyright -->
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </footer> @RenderSection("Scripts", required: false)
-    <!-- /FOOTER -->
-    <!-- jQuery Plugins -->
+            <!-- /container -->
+        </footer> @RenderSection("Scripts", required: false)
+        <!-- /FOOTER -->
+        <!-- jQuery Plugins -->
 
 
 
-</body>
+    </body>
 
 
 </html>

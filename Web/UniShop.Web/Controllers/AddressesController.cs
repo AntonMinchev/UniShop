@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
@@ -11,6 +12,7 @@ using UniShop.Web.InputModels;
 
 namespace UniShop.Web.Controllers
 {
+    [Authorize]
     public class AddressesController : BaseController
     {
         private readonly IAddressesService addressesService;
@@ -29,13 +31,18 @@ namespace UniShop.Web.Controllers
         [HttpPost]
         public IActionResult Add(AddressCreateInputModel addressCreateInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             AddressServiceModel addressServiceModel = addressCreateInputModel.To<AddressServiceModel>();
 
             this.addressesService.AddAddress(addressServiceModel, userId);
 
-            return this.Redirect("/");
+            return this.Redirect("/Orders/Create");
 
         }
     }

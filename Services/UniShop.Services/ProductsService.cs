@@ -105,7 +105,12 @@ namespace UniShop.Services
         {
             var product = this.context.Products.FirstOrDefault(p => p.Id == productId);
 
-            product.Quantity = product.Quantity - quantity;
+            var Quantity = product.Quantity - quantity;
+            if (Quantity < 0)
+            {
+                return false;
+            }
+            product.Quantity = Quantity;
             this.context.Update(product);
             int result = this.context.SaveChanges();
 
@@ -132,7 +137,12 @@ namespace UniShop.Services
 
         private IQueryable<ProductServiceModel> GetProductsBySearchString(string searchString)
         {
-            return this.context.Products.Where(p => p.Name.ToLower().Contains(searchString.ToLower())).To<ProductServiceModel>();
+            var searchStringSplit = searchString.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            var products = this.context.Products.Where(p =>searchStringSplit.All(s =>p.Name.ToLower().Contains(s.ToLower()))).To<ProductServiceModel>();
+
+            return products;
+
         }
     }
 }

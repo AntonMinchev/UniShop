@@ -5,15 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="row">
-        @if (this.TempData.ContainsKey("error"))
-        {
-            <div class="alert alert-danger alert-dismissible">
-                <p class="close" data-dismiss="alert" aria-label="close">&times;</p>
-                <strong>Грешка!</strong> @this.TempData["error"]
-            </div>
-        }
-    </div>
 
 <div class="col-md-offset-4 col-md-4">
     <div class="text-center ">

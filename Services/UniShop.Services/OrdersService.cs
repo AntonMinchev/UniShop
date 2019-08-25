@@ -35,6 +35,22 @@ namespace UniShop.Services
         {
             var user = this.uniShopUsersService.GetUserByUsername(username);
 
+    
+
+            var shoppingCartProducts = this.shoppingCartsService.GetAllShoppingCartProducts(username).ToList();
+
+            var orderProducts = new List<OrderProduct>();
+
+            foreach (var shoppingCartProduct in shoppingCartProducts)
+            { 
+               bool isInStock = this.productsService.ReduceProductQuantity(shoppingCartProduct.ProductId, shoppingCartProduct.Quantity);
+
+                if (!isInStock)
+                {
+                    return false;
+                }
+            }
+
             var order = new Order
             {
                 OrderStatus = OrderStatus.Unprocessed,
@@ -49,10 +65,6 @@ namespace UniShop.Services
             this.context.Orders.Add(order);
             this.context.SaveChanges();
 
-            var shoppingCartProducts = this.shoppingCartsService.GetAllShoppingCartProducts(username).ToList();
-
-            var orderProducts = new List<OrderProduct>();
-
             foreach (var shoppingCartProduct in shoppingCartProducts)
             {
                 var orderProduct = new OrderProduct
@@ -62,13 +74,6 @@ namespace UniShop.Services
                     Price = shoppingCartProduct.Product.Price,
                     Quantity = shoppingCartProduct.Quantity
                 };
-
-               bool isInStock = this.productsService.ReduceProductQuantity(shoppingCartProduct.ProductId, shoppingCartProduct.Quantity);
-
-                if (!isInStock)
-                {
-                    return false;
-                }
 
                 orderProducts.Add(orderProduct);
             }

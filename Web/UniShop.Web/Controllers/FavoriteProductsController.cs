@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
@@ -11,6 +12,7 @@ using X.PagedList;
 
 namespace UniShop.Web.Controllers
 {
+    [Authorize]
     public class FavoriteProductsController : BaseController
     {
         private readonly IFavoriteProductsService favoriteProductsService;

@@ -33,7 +33,7 @@ namespace UniShop.Web.Components
 
             if (categoriesViewModel.Count() == 0)
             {
-                return this.View(new List<ShoppingCartProductViewModel>());
+                return this.View(new List<CategoryViewModel>());
             }
 
             return this.View(categoriesViewModel);

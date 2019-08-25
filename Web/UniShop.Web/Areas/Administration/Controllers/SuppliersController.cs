@@ -32,6 +32,12 @@ namespace UniShop.Web.Areas.Administration.Controllers
         [HttpPost("/Administration/Suppliers/Create")]
         public IActionResult Create(SupplierCreateInputModel supplierCreateInputModel)
         {
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             SupplierServiceModel supplierServiceModel = supplierCreateInputModel.To<SupplierServiceModel>();
 
             this.suppliersService.Create(supplierServiceModel);

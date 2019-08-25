@@ -66,8 +66,18 @@
 
         <div class="product-btns row ">
             <div class="product-btns">
-                <div class="col-md-5 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</a></div>
-                <div class="col-md-5"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</a></div>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <div class="col-md-5 col-offset-2"> <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</a></div>
+                    <div class="col-md-5"><a asp-controller="FavoriteProducts" asp-action="Add" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</a></div>
+
+                }
+                else
+                {
+                    <div class="col-md-5 col-offset-2"> <a href="/Identity/Account/Login" class="primary-btn"><i class="fa fa-shopping-cart"></i> Добави в количката</a></div>
+                    <div class="col-md-5"><a href="/Identity/Account/Login" class="primary-btn"><i class="fa fa-heart"></i>Добави в любими</a></div>
+
+                }
                 @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
                 {
                     <div class="col-md-2"><a asp-area="Administration" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.ProductViewModel.Id" class="primary-btn">Промени</a></div>
@@ -126,26 +136,29 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h4 class="text-uppercase">Напиши твоето ревю</h4>
-                        <form class="review-form" method="post" asp-controller="Reviews" asp-action="Add">
-                            <input type="hidden" name="productId" value="@Model.ProductViewModel.Id">
-                            <div class="form-group">
-                                <textarea class="input" name="comment" placeholder="Напиши твоето ревю"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-rating">
-                                    <strong class="text-uppercase">Рейтинг: </strong>
-                                    <div class="stars">
-                                        <input type="radio" id="star5" name="raiting" value="5" /><label for="star5"></label>
-                                        <input type="radio" id="star4" name="raiting" value="4" /><label for="star4"></label>
-                                        <input type="radio" id="star3" name="raiting" value="3" /><label for="star3"></label>
-                                        <input type="radio" id="star2" name="raiting" value="2" /><label for="star2"></label>
-                                        <input type="radio" id="star1" name="raiting" value="1" /><label for="star1"></label>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <h4 class="text-uppercase">Напиши твоето ревю</h4>
+                            <form class="review-form" method="post" asp-controller="Reviews" asp-action="Add">
+                                <input type="hidden" name="productId" value="@Model.ProductViewModel.Id">
+                                <div class="form-group">
+                                    <textarea class="input" name="comment" placeholder="Напиши твоето ревю"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-rating">
+                                        <strong class="text-uppercase">Рейтинг: </strong>
+                                        <div class="stars">
+                                            <input type="radio" id="star5" name="raiting" value="5" /><label for="star5"></label>
+                                            <input type="radio" id="star4" name="raiting" value="4" /><label for="star4"></label>
+                                            <input type="radio" id="star3" name="raiting" value="3" /><label for="star3"></label>
+                                            <input type="radio" id="star2" name="raiting" value="2" /><label for="star2"></label>
+                                            <input type="radio" id="star1" name="raiting" value="1" /><label for="star1"></label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button class="primary-btn">Добави ревю</button>
-                        </form>
+                                <button class="primary-btn">Добави ревю</button>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>

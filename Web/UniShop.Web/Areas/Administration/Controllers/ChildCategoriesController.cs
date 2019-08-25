@@ -42,11 +42,16 @@ namespace UniShop.Web.Areas.Administration.Controllers
         [HttpPost("/Administration/ChildCategories/Create")]
         public IActionResult Create(ChildCategoryCreateInputModel childCategoryCreateInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             ChildCategoryServiceModel childCategoryServiceModel = childCategoryCreateInputModel.To<ChildCategoryServiceModel>();
 
             this.childCategoriesService.Create(childCategoryServiceModel);
 
-            return Redirect("/");
+            return RedirectToAction("All");
         }
 
         [HttpGet("/Administration/ChildCategories/All")]

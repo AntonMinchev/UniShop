@@ -20,6 +20,7 @@ using UniShop.Services.Models;
 using System.Reflection;
 using UniShop.Services.Contracts;
 using UniShop.Web.ViewModels.Home;
+using UniShop.Web.Middlewares;
 
 namespace UniShop.Web
 {
@@ -92,18 +93,18 @@ namespace UniShop.Web
               typeof(ProductServiceModel).GetTypeInfo().Assembly);
 
 
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetRequiredService<UniShopDbContext>())
-                {
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    using (var context = serviceScope.ServiceProvider.GetRequiredService<UniShopDbContext>())
+            //    {
 
-                    if (!context.Roles.Any())
-                    {
-                        SeedRoles(context);
-                    }
+            //        if (!context.Roles.Any())
+            //        {
+            //            SeedRoles(context);
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
 
             if (env.IsDevelopment())
@@ -121,6 +122,9 @@ namespace UniShop.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
+
+            app.UseSeedRolesMiddleware();
+
 
             app.UseMvc(routes =>
             {

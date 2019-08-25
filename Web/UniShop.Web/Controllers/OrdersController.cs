@@ -74,9 +74,22 @@ namespace UniShop.Web.Controllers
         [HttpPost]
         public IActionResult Create(OrderCreateInputModel orderCreateInputModel)
         {
+           
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-            this.orderService.CreateOrder(username, orderCreateInputModel.SupplierId, orderCreateInputModel.DeliveryType, orderCreateInputModel.AddressId);
+            if (!this.ModelState.IsValid)
+            {
+                return RedirectToAction("Create");
+            }
+
+
+            var isCreated = this.orderService.CreateOrder(username, orderCreateInputModel.SupplierId, orderCreateInputModel.DeliveryType, orderCreateInputModel.AddressId);
+
+            if (!isCreated)
+            {
+                this.TempData["error"] = "Проверете дали са налични продуктите , които искате да поръчате и опитайте отното!";
+                return this.RedirectToAction("Create");
+            }
 
             return this.RedirectToAction("Successfully");
         }

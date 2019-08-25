@@ -35,7 +35,6 @@
   <ItemGroup>
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="Areas\Administration\Models\" />
-    <Folder Include="Views\Shared\Partials\" />
   </ItemGroup>
 
 </Project>

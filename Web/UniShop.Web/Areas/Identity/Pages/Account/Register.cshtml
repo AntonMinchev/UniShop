@@ -33,12 +33,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" placeholder="Парола" />
+                <input asp-for="Input.Password"  type="password" class="form-control" placeholder="Парола" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control"  placeholder="Потвърди парола"/>
+                <input asp-for="Input.ConfirmPassword"  type="password" class="form-control"  placeholder="Потвърди парола"/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" style="background-color:#F8694A" class="btn btn-primary center-block">Регистрация</button>

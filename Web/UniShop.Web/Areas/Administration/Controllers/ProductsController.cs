@@ -46,6 +46,11 @@ namespace UniShop.Web.Areas.Administration.Controllers
         [HttpPost("/Administration/Products/Create")]
         public IActionResult Create(ProductCreateInputModel productCreateInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             string pictureUrl = this.cloudinaryService.UploadPicture(
                 productCreateInputModel.Image,
                 productCreateInputModel.Name);

@@ -68,8 +68,13 @@ namespace UniShop.Web.Controllers
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-            this.shoppingCartsService.IncreaseQuantity(id, username);
+            var isUncrease =  this.shoppingCartsService.IncreaseQuantity(id, username);
 
+            if (!isUncrease)
+            {
+                this.TempData["message"] = "Не може да поръчате от наличното количество за даден продукт!!! ";
+                return this.RedirectToAction("Index");
+            }
 
             return this.RedirectToAction("Index");
         }
@@ -79,8 +84,13 @@ namespace UniShop.Web.Controllers
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-            this.shoppingCartsService.ReduceQuantity(id, username);
+           var isReduce = this.shoppingCartsService.ReduceQuantity(id, username);
 
+            if (!isReduce)
+            {
+                this.TempData["message"] = "Не може да поръчате по-малко от 1 продукт,ако искате да не го поръчвате го премахнете от количката!!! ";
+                return this.RedirectToAction("Index");
+            }
 
             return this.RedirectToAction("Index");
         }
