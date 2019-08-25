@@ -7,43 +7,48 @@ using UniShop.Data.Models.Enums;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
 using UniShop.Web.ViewModels.Addresses;
+using UniShop.Web.ViewModels.Common;
 
 namespace UniShop.Web.ViewModels.Orders
 {
     public class OrderDetailsViewModel : IMapFrom<OrderServiceModel>,IHaveCustomMappings
     {
-        [Display(Name = "Номер на поръчка")]
+        [Display(Name = ViewModelsConstants.OrderId)]
         public int Id { get; set; }
 
-        [Display(Name = "Статус")]
+        [Display(Name = ViewModelsConstants.OrderStatus)]
         public OrderStatus OrderStatus { get; set; }
 
-        [Display(Name = "Дата на поръчка")]
+        [Display(Name = ViewModelsConstants.OrderDate)]
         public DateTime OrderDate { get; set; }
 
-        [Display(Name = "Очаквана дата за доставка")]
+        [Display(Name = ViewModelsConstants.EstimatedDeliveryDate)]
         public string EstimatedDeliveryDate { get; set; }
 
-        [Display(Name = "Дата на доставак")]
+        [Display(Name = ViewModelsConstants.DeliveryDate)]
         public string DeliveryDate { get; set; }
 
-        [Display(Name = "Дата на изпращане на продуктите")]
+        [Display(Name = ViewModelsConstants.DispatchDate)]
         public string DispatchDate { get; set; }
 
-        [Display(Name = "Сума")]
+        [Display(Name = ViewModelsConstants.TotalPrice)]
         public decimal TotalPrice { get; set; }
 
-        [Display(Name = "Цена на доставката")]
+        [Display(Name = ViewModelsConstants.DeliveryPrice)]
         public decimal DeliveryPrice { get; set; }
 
-        [Display(Name = "Име на клиента")]
+        [Display(Name = ViewModelsConstants.Recipient)]
         public string Recipient { get; set; }
 
-        [Display(Name = "Телефонен номер")]
+        [Display(Name = ViewModelsConstants.RecipientPhoneNumber)]
         public string RecipientPhoneNumber { get; set; }
 
-        [Display(Name = "Адрес на клиента")]
+        [Display(Name = ViewModelsConstants.Address)]
         public string Address { get; set; }
+
+        public DeliveryType DeliveryType { get; set; }
+
+        public string SupplierName { get; set; }
 
         public ICollection<OrderProductViewModel> OrderProducts { get; set; }
 

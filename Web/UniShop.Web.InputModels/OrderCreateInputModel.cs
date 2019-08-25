@@ -14,7 +14,7 @@ namespace UniShop.Web.InputModels
         public int SupplierId { get; set; }
 
         [Required]
-        public string DeliveryType { get; set; }
+        public int DeliveryType { get; set; }
     
     }
 }

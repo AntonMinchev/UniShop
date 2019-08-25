@@ -21,6 +21,7 @@ using System.Reflection;
 using UniShop.Services.Contracts;
 using UniShop.Web.ViewModels.Home;
 using UniShop.Web.Middlewares;
+using System;
 
 namespace UniShop.Web
 {
@@ -44,6 +45,7 @@ namespace UniShop.Web
                 .AddEntityFrameworkStores<UniShopDbContext>()
                 .AddDefaultTokenProviders();
 
+           
 
             Account cloudinaryCredentials = new Account(
               this.Configuration["Cloudinary:CloudName"],
@@ -65,6 +67,9 @@ namespace UniShop.Web
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 0;
                 options.User.RequireUniqueEmail = true;
+
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 0, 20);
             }); 
 
             services.AddTransient<ICloudinaryService, CloudinaryService>();
@@ -137,27 +142,7 @@ namespace UniShop.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
-
-
-
-        private void SeedRoles(UniShopDbContext context)
-        {
-           
-                context.Roles.Add(new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                });
-
-                context.Roles.Add(new IdentityRole
-                {
-                    Name = "User",
-                    NormalizedName = "USER"
-                });
-
-                context.SaveChanges();           
-        }
+        }    
 
     }
 }

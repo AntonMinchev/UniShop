@@ -26,7 +26,7 @@ namespace UniShop.Services
             Supplier supplier = new Supplier
             {
                 Name = supplierServiceModel.Name,
-                PriceToHome = supplierServiceModel.PriceToOffice,
+                PriceToHome = supplierServiceModel.PriceToHome,
                 PriceToOffice = supplierServiceModel.PriceToOffice
             };
 

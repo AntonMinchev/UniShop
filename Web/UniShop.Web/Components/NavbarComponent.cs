@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using UniShop.Services;
 using UniShop.Services.Contracts;
+using UniShop.Services.Mapping;
 using UniShop.Web.ViewModels;
+using UniShop.Web.ViewModels.ChildCategories;
 using UniShop.Web.ViewModels.ShoppingCarts;
 
 namespace UniShop.Web.Components
@@ -22,22 +24,21 @@ namespace UniShop.Web.Components
         public IViewComponentResult Invoke()
         {
 
-            var categories = this.parentCategoriesService.GetAllParentCategories().ToList();
+            var categories = this.parentCategoriesService.GetAllParentCategories().To<CategoryViewModel>().ToList();
+            
+            //var categoriesViewModel = categories.Select(category => new CategoryViewModel
+            //{
+            //    Name = category.Name,
+            //    ChildCategories = category.ChildCategories
+            //}).ToList();
 
-
-            var categoriesViewModel = categories.Select(category => new CategoryViewModel
-            {
-                Name = category.Name,
-                ChildCategories = category.ChildCategories
-            }).ToList();
-
-            if (categoriesViewModel.Count() == 0)
+            if (categories.Count() == 0)
             {
                 return this.View(new List<CategoryViewModel>());
             }
 
-            return this.View(categoriesViewModel);
-            }
-
+            return this.View(categories);
         }
+
+    }
 }

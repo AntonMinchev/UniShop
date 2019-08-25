@@ -23,11 +23,14 @@ namespace UniShop.Services
 
         public bool Create(ProductServiceModel productServiceModel)
         {
-            var test = this.context.ChildCategories.Select(x => x.Products).ToList();
-
             ChildCategory childCategoryFromDb =
                 context.ChildCategories
                 .SingleOrDefault(childCategory => childCategory.Name == productServiceModel.ChildCategoryName);
+
+            if (childCategoryFromDb == null)
+            {
+                return false;
+            }
 
             Product product = AutoMapper.Mapper.Map<Product>(productServiceModel);
             product.ChildCategory = childCategoryFromDb;

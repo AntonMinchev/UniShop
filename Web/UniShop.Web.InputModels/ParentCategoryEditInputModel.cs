@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using UniShop.Web.InputModels.Common;
 
 namespace UniShop.Web.InputModels
 {
@@ -9,9 +10,9 @@ namespace UniShop.Web.InputModels
     {
         public int Id { get; set; }
 
-        [Display(Name = "Име")]
-        [Required(ErrorMessage = "Полето е задължително!")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
+        [Display(Name = InputModelsConstants.Name)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.ParentCategoryMaxLength, MinimumLength = InputModelsConstants.ParentCategoryMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
         public string Name { get; set; }
     }
 }

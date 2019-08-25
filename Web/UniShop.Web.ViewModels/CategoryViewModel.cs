@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.ViewModels.ChildCategories;
 
 namespace UniShop.Web.ViewModels
 {
@@ -10,6 +11,6 @@ namespace UniShop.Web.ViewModels
     {
         public string Name { get; set; }
 
-        public virtual ICollection<ChildCategoryServiceModel> ChildCategories { get; set; }
+        public virtual ICollection<ChildCategoryNavbarViewModel> ChildCategories { get; set; }
     }
 }

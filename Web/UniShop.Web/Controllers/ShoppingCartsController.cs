@@ -9,6 +9,7 @@ using UniShop.Services;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.Common;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels.Products;
 using UniShop.Web.ViewModels.ShoppingCarts;
@@ -72,7 +73,7 @@ namespace UniShop.Web.Controllers
 
             if (!isUncrease)
             {
-                this.TempData["message"] = "Не може да поръчате от наличното количество за даден продукт!!! ";
+                this.TempData["message"] = WebConstants.IncreaseShoppingCartMessage ;
                 return this.RedirectToAction("Index");
             }
 
@@ -88,7 +89,7 @@ namespace UniShop.Web.Controllers
 
             if (!isReduce)
             {
-                this.TempData["message"] = "Не може да поръчате по-малко от 1 продукт,ако искате да не го поръчвате го премахнете от количката!!! ";
+                this.TempData["message"] = WebConstants.ReduceShoppingCartMessage;
                 return this.RedirectToAction("Index");
             }
 

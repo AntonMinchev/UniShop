@@ -22,7 +22,7 @@
             <tr>
                 <td class="col-1 d-flex "><strong>Номер на поръчката :</strong></td>
                 <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Id</td>
-                <td class="col-1 d-flex "><strong>Статус :</strong></td>      
+                <td class="col-1 d-flex "><strong>Статус :</strong></td>
                 <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.OrderStatus)</td>
             </tr>
             <tr>
@@ -50,10 +50,18 @@
                 <td class="col-1 d-flex ">@Model.DeliveryPrice лв.</td>
             </tr>
             <tr>
+
+                <td class="col-1 d-flex "><strong>Доставчик :</strong></td>
+                <td class="col-1 d-flex " style="border-right-style:solid">@Model.SupplierName</td>
+                <td class="col-1 d-flex "><strong>Тип на доставката :</strong></td>
+                <td class="col-1 d-flex">@Html.DisplayFor(modelItem => @Model.DeliveryType)</td>
+            </tr>
+            <tr>
                 <td class="col-1 d-flex "><strong>Обща сума:</strong></td>
                 <td class="col-1 d-flex" style="border-right-style:solid"> @Model.TotalPrice лв.</td>
                 <td class="col-1 d-flex "></td>
                 <td class="col-1 d-flex "></td>
+
             </tr>
 
         </tbody>

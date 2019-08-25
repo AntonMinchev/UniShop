@@ -9,6 +9,7 @@ using UniShop.Data.Models.Enums;
 using UniShop.Services;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
+using UniShop.Web.Common;
 using UniShop.Web.InputModels;
 using UniShop.Web.Models;
 using UniShop.Web.ViewModels;
@@ -29,8 +30,8 @@ namespace UniShop.Web.Controllers
         public IActionResult Index(IndexInputModel indexInputModel)
         {
 
-            var pageSize = indexInputModel.PageSize ?? 9;
-            var pageNumber = indexInputModel.PageNumber ?? 1;
+            var pageSize = indexInputModel.PageSize ?? WebConstants.DefaultIndexPageSize;
+            var pageNumber = indexInputModel.PageNumber ?? WebConstants.DefaultPageNumber;
                                              
 
             var products = this.productsService.GetAllProducts(indexInputModel.ChildCategoryId,indexInputModel.SearchString);

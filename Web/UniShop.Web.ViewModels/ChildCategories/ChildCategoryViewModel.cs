@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.ViewModels.Common;
 
 namespace UniShop.Web.ViewModels.ChildCategories
 {
@@ -13,13 +14,13 @@ namespace UniShop.Web.ViewModels.ChildCategories
 
         public int Id { get; set; }
 
-        [Display(Name = "Име")]
+        [Display(Name = ViewModelsConstants.Name)]
         public string Name { get; set; }
 
-        [Display(Name = "Основна категория")]
+        [Display(Name = ViewModelsConstants.ParentCategoryName)]
         public string ParentCategoryName { get; set; }
 
-        [Display(Name = "Брой продукти")]
+        [Display(Name = ViewModelsConstants.CountOfProducts)]
         public int CountOfProducts { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

@@ -5,49 +5,46 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using UniShop.Services.Mapping;
+using UniShop.Web.InputModels.Common;
 
 namespace UniShop.Web.InputModels
 {
     public class ProductCreateInputModel
     {
-        [Display(Name = "Име")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
+        [Display(Name = InputModelsConstants.Name)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.ProductMaxLength, MinimumLength = InputModelsConstants.ProductMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
         public string Name { get; set; }
 
-        [Display(Name = "Цена")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
-        [Range(typeof(decimal), "0.1", "79228162514264337593543950335", ErrorMessage = "Цената трябва да е между {1} и {2}!")]
+        [Display(Name = InputModelsConstants.Price)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [Range(typeof(decimal), InputModelsConstants.PriceMinValue, InputModelsConstants.PriceMaxValue, ErrorMessage = InputModelsConstants.PriceErrorMessage)]
         public decimal Price { get; set; }
 
-        [Display(Name = "Количество")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
-        [Range(1,int.MaxValue, ErrorMessage = "Количеството на продуктите  трябва да е число от {1} до {2}!")]
+        [Display(Name = InputModelsConstants.Quantity)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [Range(InputModelsConstants.QuantityMinNumber,InputModelsConstants.QuantityMaxNumber, ErrorMessage = InputModelsConstants.QuantityErrorMessage)]
         public int Quantity { get; set; }
 
-        [Display(Name = "Описание")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
-        [StringLength(255, MinimumLength = 10, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
+        [Display(Name = InputModelsConstants.Description)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.DescriptionMaxLength, MinimumLength = InputModelsConstants.DescriptionMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
         public string Description { get; set; }
 
-        [Display(Name = "Характеристики")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
-        [StringLength(255, MinimumLength = 10, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
+        [Display(Name = InputModelsConstants.Specification)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.SpecificationMaxLength, MinimumLength = InputModelsConstants.SpecificationMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
         public string Specification { get; set; } 
        
-        [Display(Name = "Снимка")]
-        [Required(ErrorMessage = "Полето \"{0}\" е задължително!")]
+        [Display(Name = InputModelsConstants.Image)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
         public IFormFile Image { get; set; }
 
-        [Required(ErrorMessage = "Полето \"{0}\" е задължително!")]
+        [Display(Name = InputModelsConstants.ChildCategoryName)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.ChildCategoryMaxLength, MinimumLength = InputModelsConstants.ChildCategoryMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
         public string ChildCategoryName { get; set; }
 
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration
-        //        .CreateMap<ProductCreateInputModel, ProductServiceModel>()
-        //        .ForMember(destination => destination.ProductType,
-        //                    opts => opts.MapFrom(origin => new ProductTypeServiceModel { Name = origin.ProductType }));
-        //}
+        
     }
 }

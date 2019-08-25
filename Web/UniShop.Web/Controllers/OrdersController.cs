@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
+using UniShop.Web.Common;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels.Addresses;
 using UniShop.Web.ViewModels.Orders;
@@ -87,7 +88,7 @@ namespace UniShop.Web.Controllers
 
             if (!isCreated)
             {
-                this.TempData["error"] = "Проверете дали са налични продуктите , които искате да поръчате и опитайте отното!";
+                this.TempData["error"] = WebConstants.ErrorOrderMessage;
                 return this.RedirectToAction("Create");
             }
 
@@ -100,9 +101,9 @@ namespace UniShop.Web.Controllers
 
             var orders = this.orderService.GetAllOrdersByUserId(userId).To<AllOrdersViewModel>().ToList();
 
-            int pageNumber = pages ?? 1;
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
 
-            var pageOrders = orders.ToPagedList(pageNumber, 5);
+            var pageOrders = orders.ToPagedList(pageNumber, WebConstants.OrdersPageSize);
 
             return this.View(pageOrders);
         }

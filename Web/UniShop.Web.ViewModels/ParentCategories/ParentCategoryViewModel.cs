@@ -5,18 +5,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.ViewModels.Common;
 
 namespace UniShop.Web.ViewModels.ParentCategories
 {
     public class ParentCategoryViewModel : IMapFrom<ParentCategoryServiceModel>,IHaveCustomMappings
     {
-        [Display(Name = "Номер")]
+        [Display(Name = ViewModelsConstants.ParentCategoryId)]
         public int Id { get; set; }
 
-        [Display(Name = "Име")]
+        [Display(Name = ViewModelsConstants.Name)]
         public string Name { get; set; }
 
-        [Display(Name = "Брой подкатегории")]
+        [Display(Name = ViewModelsConstants.ChildCategoriesCount)]
         public int ChildCategoriesCount { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

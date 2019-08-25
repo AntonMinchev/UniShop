@@ -32,6 +32,10 @@ namespace UniShop.Data.Models
 
         public string RecipientPhoneNumber { get; set; }
 
+        public string SupplierName { get; set; }
+
+        public DeliveryType DeliveryType { get; set; }
+
         public string UniShopUserId { get; set; }
         public UniShopUser UniShopUser { get; set; }
 

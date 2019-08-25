@@ -9,7 +9,7 @@ namespace UniShop.Web.ViewModels.Products
 {
     public class ProductReviewViewModel : IMapFrom<ReviewServiceModel>,IHaveCustomMappings
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public string Username { get; set; }
 

@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using UniShop.Web.InputModels.Common;
 
 namespace UniShop.Web.InputModels
 {
     public class SupplierEditInputModel
     {
+        [Required]
         public int Id { get; set; }
 
-        [Display(Name = "Име")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително!")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
+        [Display(Name = InputModelsConstants.Name)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.SupplierMaxLength, MinimumLength = InputModelsConstants.SupplierMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
         public string Name { get; set; }
 
-        [Display(Name = "Цена до офис")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [Range(typeof(decimal), "0.01", "79228162514264337593543950335", ErrorMessage = "Полето \"{0}\" трябва да е число в диапазона от {1} до {2}")]
+        [Display(Name = InputModelsConstants.PriceToOffice)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [Range(typeof(decimal), InputModelsConstants.PriceMinValue, InputModelsConstants.PriceMaxValue, ErrorMessage = InputModelsConstants.PriceErrorMessage)]
         public decimal PriceToOffice { get; set; }
 
-        [Display(Name = "Цена до адрес")]
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [Range(typeof(decimal), "0.01", "79228162514264337593543950335", ErrorMessage = "Полето \"{0}\" трябва да е число в диапазона от {1} до {2}")]
+        [Display(Name = InputModelsConstants.PriceToHome)]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [Range(typeof(decimal), InputModelsConstants.PriceMinValue, InputModelsConstants.PriceMaxValue, ErrorMessage = InputModelsConstants.PriceErrorMessage)]
         public decimal PriceToHome { get; set; }
     }
 }

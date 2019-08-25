@@ -21,12 +21,6 @@ namespace UniShop.Web.ViewModels.Orders
 
         public int Quantity { get; set; }
 
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration
-        //        .CreateMap<OrderProductServiceModel, OrderProductViewModel>()
-        //         .ForMember(destination => destination.TotalSum,
-        //                    opts => opts.MapFrom(origin => origin.));
-        //}
+     
     }
 }

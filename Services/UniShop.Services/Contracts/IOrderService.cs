@@ -8,7 +8,7 @@ namespace UniShop.Services.Contracts
 {
     public interface IOrderService
     {
-        bool CreateOrder(string username, int supplierId, string deliveryType,int addressId);
+        bool CreateOrder(string username, int supplierId, int deliveryType,int addressId);
 
         IQueryable<OrderServiceModel> GetAllUnprocessedOrders();
 

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using UniShop.Web.InputModels.Common;
 
 namespace UniShop.Web.InputModels
 {
     public class ChildCategoryCreateInputModel
     {
-        [Required(ErrorMessage = "Полето \"{0}\" e задължително.")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Полето \"{0}\" трябва да бъде текст с минимална дължина {2} и максимална дължина {1} символа.")]
-        [Display(Name = "Име")]
+        [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
+        [StringLength(InputModelsConstants.ChildCategoryMaxLength, MinimumLength = InputModelsConstants.ChildCategoryMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
+        [Display(Name = InputModelsConstants.Name)]
         public string Name { get; set; }
 
 

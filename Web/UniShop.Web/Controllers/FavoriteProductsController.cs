@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
+using UniShop.Web.Common;
 using UniShop.Web.ViewModels.FavoriteProducts;
 using X.PagedList;
 
@@ -45,9 +46,9 @@ namespace UniShop.Web.Controllers
                 ProductPrice = p.Product.Price
             });
 
-            int pageNumber = pages ?? 1;
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
 
-            var pageFavoriteProducts = favoriteProductsViewModels.ToPagedList(pageNumber, 3);
+            var pageFavoriteProducts = favoriteProductsViewModels.ToPagedList(pageNumber, WebConstants.FavoriteProductsPageSize);
 
             return this.View(pageFavoriteProducts);
         }

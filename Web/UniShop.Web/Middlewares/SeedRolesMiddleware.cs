@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using UniShop.Web.Common;
 
 namespace UniShop.Web.Middlewares
 {
@@ -15,8 +16,8 @@ namespace UniShop.Web.Middlewares
 
         public async Task InvokeAsync(HttpContext context, RoleManager<IdentityRole> roleManager)
         {
-            SeedRoles(roleManager, "Admin").Wait();
-            SeedRoles(roleManager, "User").Wait();
+            SeedRoles(roleManager, WebConstants.AdminRoleName).Wait();
+            SeedRoles(roleManager, WebConstants.UserRoleName).Wait();
 
             await this.next(context);
         }

@@ -67,7 +67,7 @@ namespace UniShop.Services
 
         public IQueryable<ParentCategoryServiceModel> GetAllParentCategories()
         {
-            var parentCategories = this.context.ParentCategories.To<ParentCategoryServiceModel>();
+            var parentCategories = this.context.ParentCategories.Include(x =>x.ChildCategories).To<ParentCategoryServiceModel>();
 
             return parentCategories;
         }

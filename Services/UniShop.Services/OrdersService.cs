@@ -15,6 +15,8 @@ namespace UniShop.Services
 {
     public class OrdersService : IOrderService
     {
+        private const int EstimatedDeliverydays = 5;
+
         private readonly UniShopDbContext context;
         private readonly IUniShopUsersService uniShopUsersService;
         private readonly IShoppingCartsService shoppingCartsService;
@@ -31,7 +33,7 @@ namespace UniShop.Services
             this.productsService = productsService;
         }
 
-        public bool CreateOrder(string username, int supplierId, string deliveryType,int addressId)
+        public bool CreateOrder(string username, int supplierId, int deliveryType,int addressId)
         {
             var user = this.uniShopUsersService.GetUserByUsername(username);
 
@@ -54,9 +56,10 @@ namespace UniShop.Services
             var order = new Order
             {
                 OrderStatus = OrderStatus.Unprocessed,
+                DeliveryType = deliveryType == 1 ? DeliveryType.ToHome : DeliveryType.ToOffice,
                 OrderDate = DateTime.UtcNow,
                 DeliveryAddressId = addressId,
-                EstimatedDeliveryDate = DateTime.UtcNow.AddDays(5),
+                EstimatedDeliveryDate = DateTime.UtcNow.AddDays(EstimatedDeliverydays),
                 UniShopUserId = user.Id,
                 Recipient = user.FullName,
                 RecipientPhoneNumber = user.PhoneNumber
@@ -82,7 +85,7 @@ namespace UniShop.Services
 
             var supplier = this.suppliersService.GetSupplierById(supplierId);
 
-            if (deliveryType == "Home")
+            if (order.DeliveryType == DeliveryType.ToHome)
             {
                 order.DeliveryPrice = supplier.PriceToHome;
             }
@@ -91,7 +94,7 @@ namespace UniShop.Services
                 order.DeliveryPrice = supplier.PriceToOffice;
             }
 
-
+            order.SupplierName = supplier.Name;
             order.TotalPrice = orderProducts.Sum(op => op.Price * op.Quantity) + order.DeliveryPrice;
             order.OrderProducts = orderProducts;
             int result = this.context.SaveChanges();

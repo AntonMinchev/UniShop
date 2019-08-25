@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using UniShop.Services;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
+using UniShop.Web.Common;
 using UniShop.Web.ViewModels;
 using UniShop.Web.ViewModels.Products;
 using X.PagedList;
@@ -32,9 +33,9 @@ namespace UniShop.Web.Controllers
 
             var productReviews = this.reviewsService.GetReviewsByProductId(id).To<ProductReviewViewModel>().ToList();
 
-            int pageNumber = PageNumber ?? 1;
+            int pageNumber = PageNumber ?? WebConstants.DefaultPageNumber;
             
-            var pageReviews = productReviews.ToPagedList(pageNumber, 3);
+            var pageReviews = productReviews.ToPagedList(pageNumber, WebConstants.ReviewsPageSize);
 
             var productDetailsViewModel = new ProductDetailsViewModel
             {
