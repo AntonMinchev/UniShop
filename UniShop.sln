@@ -19,11 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniShop.Web", "Web\UniShop.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniShop.Web.InputModels", "Web\UniShop.Web.InputModels\UniShop.Web.InputModels.csproj", "{BA7B2874-0753-4C76-A0E2-22D520477D23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniShop.Services.Mapping", "Services\UniShop.Services.Mapping\UniShop.Services.Mapping.csproj", "{CAE6EC72-7CE1-49B7-BAD0-DA2442F402E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniShop.Services.Mapping", "Services\UniShop.Services.Mapping\UniShop.Services.Mapping.csproj", "{CAE6EC72-7CE1-49B7-BAD0-DA2442F402E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniShop.Services.Models", "Services\UniShop.Services.Models\UniShop.Services.Models.csproj", "{0AB4C60F-6D98-454E-9A0A-9D20618038DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniShop.Services.Models", "Services\UniShop.Services.Models\UniShop.Services.Models.csproj", "{0AB4C60F-6D98-454E-9A0A-9D20618038DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniShop.Web.ViewModels", "Web\UniShop.Web.ViewModels\UniShop.Web.ViewModels.csproj", "{D4A02BC4-C4D0-4249-9D33-97288ED23B26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniShop.Web.ViewModels", "Web\UniShop.Web.ViewModels\UniShop.Web.ViewModels.csproj", "{D4A02BC4-C4D0-4249-9D33-97288ED23B26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A1496DB6-DF9E-4272-9D8B-3C1B149A0BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniShop.Services.Tests", "Tests\UniShop.Services.Tests\UniShop.Services.Tests.csproj", "{B2BF523F-3375-4E99-A002-8225E07009C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,10 @@ Global
 		{D4A02BC4-C4D0-4249-9D33-97288ED23B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4A02BC4-C4D0-4249-9D33-97288ED23B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4A02BC4-C4D0-4249-9D33-97288ED23B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2BF523F-3375-4E99-A002-8225E07009C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2BF523F-3375-4E99-A002-8225E07009C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2BF523F-3375-4E99-A002-8225E07009C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2BF523F-3375-4E99-A002-8225E07009C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,7 @@ Global
 		{CAE6EC72-7CE1-49B7-BAD0-DA2442F402E2} = {5B2CD397-801C-4ECE-ABC4-F322F7EA7736}
 		{0AB4C60F-6D98-454E-9A0A-9D20618038DD} = {5B2CD397-801C-4ECE-ABC4-F322F7EA7736}
 		{D4A02BC4-C4D0-4249-9D33-97288ED23B26} = {6FEF42C1-5A46-4AB9-86D4-50D4983DED49}
+		{B2BF523F-3375-4E99-A002-8225E07009C9} = {A1496DB6-DF9E-4272-9D8B-3C1B149A0BAE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A81ED5CE-C956-4F67-A740-CC28DCFBE262}

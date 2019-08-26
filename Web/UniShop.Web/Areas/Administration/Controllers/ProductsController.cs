@@ -7,6 +7,7 @@ using UniShop.Services;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.Common;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels;
 using UniShop.Web.ViewModels.Products;
@@ -70,9 +71,9 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             var productsViewModels = this.productsService.GetAllProducts().To<ProductAllViewModel>().ToList();
 
-            int pageNumber = pages ?? 1;
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
 
-            var pageProductsViewModels = productsViewModels.ToPagedList(pageNumber, 10);
+            var pageProductsViewModels = productsViewModels.ToPagedList(pageNumber, WebConstants.ProductsPageSize);
 
             return this.View(pageProductsViewModels);
 

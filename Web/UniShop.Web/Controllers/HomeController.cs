@@ -68,6 +68,11 @@ namespace UniShop.Web.Controllers
             return View();
         }
 
+        public IActionResult Information()
+        {
+            return View();
+        }
+
         public IActionResult ReturnShipment()
         {
             return View();

@@ -20,7 +20,7 @@ namespace UniShop.Data.Models
 
         public virtual ICollection<Order> Orders { get; set; }
 
-
+        
         public int ShoppingCartId { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
 

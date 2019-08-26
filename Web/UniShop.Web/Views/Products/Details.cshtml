@@ -101,38 +101,52 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="product-reviews">
-                            @foreach (var review in Model.ProductReviews)
+                            @if (Model.ProductReviews.Count == 0)
                             {
                                 <div class="single-review">
-                                    <div class="review-heading">
-                                        <div><a href="#"><i class="fa fa-user-o"></i>@review.Username </a></div>
-                                        <div class="review-rating pull-right">
-                                            @for (int i = 0; i < review.Raiting; i++)
-                                            {
-                                                <i class="fa fa-star"></i>
-                                            }
-                                            @for (int i = 0; i < 5 - review.Raiting; i++)
-                                            {
-                                                <i class="fa fa-star-o empty"></i>
-                                            }
-
-                                        </div>
-                                    </div>
                                     <div class="review-body">
                                         <p>
-                                            @review.Comment
+                                            Няма ревюта.
                                         </p>
                                     </div>
                                 </div>
                             }
-                            <ul class="reviews-pages">
-                                @Html.PagedListPager((IPagedList)Model.ProductReviews, page => Url.Action("Details", new
+                            else
+                            {
+                                @foreach (var review in Model.ProductReviews)
                                 {
-                                                pageNumber = page,
+                                    <div class="single-review">
+                                        <div class="review-heading">
+                                            <div><a href="#"><i class="fa fa-user-o"></i> @review.Username </a></div>
+                                            <div class="review-rating pull-right">
+                                                @for (int i = 0; i < review.Raiting; i++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                @for (int i = 0; i < 5 - review.Raiting; i++)
+                                                {
+                                                    <i class="fa fa-star-o empty"></i>
+                                                }
 
-                                }))
+                                            </div>
+                                        </div>
+                                        <div class="review-body">
+                                            <p>
+                                                @review.Comment
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                                <ul class="reviews-pages">
+                                    @Html.PagedListPager((IPagedList)Model.ProductReviews, page => Url.Action("Details", new
+                                    {
+                                                    pageNumber = page,
 
-                            </ul>
+                                    }))
+
+                                </ul>
+                            }
+
                         </div>
                     </div>
                     <div class="col-md-6">

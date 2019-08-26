@@ -110,10 +110,17 @@ namespace UniShop.Web.Controllers
 
         public IActionResult Details(int id)
         {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var order = this.orderService.GetOrderById(id).To<OrderDetailsViewModel>();
+            var order = this.orderService.GetOrderById(id,userId);
 
-            return this.View(order);
+            if (order == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            var orderDetailsViewModel = order.To<OrderDetailsViewModel>();
+            return this.View(orderDetailsViewModel);
         }
 
         public IActionResult Successfully()

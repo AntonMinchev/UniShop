@@ -16,12 +16,10 @@ namespace UniShop.Services
     public class AddressesService : IAddressesService
     {
         private readonly UniShopDbContext context;
-        private readonly IUniShopUsersService uniShopUsersService;
 
         public AddressesService(UniShopDbContext context,IUniShopUsersService uniShopUsersService)
         {
             this.context = context;
-            this.uniShopUsersService = uniShopUsersService;
         }
 
         public bool AddAddress(AddressServiceModel addressServiceModel, string userId)

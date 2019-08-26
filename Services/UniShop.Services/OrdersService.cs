@@ -147,20 +147,32 @@ namespace UniShop.Services
             return unprocessedOrders;
         }
 
-        public OrderServiceModel GetOrderById(int id)
+        public OrderServiceModel GetOrderById(int id,string userId)
         {
-            var order = this.context.Orders.Include(p => p.OrderProducts).ThenInclude(x=>x.Product).Include(o=>o.DeliveryAddress).FirstOrDefault(o => o.Id == id).To<OrderServiceModel>();
-            //.Include(x => x.DeliveryAddress)
-            //                  .ThenInclude(x => x.City)
-            //                  .Include(x => x.XeonUser)
-            //                  .ThenInclude(x => x.Company)
-            //                  .FirstOrDefault(x => x.Id == orderId && x.XeonUser.UserName == username);
-            return order;
+            var order = this.context.Orders
+                .Include(p => p.OrderProducts)
+                .ThenInclude(x=>x.Product)
+                .Include(o=>o.DeliveryAddress)
+                .FirstOrDefault(o => o.Id == id && o.UniShopUserId == userId);
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            return order.To<OrderServiceModel>();
         }
 
         public bool ProcessingOrder(int id)
         {
             var order = this.context.Orders.FirstOrDefault(o => o.Id == id);
+
+
+            if (order == null)
+            {
+                return false;
+            }    
+            
 
             order.OrderStatus = OrderStatus.Processed;
             order.DispatchDate = DateTime.UtcNow;

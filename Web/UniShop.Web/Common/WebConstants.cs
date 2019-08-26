@@ -19,6 +19,8 @@ namespace UniShop.Web.Common
 
         public const int OrdersPageSize = 10;
 
+        public const int ProductsPageSize = 10;
+
         public const int ReviewsPageSize = 5;
 
         public const string ErrorOrderMessage = "Проверете дали са налични продуктите , които искате да поръчате и опитайте отното!";
@@ -27,5 +29,13 @@ namespace UniShop.Web.Common
 
         public const string ReduceShoppingCartMessage = "Не може да поръчате по-малко от 1 продукт,ако искате да не го поръчвате го премахнете от количката!!! ";
 
+        public const string ParentCategoryNonExistentMessage = "Не може да изтриете несъществуваща категория!!!";
+
+        public const string ParentCategoryHasChildCategoriesMessage = "Категорията не може да бъде изтрита ,защото съдържа подкатегории!!!";
+
+        public const string ChildCategoryWhitProductsMessage = "Не може да изтриете подкатегория ,която съдържа продукти !!!";
+
+
+        public const string ChildCategoryNonExistentMessage = "Не може да изтриете несъществуваща подкатегория!!!";
     }
 }

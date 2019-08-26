@@ -7,6 +7,7 @@ using UniShop.Services;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
 using UniShop.Services.Models;
+using UniShop.Web.Common;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels.ParentCategories;
 
@@ -94,7 +95,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             if (!isHaveParentCategory)
             {
-                this.TempData["error"] = "Не може да изтриете несъществуваща категория!!!";
+                this.TempData["error"] = WebConstants.ParentCategoryNonExistentMessage;
                 return this.Redirect("All");
             }
             else
@@ -103,7 +104,7 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
                 if (!isDelete)
                 {
-                    this.TempData["error"] = "Категорията не може да бъде изтрита ,защото съдържа подкатегории!!!";
+                    this.TempData["error"] = WebConstants.ParentCategoryHasChildCategoriesMessage;
                     return this.Redirect("All");
                 }
             }

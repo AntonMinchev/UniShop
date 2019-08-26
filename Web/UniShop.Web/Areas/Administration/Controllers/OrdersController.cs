@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UniShop.Services.Contracts;
 using UniShop.Services.Mapping;
+using UniShop.Web.Common;
 using UniShop.Web.ViewModels.Orders;
 using X.PagedList;
 
@@ -24,9 +25,9 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             var unprocessedOrders = this.orderService.GetAllUnprocessedOrders().To<UnprocessedOrderViewModel>().ToList();
 
-            int pageNumber = pages ?? 1;
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
 
-            var pageUnprocrssedOrders = unprocessedOrders.ToPagedList(pageNumber, 2);
+            var pageUnprocrssedOrders = unprocessedOrders.ToPagedList(pageNumber, WebConstants.OrdersPageSize);
 
             return this.View(pageUnprocrssedOrders);
         }
@@ -36,9 +37,9 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             var processedOrders = this.orderService.GetAllProcessedOrders().To<ProcessedOrderViewModel>().ToList();
 
-            int pageNumber = pages ?? 1;
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
 
-            var pageProcrssedOrders = processedOrders.ToPagedList(pageNumber, 2);
+            var pageProcrssedOrders = processedOrders.ToPagedList(pageNumber, WebConstants.OrdersPageSize);
 
             return this.View(pageProcrssedOrders);
         }
@@ -48,9 +49,9 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             var deliveredOrders = this.orderService.GetAllDeliveredOrders().To<DeliveredOrderViewModel>().ToList();
 
-            int pageNumber = pages ?? 1;
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
 
-            var pageDeliveredOrders = deliveredOrders.ToPagedList(pageNumber, 2);
+            var pageDeliveredOrders = deliveredOrders.ToPagedList(pageNumber, WebConstants.OrdersPageSize);
 
             return this.View(pageDeliveredOrders);
         }

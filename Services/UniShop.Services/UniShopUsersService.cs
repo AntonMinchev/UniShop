@@ -20,14 +20,14 @@ namespace UniShop.Services
 
         public UniShopUserServiceModel GetUserById(string Id)
         {
-            var user = this.context.Users.FirstOrDefault(u => u.Id == Id).To<UniShopUserServiceModel>();
+            var user = this.context.Users.To<UniShopUserServiceModel>().FirstOrDefault(u => u.Id == Id);
 
             return user;
         }
 
         UniShopUserServiceModel IUniShopUsersService.GetUserByUsername(string username)
         {
-            var user = this.context.Users.FirstOrDefault(u => u.UserName == username).To<UniShopUserServiceModel>();
+            var user = this.context.Users.To<UniShopUserServiceModel>().FirstOrDefault(u => u.UserName == username);
 
             return user;
         }
