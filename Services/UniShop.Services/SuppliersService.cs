@@ -81,9 +81,11 @@ namespace UniShop.Services
 
         public SupplierServiceModel GetSupplierById(int id)
         {
-            var supplier = this.context.Suppliers.FirstOrDefault(s => s.Id == id).To<SupplierServiceModel>();
+            var supplier = this.context.Suppliers.To<SupplierServiceModel>().FirstOrDefault(s => s.Id == id);
 
             return supplier;
         }
+
+
     }
 }

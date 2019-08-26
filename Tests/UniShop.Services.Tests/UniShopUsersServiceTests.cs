@@ -103,7 +103,7 @@ namespace UniShop.Services.Tests
         }
 
         [Fact]
-        public void GetUserByUsername_WithNonExistentUserName_ShouldReturnCorrectResults()
+        public void GetUserByUsername_WithNonExistentUserName_ShouldReturnNull()
         {
             string errorMessagePrefix = "UniShopUserService GetUserByUsername() method does not work properly.";
 
