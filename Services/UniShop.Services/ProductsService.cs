@@ -15,17 +15,17 @@ namespace UniShop.Services
     public class ProductsService : IProductsService
     {
         private readonly UniShopDbContext context;
+        private readonly IChildCategoriesService childCategoriesService;
 
-        public ProductsService(UniShopDbContext context)
+        public ProductsService(UniShopDbContext context,IChildCategoriesService childCategoriesService)
         {
             this.context = context;
+            this.childCategoriesService = childCategoriesService;
         }
 
         public bool Create(ProductServiceModel productServiceModel)
         {
-            ChildCategory childCategoryFromDb =
-                context.ChildCategories
-                .SingleOrDefault(childCategory => childCategory.Name == productServiceModel.ChildCategoryName);
+            ChildCategory childCategoryFromDb = this.context.ChildCategories.FirstOrDefault(c => c.Id == productServiceModel.ChildCategoryId);
 
             if (childCategoryFromDb == null)
             {
@@ -50,19 +50,20 @@ namespace UniShop.Services
                 return false;
             }
 
-            var categoty = this.context.ChildCategories.FirstOrDefault(c => c.Name == productServiceModel.ChildCategoryName);
+            bool isHaveChildCategory = childCategoriesService.IsHaveChildCategoryWhitId(productServiceModel.ChildCategoryId);
 
-            if (categoty == null)
+
+            if (!isHaveChildCategory)
             {
                 return false;
-            }
+            } 
 
             product.Name = productServiceModel.Name;
             product.Price = productServiceModel.Price;
             product.Description = productServiceModel.Description;
             product.Specification = productServiceModel.Specification;
             product.Quantity = productServiceModel.Quantity;
-            product.ChildCategory = categoty;
+            product.ChildCategoryId = productServiceModel.ChildCategoryId;
             if (!string.IsNullOrEmpty(productServiceModel.Image))
             {
                 product.Image = productServiceModel.Image;
@@ -99,14 +100,19 @@ namespace UniShop.Services
 
         public ProductServiceModel GetById(int id)
         {
-            var product = this.context.Products.FirstOrDefault(p => p.Id==id);
+            var product = this.context.Products.To<ProductServiceModel>().FirstOrDefault(p => p.Id==id);
 
-            return product.To<ProductServiceModel>();
+            return product;
         }
 
         public bool ReduceProductQuantity(int productId, int quantity)
         {
             var product = this.context.Products.FirstOrDefault(p => p.Id == productId);
+
+            if (product == null)
+            {
+                return false;
+            }
 
             var Quantity = product.Quantity - quantity;
             if (Quantity < 0)

@@ -42,8 +42,7 @@ namespace UniShop.Web.InputModels
 
         [Display(Name = InputModelsConstants.ChildCategoryName)]
         [Required(ErrorMessage = InputModelsConstants.RequiredErrorMessage)]
-        [StringLength(InputModelsConstants.ChildCategoryMaxLength, MinimumLength = InputModelsConstants.ChildCategoryMinLength, ErrorMessage = InputModelsConstants.StringLengthErrorMessage)]
-        public string ChildCategoryName { get; set; }
+        public int ChildCategoryId { get; set; }
 
         
     }

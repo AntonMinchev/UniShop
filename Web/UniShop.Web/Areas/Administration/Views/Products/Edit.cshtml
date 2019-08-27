@@ -51,22 +51,22 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ChildCategoryName" class="control-label"></label>
-                <select class="select-width center-block" name="ChildCategoryName">
+                <label asp-for="ChildCategoryId" class="control-label"></label>
+                <select class="select-width center-block" name="ChildCategoryId">
                     @foreach (var childCategory in (IEnumerable<ProductCreateChildCategoryViewModel>)this.ViewData["categories"])
                     {
-                        if (childCategory.Name == Model.ChildCategoryName)
+                        if (childCategory.Id == Model.ChildCategoryId)
                         {
-                            <option value="@childCategory.Name" selected>@childCategory.Name (@childCategory.ParentCategoryName)</option>
+                            <option value="@childCategory.Id" selected>@childCategory.Name (@childCategory.ParentCategoryName)</option>
                         }
                         else
                         {
-                            <option value="@childCategory.Name">@childCategory.Name (@childCategory.ParentCategoryName)</option>
+                            <option value="@childCategory.Id">@childCategory.Name (@childCategory.ParentCategoryName)</option>
                         }
 
                     }
                 </select>
-                <span asp-validation-for="ChildCategoryName" class="text-danger"></span>
+                <span asp-validation-for="ChildCategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Запази промените" style="background-color:#F8694A" class="btn btn-default center-block" />

@@ -32,7 +32,7 @@ namespace UniShop.Services.Models
 
         public ChildCategoryServiceModel ChildCategory { get; set; }
 
-        public string ChildCategoryName { get; set; }
+        //public string ChildCategoryName { get; set; }
 
         public string Image { get; set; }
 

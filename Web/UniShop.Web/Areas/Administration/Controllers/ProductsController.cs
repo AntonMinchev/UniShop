@@ -35,10 +35,13 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
             {
+                Id = childCategory.Id,
                 ParentCategoryName = childCategory.ParentCategory.Name,
-                Name = childCategory.Name
+                Name = childCategory.Name,
+            
+                
             })
-                .ToList(); ;
+                .ToList(); 
 
             return this.View();
         }
@@ -49,6 +52,18 @@ namespace UniShop.Web.Areas.Administration.Controllers
         {
             if (!this.ModelState.IsValid)
             {
+                var childCategories = this.childCategoriesService.GetAllChildCategories();
+
+                this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
+                {
+                    Id = childCategory.Id,
+                    ParentCategoryName = childCategory.ParentCategory.Name,
+                    Name = childCategory.Name,
+
+
+                })
+                    .ToList();
+
                 return this.View();
             }
 
@@ -94,11 +109,13 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
             {
+                Id = childCategory.Id,
                 ParentCategoryName = childCategory.ParentCategory.Name,
-                Name = childCategory.Name
-            })
-              .ToList(); ;
+                Name = childCategory.Name,
 
+
+            })
+                     .ToList();
             return this.View(productEditInputModel);
 
         }
@@ -114,10 +131,13 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
                 this.ViewData["categories"] = childCategories.Select(childCategory => new ProductCreateChildCategoryViewModel
                 {
+                    Id = childCategory.Id,
                     ParentCategoryName = childCategory.ParentCategory.Name,
-                    Name = childCategory.Name
+                    Name = childCategory.Name,
+
+
                 })
-                  .ToList(); ;
+                   .ToList();
 
                 return this.View(productEditModel);
             }
