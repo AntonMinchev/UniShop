@@ -21,13 +21,7 @@ namespace UniShop.Services
         }
         public bool Create(ParentCategoryServiceModel parentCategoryServiceModel)
         {
-            if (string.IsNullOrEmpty(parentCategoryServiceModel.Name) ||
-                string.IsNullOrWhiteSpace(parentCategoryServiceModel.Name) || 
-                parentCategoryServiceModel == null)
-            {
-                return false;
-            }
-
+            
             ParentCategory parentCategory = new ParentCategory
             {
                 Name = parentCategoryServiceModel.Name

@@ -15,15 +15,26 @@ namespace UniShop.Services
     public class ChildCategoriesService : IChildCategoriesService
     {
         private readonly UniShopDbContext context;
+        private readonly IParentCategoriesService parentCategoriesService;
 
-        public ChildCategoriesService(UniShopDbContext context)
+        public ChildCategoriesService(UniShopDbContext context,IParentCategoriesService parentCategoriesService)
         {
             this.context = context;
+            this.parentCategoriesService = parentCategoriesService;
         }
 
 
         public bool Create(ChildCategoryServiceModel childCategoryServiceModel )
         {
+           
+            var isParentCategoryExists = this.parentCategoriesService.IsHaveParentCategory(childCategoryServiceModel.ParentCategoryId);
+
+            if (!isParentCategoryExists)
+            {
+                return false;
+            }
+
+
             ChildCategory childCategory = new ChildCategory
             {
                 Name = childCategoryServiceModel.Name,
@@ -40,6 +51,11 @@ namespace UniShop.Services
         public bool Delete(int id)
         {
             var childCategory = this.context.ChildCategories.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
+
+            if (childCategory == null)
+            {
+                return false;
+            }
 
             var isHaveProducts = childCategory.Products.Any();
 
@@ -88,7 +104,7 @@ namespace UniShop.Services
 
         public ChildCategoryServiceModel GetChildCategoryById(int id)
         {
-            var childCategory = this.context.ChildCategories.FirstOrDefault(c => c.Id == id).To<ChildCategoryServiceModel>();
+            var childCategory = this.context.ChildCategories.To<ChildCategoryServiceModel>().FirstOrDefault(c => c.Id == id);
 
             return childCategory;
         }
