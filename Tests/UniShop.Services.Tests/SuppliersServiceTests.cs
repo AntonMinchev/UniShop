@@ -143,9 +143,9 @@ namespace UniShop.Services.Tests
 
             int nonExistentId = 5;
 
-            bool actualData = this.suppliersService.Delete(nonExistentId);
+            bool actualResult = this.suppliersService.Delete(nonExistentId);
 
-            Assert.False(actualData, errorMessagePrefix);
+            Assert.False(actualResult, errorMessagePrefix);
         }
 
         [Fact]
@@ -212,9 +212,9 @@ namespace UniShop.Services.Tests
 
             int nonExistentId = 5;
 
-            SupplierServiceModel actualData = this.suppliersService.GetSupplierById(nonExistentId);
+            SupplierServiceModel actualResult = this.suppliersService.GetSupplierById(nonExistentId);
 
-            Assert.True(actualData == null, errorMessagePrefix);
+            Assert.True(actualResult == null, errorMessagePrefix);
         }
 
     }

@@ -21,6 +21,13 @@ namespace UniShop.Services
         }
         public bool Create(ParentCategoryServiceModel parentCategoryServiceModel)
         {
+            if (string.IsNullOrEmpty(parentCategoryServiceModel.Name) ||
+                string.IsNullOrWhiteSpace(parentCategoryServiceModel.Name) || 
+                parentCategoryServiceModel == null)
+            {
+                return false;
+            }
+
             ParentCategory parentCategory = new ParentCategory
             {
                 Name = parentCategoryServiceModel.Name
@@ -35,6 +42,11 @@ namespace UniShop.Services
         public bool Delete(int id)
         {
             var parentCategory = this.context.ParentCategories.Include(c => c.ChildCategories).FirstOrDefault(p => p.Id == id);
+
+            if (parentCategory == null)
+            {
+                return false;
+            }
 
             var isHaveChildCategories = parentCategory.ChildCategories.Any();
 
@@ -74,7 +86,7 @@ namespace UniShop.Services
 
         public ParentCategoryServiceModel GetParentCategoryById(int id)
         {
-            var parentCategory = this.context.ParentCategories.FirstOrDefault(p => p.Id == id).To<ParentCategoryServiceModel>();
+            var parentCategory = this.context.ParentCategories.To<ParentCategoryServiceModel>().FirstOrDefault(p => p.Id == id);
 
             return parentCategory;
         }
