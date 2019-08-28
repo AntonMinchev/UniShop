@@ -16,14 +16,23 @@ namespace UniShop.Services
     public class AddressesService : IAddressesService
     {
         private readonly UniShopDbContext context;
+        private readonly IUniShopUsersService uniShopUsersService;
 
         public AddressesService(UniShopDbContext context,IUniShopUsersService uniShopUsersService)
         {
             this.context = context;
+            this.uniShopUsersService = uniShopUsersService;
         }
 
         public bool AddAddress(AddressServiceModel addressServiceModel, string userId)
         {
+            var user = this.uniShopUsersService.GetUserById(userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
 
             Address address = new Address
             {               
@@ -43,6 +52,7 @@ namespace UniShop.Services
 
         public IQueryable<AddressServiceModel> GetAddressesByUserName(string username)
         {
+
             var addresses = this.context.Addresses.Where(a => a.UniShopUser.UserName == username).To<AddressServiceModel>();
 
             return addresses;
