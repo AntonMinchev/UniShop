@@ -37,7 +37,7 @@ namespace UniShop.Services
         {
             var user = this.uniShopUsersService.GetUserByUsername(username);
 
-    
+             
 
             var shoppingCartProducts = this.shoppingCartsService.GetAllShoppingCartProducts(username).ToList();
 
