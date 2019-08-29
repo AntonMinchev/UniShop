@@ -67,7 +67,6 @@ namespace UniShop.Web
                 options.Password.RequiredLength = 3;
                 options.Password.RequiredUniqueChars = 0;
                 options.User.RequireUniqueEmail = true;
-
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 0, 20);
             }); 

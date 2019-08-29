@@ -31,6 +31,11 @@ namespace UniShop.Services
 
             var user = this.usersService.GetUserByUsername(username);
 
+            if (user == null || product == null)
+            {
+                return false;
+            }
+
             var shoppingCartProduct = this.context.ShoppingCartProducts.FirstOrDefault(x => x.ProductId == productId && x.ShoppingCartId == user.ShoppingCartId);
            
 
@@ -71,13 +76,19 @@ namespace UniShop.Services
         {
             var product = this.productsService.GetById(productId);
 
+         
             var user = this.usersService.GetUserByUsername(username);
+
+            if (user == null || product == null)
+            {
+                return false;
+            }
 
             var shoppingCartProduct = this.context.ShoppingCartProducts.FirstOrDefault(x => x.ProductId == productId && x.ShoppingCartId == user.ShoppingCartId);
 
             if (shoppingCartProduct == null)
             {
-                throw new ArgumentNullException(nameof(shoppingCartProduct));
+                return false;
             }
             else if (product.Quantity > shoppingCartProduct.Quantity)
             {
@@ -102,11 +113,16 @@ namespace UniShop.Services
 
             var user = this.usersService.GetUserByUsername(username);
 
+            if (user == null || product == null)
+            {
+                return false;
+            }
+
             var shoppingCartProduct = this.context.ShoppingCartProducts.FirstOrDefault(x => x.ProductId == productId && x.ShoppingCartId == user.ShoppingCartId);
 
             if (shoppingCartProduct == null)
             {
-                throw new ArgumentNullException(nameof(shoppingCartProduct));
+                return false;
             }
             else if (shoppingCartProduct.Quantity > 1)
             {
@@ -129,7 +145,17 @@ namespace UniShop.Services
 
             var user = this.usersService.GetUserByUsername(username);
 
+            if (user == null || product == null)
+            {
+                return false;
+            }
+
             var shoppingCartProduct = this.context.ShoppingCartProducts.FirstOrDefault(x => x.ProductId == productId && x.ShoppingCartId == user.ShoppingCartId);
+
+            if (shoppingCartProduct == null)
+            {
+                return false;
+            }
 
             this.context.ShoppingCartProducts.Remove(shoppingCartProduct);
             int result = this.context.SaveChanges();
