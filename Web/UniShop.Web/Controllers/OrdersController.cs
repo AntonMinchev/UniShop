@@ -110,9 +110,10 @@ namespace UniShop.Web.Controllers
 
         public IActionResult Details(int id)
         {
+
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var order = this.orderService.GetOrderById(id,userId);
+            var order = this.orderService.GetOrderByIdAndUserId(id,userId);
 
             if (order == null)
             {

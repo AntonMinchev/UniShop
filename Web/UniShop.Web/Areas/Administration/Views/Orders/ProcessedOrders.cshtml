@@ -36,26 +36,27 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var processedOrder in Model)
         {
             <tr>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => processedOrder.Id)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.OrderDate)
+                    @Html.DisplayFor(modelItem => processedOrder.OrderDate)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.EstimatedDeliveryDate)
+                    @Html.DisplayFor(modelItem => processedOrder.EstimatedDeliveryDate)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.DispatchDate)
+                    @Html.DisplayFor(modelItem => processedOrder.DispatchDate)
                 </td>
                 <td class="text-center">
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                    @Html.DisplayFor(modelItem => processedOrder.TotalPrice) лв.
                 </td>
-                <td class="col-md-1 d-flex justify-content-around">
-                    <a asp-area="Administration" asp-controller="Orders" asp-action="Deliver" asp-route-id="@item.Id" class="btn" style="background-color:coral">Доставена</a>
+                <td class="col-md-2 d-flex justify-content-around">
+                    <a asp-controller="Orders" asp-action="Details" asp-route-id="@processedOrder.Id" class="btn" style="background-color:coral">Детайли</a>
+                    <a asp-area="Administration" asp-controller="Orders" asp-action="Deliver" asp-route-id="@processedOrder.Id" class="btn btn-success">Доставена</a>
                 </td>
             </tr>
         }

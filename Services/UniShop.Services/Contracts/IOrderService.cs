@@ -20,7 +20,7 @@ namespace UniShop.Services.Contracts
 
         bool DeliverOrder(int id);
 
-        OrderServiceModel GetOrderById(int id,string userId);
+        OrderServiceModel GetOrderByIdAndUserId(int id,string userId);
 
         IQueryable<OrderServiceModel> GetAllOrdersByUserId(string userId);
     }

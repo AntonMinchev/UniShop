@@ -30,24 +30,24 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var supplier in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => supplier.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => supplier.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PriceToOffice)лв.
+                    @Html.DisplayFor(modelItem => supplier.PriceToOffice)лв.
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PriceToHome)лв.
+                    @Html.DisplayFor(modelItem => supplier.PriceToHome)лв.
                 </td>
                 <td class="col-md-2 d-flex justify-content-around">
-                    <a asp-controller="Suppliers" asp-action="Edit" asp-route-id="@item.Id" class="btn" style="background-color:coral">Промени</a>
-                    <a asp-controller="Suppliers" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Изтрий</a>
+                    <a asp-controller="Suppliers" asp-action="Edit" asp-route-id="@supplier.Id" class="btn" style="background-color:coral">Промени</a>
+                    <a asp-controller="Suppliers" asp-action="Delete" asp-route-id="@supplier.Id" class="btn btn-danger">Изтрий</a>
                 </td>
             </tr>
         }

@@ -11,7 +11,7 @@
     public static class AutoMapperConfig
     {
         private static bool initialized;
-
+      
         public static void RegisterMappings(params Assembly[] assemblies)
         {
             if (initialized)

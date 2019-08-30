@@ -23,30 +23,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var product in Model)
         {
             <tr class="row d-flex justify-content-around">
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => product.Id)
                 </td>
                 <td>
-                    <img src="@item.Image" width="50" height="50" />
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">  <img src="@product.Image" width="50" height="50" /></a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">  @Html.DisplayFor(modelItem => product.Name)</a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ChildCategoryName)
+                    @Html.DisplayFor(modelItem => product.ChildCategoryName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
+                    @Html.DisplayFor(modelItem => product.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)лв.
+                    @Html.DisplayFor(modelItem => product.Price)лв.
                 </td>
                 <td class="col-md-2 d-flex justify-content-around">
-                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary" >Детайли</a>
-                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary" >Детайли</a>
+                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
                 </td>
             </tr>
         }

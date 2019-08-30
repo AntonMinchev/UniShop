@@ -8,46 +8,57 @@
 <div class="col-md-offset-4 col-md-4">
     <div class="text-center ">
         <h2 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Любоми продукти</h2>
+        <hr />
     </div>
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                 Име
-            </th>
-            <th>
-                Снимка
-            </th>
-            <th>
-                Цена
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model.Count() == 0)
+{
+    <div class="col-md-offset-4 col-md-4">
+        <div class="text-center ">
+            <h4 class="text-white font-weight-bold text-center  mx-auto rounded-lg ">Нямате любими продукти!</h4>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    <img src="@item.ProductImage" width="50" height="50" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductPrice)
-                </td>
-                <td class="col-md-2 d-flex justify-content-around">
-                    <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@item.ProductId" class="btn" style="background-color:coral">Добави в количката</a>
-                    <a asp-controller="FavoriteProducts" asp-action="Remove" asp-route-id="@item.ProductId" class="btn btn-danger">Премахни</a>
-                </td>
+                <th>
+                    Име
+                </th>
+                <th>
+                    Снимка
+                </th>
+                <th>
+                    Цена
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new
-       {
-                                             pages = page
-                                         }))
+        </thead>
+        <tbody>
+            @foreach (var favoriteProduct in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Products" asp-action="Details" asp-route-id="@favoriteProduct.ProductId">  @Html.DisplayFor(modelItem => favoriteProduct.ProductName)</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Products" asp-action="Details" asp-route-id="@favoriteProduct.ProductId">  <img src="@favoriteProduct.ProductImage" width="50" height="50" /></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => favoriteProduct.ProductPrice) лв.
+                    </td>
+                    <td class="col-md-2 d-flex justify-content-around">
+                        <a asp-controller="ShoppingCarts" asp-action="Add" asp-route-id="@favoriteProduct.ProductId" class="btn" style="background-color:coral">Добави в количката</a>
+                        <a asp-controller="FavoriteProducts" asp-action="Remove" asp-route-id="@favoriteProduct.ProductId" class="btn btn-danger">Премахни</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new
+           {
+                                                 pages = page
+                                             }))
+}

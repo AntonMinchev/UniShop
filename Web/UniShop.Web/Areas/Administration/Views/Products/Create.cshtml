@@ -51,13 +51,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="ChildCategoryId" class="control-label">Kатегория</label>
-                <select class="select-width center-block" name="ChildCategoryId">
+                <select class="select-width center-block" name="ChildCategoryId" asp-for="ChildCategoryId">
                     <option value="" disabled selected>-- Основна категория --</option>
                     @foreach (var childCategory in (IEnumerable<ProductCreateChildCategoryViewModel>)this.ViewData["categories"])
                     {
                         <option value="@childCategory.Id">@childCategory.Name (@childCategory.ParentCategoryName)</option>
                     }
                 </select>
+                <span asp-validation-for="ChildCategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Добави" style="background-color:#F8694A" class="btn btn-default center-block" />

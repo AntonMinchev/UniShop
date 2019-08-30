@@ -137,6 +137,22 @@ namespace UniShop.Services
             return products.OrderBy(p => p.Price);
         }
 
+        public bool CheckIsInStockShoppingCartProducts(List<ShoppingCartProductServiceModel> shoppingCartProducts)
+        {
+            foreach (var shoppingCartProduct in shoppingCartProducts)
+            {
+
+                int productQuantity = this.context.Products.First(p => p.Id == shoppingCartProduct.ProductId).Quantity;
+
+                if (productQuantity < shoppingCartProduct.Quantity)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private IQueryable<ProductServiceModel> GetProductByChildCategoryId(int? categoryId)
         {
 

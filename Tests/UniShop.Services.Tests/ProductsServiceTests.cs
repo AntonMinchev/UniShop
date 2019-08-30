@@ -460,5 +460,105 @@ namespace UniShop.Services.Tests
             Assert.True(actualData.Count() == expectedData.Count());
             
         }
+
+
+        [Fact]
+        public void CheckIsInStockShoppingCartProducts_WithCorrectData_ShouldReturnTrue()
+        {
+            string errorMessagePrefix = "ProductsService ReduceProductQuantity() method does not work properly.";
+
+            var context = UniShopDbContextInMemoryFactory.InitializeContext();
+            this.SeedData(context);
+            this.productsService = new ProductsService(context, new ChildCategoriesService(context, new ParentCategoriesService(context)));
+
+          
+            Product firstProduct = context.Products.First();
+            Product secondProduct = context.Products.Last();
+            UniShopUser user = new UniShopUser
+            {
+                UserName = "Test User",
+                ShoppingCart = new ShoppingCart { }
+            };
+
+            context.Add(user);
+
+            List<ShoppingCartProduct> testshoppingProducts = new List<ShoppingCartProduct>
+            {
+                new ShoppingCartProduct
+                {
+                    ShoppingCart = user.ShoppingCart,
+                    Product = firstProduct,
+                    Quantity = 1,
+                    
+                },
+                new ShoppingCartProduct
+                {
+                    ShoppingCart = user.ShoppingCart,
+                    Product = secondProduct,
+                    Quantity = 1
+                }
+            };
+
+            context.AddRange(testshoppingProducts);
+            context.SaveChanges();
+
+            List<ShoppingCartProductServiceModel> shoppingCartProducts = testshoppingProducts
+                .To<ShoppingCartProductServiceModel>().ToList();
+
+            bool actualResult = this.productsService.CheckIsInStockShoppingCartProducts(shoppingCartProducts);
+
+            Assert.True(actualResult, errorMessagePrefix);
+        }
+
+
+
+        [Fact]
+        public void CheckIsInStockShoppingCartProducts_WithNonExistentProductQuantity_ShouldReturnFalse()
+        {
+            string errorMessagePrefix = "ProductsService ReduceProductQuantity() method does not work properly.";
+
+            var context = UniShopDbContextInMemoryFactory.InitializeContext();
+            this.SeedData(context);
+            this.productsService = new ProductsService(context, new ChildCategoriesService(context, new ParentCategoriesService(context)));
+
+
+            Product firstProduct = context.Products.First();
+            Product secondProduct = context.Products.Last();
+            UniShopUser user = new UniShopUser
+            {
+                UserName = "Test User",
+                ShoppingCart = new ShoppingCart { }
+            };
+
+            context.Add(user);
+
+            List<ShoppingCartProduct> testshoppingProducts = new List<ShoppingCartProduct>
+            {
+                new ShoppingCartProduct
+                {
+                    ShoppingCart = user.ShoppingCart,
+                    Product = firstProduct,
+                    Quantity = 1,
+
+                },
+                new ShoppingCartProduct
+                {
+                    ShoppingCart = user.ShoppingCart,
+                    Product = secondProduct,
+                    Quantity = 10
+                }
+            };
+
+            context.AddRange(testshoppingProducts);
+            context.SaveChanges();
+
+            List<ShoppingCartProductServiceModel> shoppingCartProducts = testshoppingProducts
+                .To<ShoppingCartProductServiceModel>().ToList();
+
+            bool actualResult = this.productsService.CheckIsInStockShoppingCartProducts(shoppingCartProducts);
+
+            Assert.False(actualResult, errorMessagePrefix);
+        }
+
     }
 }

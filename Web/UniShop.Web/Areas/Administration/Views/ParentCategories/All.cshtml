@@ -29,21 +29,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var parentCategory in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => parentCategory.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => parentCategory.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ChildCategoriesCount)
+                    @Html.DisplayFor(modelItem => parentCategory.ChildCategoriesCount)
                 </td>
                 <td class="col-md-2 d-flex justify-content-around">
-                    <a asp-controller="ParentCategories" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
-                    <a asp-controller="ParentCategories" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Изтрий</a>
+                    <a asp-controller="ParentCategories" asp-action="Edit" asp-route-id="@parentCategory.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
+                    <a asp-controller="ParentCategories" asp-action="Delete" asp-route-id="@parentCategory.Id" class="btn btn-danger">Изтрий</a>
 
                 </td>
             </tr>

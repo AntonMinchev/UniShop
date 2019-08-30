@@ -1,10 +1,4 @@
-﻿@using X.PagedList.Mvc.Core;
-@using X.PagedList;
-@using Microsoft.AspNetCore.Identity
-@using UniShop.Data.Models
-
-
-@inject SignInManager<UniShopUser> SignInManager
+﻿@inject SignInManager<UniShopUser> SignInManager
 @inject UserManager<UniShopUser> UserManager
 @model UniShop.Web.ViewModels.Home.IndexViewModel
 @{
@@ -70,7 +64,7 @@
                                         </div>
                                     </a>
                                     <div class="product-body">
-                                        <h3 class="product-price">@product.Price.ToString("F2")</h3>
+                                        <h3 class="product-price">@product.Price.ToString("F2") лв.</h3>
                                         <div class="product-rating">
                                             @if (product.Raiting != 0 && product.CountReviews != 0)
                                             {

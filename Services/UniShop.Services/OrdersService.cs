@@ -37,20 +37,30 @@ namespace UniShop.Services
         {
             var user = this.uniShopUsersService.GetUserByUsername(username);
 
-             
+            if (user == null)
+            {
+                return false;
+            }
 
             var shoppingCartProducts = this.shoppingCartsService.GetAllShoppingCartProducts(username).ToList();
 
+            if (shoppingCartProducts.Count() == 0)
+            {
+                return false;
+            }
+
             var orderProducts = new List<OrderProduct>();
 
-            foreach (var shoppingCartProduct in shoppingCartProducts)
-            { 
-               bool isInStock = this.productsService.ReduceProductQuantity(shoppingCartProduct.ProductId, shoppingCartProduct.Quantity);
+            bool isInStock = this.productsService.CheckIsInStockShoppingCartProducts(shoppingCartProducts);
 
-                if (!isInStock)
-                {
-                    return false;
-                }
+            if (!isInStock)
+            {
+                return false;
+            }
+
+            foreach (var shoppingCartProduct in shoppingCartProducts)
+            {
+                this.productsService.ReduceProductQuantity(shoppingCartProduct.ProductId, shoppingCartProduct.Quantity);
             }
 
             var order = new Order
@@ -101,14 +111,17 @@ namespace UniShop.Services
 
             this.RemoveShoppingCartProducts(shoppingCartProducts);
 
-
-
             return result > 0;
         }
 
         public bool DeliverOrder(int id)
         {
             var order = this.context.Orders.FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+            {
+                return false;
+            }
 
             order.OrderStatus = OrderStatus.Delivered;
             order.DeliveryDate = DateTime.UtcNow;
@@ -147,7 +160,7 @@ namespace UniShop.Services
             return unprocessedOrders;
         }
 
-        public OrderServiceModel GetOrderById(int id,string userId)
+        public OrderServiceModel GetOrderByIdAndUserId(int id,string userId)
         {
             var order = this.context.Orders
                 .Include(p => p.OrderProducts)
@@ -199,5 +212,6 @@ namespace UniShop.Services
 
             return result > 0;
         }
+
     }
 }

@@ -50,7 +50,13 @@ namespace UniShop.Web.Controllers
         {
             string username = this.User.FindFirst(ClaimTypes.Name).Value;
 
-            this.shoppingCartsService.AddShoppingCartProduct(id, username);
+            bool isAdded =  this.shoppingCartsService.AddShoppingCartProduct(id, username);
+
+            if (!isAdded)
+            {
+                this.TempData["message"] = WebConstants.AddShoppingCartMessage;
+                return this.RedirectToAction("Index");
+            }
 
             return this.RedirectToAction("Index");
         }

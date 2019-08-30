@@ -20,5 +20,7 @@ namespace UniShop.Services.Contracts
         bool ReduceProductQuantity(int productId,int quantity);
 
         bool Edit(ProductServiceModel productServiceModel);
+
+        bool CheckIsInStockShoppingCartProducts(List<ShoppingCartProductServiceModel> shoppingCartProducts);
     }
 }

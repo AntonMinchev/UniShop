@@ -21,44 +21,44 @@
 
             <tr>
                 <td class="col-1 d-flex "><strong>Номер на поръчката :</strong></td>
-                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Id</td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Html.DisplayFor(modelItem => Model.Id)</td>
                 <td class="col-1 d-flex "><strong>Статус :</strong></td>
                 <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.OrderStatus)</td>
             </tr>
             <tr>
                 <td class="col-1 d-flex "><strong>Дата на поръчката :</strong></td>
-                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.OrderDate</td>
+                <td class="col-1 d-flex" style="border-right-style:solid">@Html.DisplayFor(modelItem => Model.OrderDate)</td>
                 <td class="col-1 d-flex "><strong>Очаквана дата за доставка :</strong></td>
-                <td class="col-1 d-flex ">@Model.EstimatedDeliveryDate</td>
+                <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.EstimatedDeliveryDate)</td>
             </tr>
             <tr>
                 <td class="col-1 d-flex "><strong>Дата на изпрашане на поръчката :</strong></td>
-                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.DispatchDate</td>
+                <td class="col-1 d-flex" style="border-right-style:solid"> @Html.DisplayFor(modelItem => Model.DispatchDate)</td>
                 <td class="col-1 d-flex "><strong>Дата на доставка :</strong></td>
-                <td class="col-1 d-flex ">@Model.DeliveryDate</td>
+                <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.DeliveryDate)</td>
             </tr>
             <tr>
                 <td class="col-1 d-flex "><strong>Имена на клиента :</strong></td>
-                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Recipient</td>
+                <td class="col-1 d-flex" style="border-right-style:solid">@Html.DisplayFor(modelItem => Model.Recipient)</td>
                 <td class="col-1 d-flex "><strong>Телефон :</strong></td>
-                <td class="col-1 d-flex ">@Model.RecipientPhoneNumber</td>
+                <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.RecipientPhoneNumber)</td>
             </tr>
             <tr>
                 <td class="col-1 d-flex "><strong>Адрес :</strong></td>
-                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.Address</td>
+                <td class="col-1 d-flex" style="border-right-style:solid">@Html.DisplayFor(modelItem => Model.Address)</td>
                 <td class="col-1 d-flex "><strong>Цена на доставката :</strong></td>
-                <td class="col-1 d-flex ">@Model.DeliveryPrice лв.</td>
+                <td class="col-1 d-flex ">@Html.DisplayFor(modelItem => Model.DeliveryPrice) лв.</td>
             </tr>
             <tr>
 
                 <td class="col-1 d-flex "><strong>Доставчик :</strong></td>
-                <td class="col-1 d-flex " style="border-right-style:solid">@Model.SupplierName</td>
+                <td class="col-1 d-flex " style="border-right-style:solid">@Html.DisplayFor(modelItem => Model.SupplierName)</td>
                 <td class="col-1 d-flex "><strong>Тип на доставката :</strong></td>
                 <td class="col-1 d-flex">@Html.DisplayFor(modelItem => @Model.DeliveryType)</td>
             </tr>
             <tr>
                 <td class="col-1 d-flex "><strong>Обща сума:</strong></td>
-                <td class="col-1 d-flex" style="border-right-style:solid"> @Model.TotalPrice лв.</td>
+                <td class="col-1 d-flex" style="border-right-style:solid">@Html.DisplayFor(modelItem => Model.TotalPrice) лв.</td>
                 <td class="col-1 d-flex "></td>
                 <td class="col-1 d-flex "></td>
 
