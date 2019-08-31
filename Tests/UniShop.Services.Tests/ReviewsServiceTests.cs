@@ -279,5 +279,54 @@ namespace UniShop.Services.Tests
 
             Assert.Equal(expectedResults, actualResults.Count());
         }
+
+
+        [Fact]
+        public void Delete_WithCorrectData_ShouldSuccessfullyDelete()
+        {
+            string errorMessagePrefix = "ReviewsService Delete() method does not work properly.";
+
+            var context = UniShopDbContextInMemoryFactory.InitializeContext();
+            this.SeedData(context);
+            this.reviewsService = new ReviewsService(context, new UniShopUsersService(context));
+
+            string userId = context.Users.First().Id;
+            int productId = context.Products.First().Id;
+
+            Review testReview = new Review
+            {
+                UniShopUserId = userId,
+                Raiting = 4,
+                ProductId = productId,
+                Comment = "Test Comment Test"
+            };
+
+            context.Reviews.Add(testReview);
+            context.SaveChanges();
+
+            int expectedCount = context.Reviews.Count() - 1;
+            bool actualResult = this.reviewsService.Delete(testReview.Id);
+            int actualCount = context.Reviews.Count();
+
+            Assert.True(actualResult, errorMessagePrefix);
+            Assert.Equal(expectedCount, actualCount);
+        }
+
+
+
+
+        [Fact]
+        public void Delete_WithNonExistentReview_ShouldReturnFalse()
+        {
+            string errorMessagePrefix = "ReviewsService Delete() method does not work properly.";
+
+            var context = UniShopDbContextInMemoryFactory.InitializeContext();
+            this.SeedData(context);
+            this.reviewsService = new ReviewsService(context, new UniShopUsersService(context));
+
+            bool actualResult = this.reviewsService.Delete(1000);
+            
+            Assert.False(actualResult, errorMessagePrefix);
+        }
     }
 }

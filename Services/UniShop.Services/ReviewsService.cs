@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,14 +54,23 @@ namespace UniShop.Services
 
         }
 
+        public bool Delete(int id)
+        {
+            var review = this.context.Reviews.FirstOrDefault(r => r.Id == id);
+
+            if (review == null)
+            {
+                return false;
+            }
+
+            this.context.Remove(review);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
+
         public IQueryable<ReviewServiceModel> GetReviewsByProductId(int productId)
         {
-            //var product = this.context.Products.FirstOrDefault(p => p.Id == productId);
-
-            //if (product == null)
-            //{
-            //    return null;
-            //}
 
             var reviews = this.context.Reviews.Where(r => r.ProductId == productId).To<ReviewServiceModel>();
 

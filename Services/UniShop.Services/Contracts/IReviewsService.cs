@@ -11,5 +11,8 @@ namespace UniShop.Services.Contracts
         bool Create(ReviewServiceModel reviewServiceModel,string userId);
 
         IQueryable<ReviewServiceModel> GetReviewsByProductId(int productId);
+
+        bool Delete(int id);
+
     }
 }

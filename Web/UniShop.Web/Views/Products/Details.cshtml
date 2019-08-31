@@ -134,6 +134,10 @@
                                             <p>
                                                 @review.Comment
                                             </p>
+                                            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                                            {
+                                                <a asp-area="Administration" asp-controller="Reviews" asp-action="Delete" asp-route-id="@review.Id" asp-route-productId="@Model.ProductViewModel.Id" class="btn btn-danger center-block">Изтрий</a>
+                                            }
                                         </div>
                                     </div>
                                 }
