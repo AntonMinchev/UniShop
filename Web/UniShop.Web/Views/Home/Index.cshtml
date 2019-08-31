@@ -111,6 +111,7 @@
                     </div>
                     <!-- /MAIN -->
                 </div>
+                <div class="col-lg-offset-6">
                 @Html.PagedListPager((IPagedList)Model.Products, page => Url.Action("Index", new
                 {
                                                 pageNumber = page,
@@ -119,6 +120,7 @@
                                                 SortBy = Model.Sort,
                                                 SearchString = Model.SearchString
                                             }))
+                </div>
                 <!-- /row -->
             </div>
 

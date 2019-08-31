@@ -82,9 +82,11 @@ else
             }
         </tbody>
     </table>
+    <div class="col-lg-offset-6">
     @Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new
            {
                                                  pages = page
                                              }))
+    </div>
 }
 

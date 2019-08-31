@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UniShop.Web.ViewModels.ChildCategories.ChildCategoryViewModel>
+﻿@model IPagedList<UniShop.Web.ViewModels.ChildCategories.ChildCategoryViewModel>
 
 
 @{
@@ -20,13 +20,13 @@
                 #
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Име 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParentCategoryName)
+                Основна категория
             </th>
             <th class="col-2 d-flex justify-content-center">
-                @Html.DisplayNameFor(model => model.CountOfProducts)
+                Брой продукти
             </th>
             <th></th>
         </tr>
@@ -34,25 +34,31 @@
     <tbody>
         @foreach (var childCategory in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => childCategory.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => childCategory.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => childCategory.ParentCategoryName)
-                </td>
-                <td class="col">
-                    @Html.DisplayFor(modelItem => childCategory.CountOfProducts)
-                </td>
-                <td class="col-md-2 d-flex justify-content-around">
-                    <a asp-controller="ChildCategories" asp-action="Edit" asp-route-id="@childCategory.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
-                    <a asp-controller="ChildCategories" asp-action="Delete" asp-route-id="@childCategory.Id" class="btn btn-danger">Изтрий</a>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => childCategory.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => childCategory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => childCategory.ParentCategoryName)
+            </td>
+            <td class="col">
+                @Html.DisplayFor(modelItem => childCategory.CountOfProducts)
+            </td>
+            <td class="col-md-2 d-flex justify-content-around">
+                <a asp-controller="ChildCategories" asp-action="Edit" asp-route-id="@childCategory.Id" class="btn btn-primary" style="background-color:coral">Промени</a>
+                <a asp-controller="ChildCategories" asp-action="Delete" asp-route-id="@childCategory.Id" class="btn btn-danger">Изтрий</a>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+<div class="col-lg-offset-6">
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new
+          {
+                                                pages = page
+                                            }))
+    </div>

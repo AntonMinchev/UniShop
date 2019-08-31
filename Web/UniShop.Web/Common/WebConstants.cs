@@ -23,6 +23,10 @@ namespace UniShop.Web.Common
 
         public const int ReviewsPageSize = 5;
 
+        public const int ParentCategoriserPageSize = 10;
+
+        public const int ChildCategoriesPageSize = 10;
+
         public const string ErrorOrderMessage = "Проверете дали са налични продуктите , които искате да поръчате и опитайте отното!";
 
         public const string IncreaseShoppingCartMessage = "Не може да поръчате повече от наличното количество за даден продукт!!! ";
@@ -30,6 +34,8 @@ namespace UniShop.Web.Common
         public const string AddShoppingCartMessage = "Продуктът , който искахте да добавите не е в наличност,извинете ни за неудобството!!! ";
 
         public const string ReduceShoppingCartMessage = "Не може да поръчате по-малко от 1 продукт,ако искате да не го поръчвате го премахнете от количката!!! ";
+
+        public const string PhoneMessage = "Моля съседете своя телефонен номер ,за да имате възможност да правите поръчки!";
 
         public const string ParentCategoryNonExistentMessage = "Не може да изтриете несъществуваща категория!!!";
 

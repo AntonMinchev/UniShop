@@ -41,9 +41,9 @@ namespace UniShop.Web.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-
-            string username = this.User.FindFirst(ClaimTypes.Name).Value;
             
+            string username = this.User.FindFirst(ClaimTypes.Name).Value;
+
             var shoppingCartProducts = this.shoppingCartsService.GetAllShoppingCartProducts(username).ToList();
 
             var shoppingCartProductsViewModel = shoppingCartProducts.Select(product => new ShoppingCartProductViewModel
@@ -56,6 +56,12 @@ namespace UniShop.Web.Controllers
             }).ToList();
 
             var user = this.uniShopUsersService.GetUserByUsername(username);
+
+            if (user.PhoneNumber == null)
+            {
+                this.TempData["message"] = WebConstants.PhoneMessage;
+                return this.Redirect("/Identity/Account/Manage/Index");
+            }
 
             var suppliers = this.suppliersService.GetAllSuppliers().To<SupplierViewModel>().ToList();
 

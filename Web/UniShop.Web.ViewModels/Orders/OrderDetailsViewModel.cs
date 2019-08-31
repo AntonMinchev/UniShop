@@ -43,6 +43,7 @@ namespace UniShop.Web.ViewModels.Orders
         [Display(Name = ViewModelsConstants.RecipientPhoneNumber)]
         public string RecipientPhoneNumber { get; set; }
 
+
         [Display(Name = ViewModelsConstants.Address)]
         public string Address { get; set; }
 

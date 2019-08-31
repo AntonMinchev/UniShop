@@ -10,6 +10,7 @@ using UniShop.Services.Models;
 using UniShop.Web.Common;
 using UniShop.Web.InputModels;
 using UniShop.Web.ViewModels.ParentCategories;
+using X.PagedList;
 
 namespace UniShop.Web.Areas.Administration.Controllers
 {
@@ -46,15 +47,20 @@ namespace UniShop.Web.Areas.Administration.Controllers
 
             this.parentCategoriesService.Create(parentCategoryServiceModel);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("All");
         }
 
         [HttpGet("/Administration/ParentCategories/All")]
-        public IActionResult All()
+        public IActionResult All(int? pages)
         {
             var parentCategoryViewModels = this.parentCategoriesService.GetAllParentCategories().To<ParentCategoryViewModel>().ToList();
 
-            return this.View(parentCategoryViewModels);
+            int pageNumber = pages ?? WebConstants.DefaultPageNumber;
+
+            var pageParentCategory = parentCategoryViewModels.ToPagedList(pageNumber, WebConstants.ParentCategoriserPageSize);
+
+
+            return this.View(pageParentCategory);
         }
 
         [HttpGet("/Administration/ParentCategories/Edit")]

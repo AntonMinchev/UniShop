@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UniShop.Web.ViewModels.ParentCategories.ParentCategoryViewModel>
+﻿@model IPagedList<UniShop.Web.ViewModels.ParentCategories.ParentCategoryViewModel>
 
 @{
     ViewData["Title"] = "All";
@@ -20,10 +20,10 @@
                 #
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Име
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ChildCategoriesCount)
+                Брой подкатегории
             </th>
             <th></th>
         </tr>
@@ -50,3 +50,9 @@
         }
     </tbody>
 </table>
+<div class="col-lg-offset-6">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("All", new
+              {
+                                                    pages = page
+                                                }))
+</div>
